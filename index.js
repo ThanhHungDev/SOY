@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-server.listen(CONFIG.port, () => {
+server.listen(CONFIG.SERVER.PORT, CONFIG.SERVER.DOMAIN ,  () => {
     console.log(`server listen: ${server.address().address}:${ server.address().port}`);
 });
 /////////////////////////////////////////////////////////////////////////

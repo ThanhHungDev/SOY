@@ -1,5 +1,9 @@
 const CONFIG = {
-    port : 3000 , 
+    SERVER : {
+        PORT : 3000,
+        DOMAIN : "localhost",
+        PROTOCOL: "http://" 
+    }, 
     database : {
         username: 'postgres',
         password: 'admin123',
