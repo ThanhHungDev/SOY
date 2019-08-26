@@ -7,7 +7,7 @@ const { CONFIG } =  require('./Config');
  */
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'View'));
-// app.use("/public", express.static(path.join(__dirname, 'Public')));
+app.use("", express.static(path.join(__dirname, 'Public')));
 /////////////////////////////////////////////////////////////////////////
 // for parsing application/x-www-form-urlencoded/////////////////////////
 /////////////////////////////////////////////////////////////////////////
