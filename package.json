@@ -1,0 +1,23 @@
+{
+  "name": "werewolf-online",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "nodemon": "^1.18.5",
+    "pg": "^7.12.1",
+    "redis": "^2.8.0",
+    "sequelize": "^5.16.0",
+    "socket.io": "^2.1.1",
+    "validator": "^11.1.0"
+  }
+}
