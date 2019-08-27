@@ -2,6 +2,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { CONFIG } =  require('./Config');
+/***
+ * nodejs allow origin localhost http://localhost:8081
+ */
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8081");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 /**
  * setting directeries of view and asset root 
  */

@@ -621,6 +621,13 @@ body {
 	margin-right: -15px;
 	margin-left: -15px;
 }
+.row:after {
+    clear: both;
+}
+.clearfix:after, .clearfix:before,.container:after, .container:before, .row:after, .row:before {
+    display: table;
+    content: " ";
+}
 .container {
     max-width: 1320px;
 }

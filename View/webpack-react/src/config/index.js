@@ -9,6 +9,10 @@ const CONFIG = {
         version : '0.1.0',
         contact : ''
     },
+    SERVER : {
+        domain : "http://localhost:3001",
+        title : 'werewolf online'
+    },
     PHP : {
 
     },
