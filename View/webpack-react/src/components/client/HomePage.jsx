@@ -9,6 +9,9 @@ class HomePage extends Component {
             <div className="HomePageComponent">
                 <Header />
                 <Main />
+                <div className="wrapper-underline">
+                    <a className="underline" href="hung">hungtt</a>
+                </div>
                 <Footer />
             </div>
         );
