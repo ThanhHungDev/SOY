@@ -72,6 +72,7 @@ a {
 
 a:hover,
 a:active {
+	background-color: transparent;
 	color: #bbb;
 	text-decoration: none;
 }
@@ -114,7 +115,9 @@ body {
 .mobile {
 	display: none;
 }
-
+.small{
+	display: none;
+}
 
 /* Clearfix
 -----------------------------------------*/
@@ -1084,5 +1087,8 @@ body {
 	.col-xs-1 {
 		width: 8.33333333%;
 	}
+	.small{
+        display: block;
+    }
 }
 

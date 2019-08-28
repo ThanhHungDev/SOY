@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 //// css and custom define
-import '../styles/App.css';
+import '../styles/client/App.css';
 import ClientHomePage from './client/HomePage.jsx';
 
 class App extends Component {

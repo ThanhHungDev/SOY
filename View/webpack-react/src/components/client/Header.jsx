@@ -7,6 +7,10 @@ import {Link} from "react-router-dom"
 import CONFIG from "../../config";
 import IconAlignJustify from "../../icon/svg/align-justify.jsx" ;
 import IconAngleDown from "../../icon/svg/angle-down.jsx"
+/**
+ * import css
+ */
+import "../../styles/client/Header.css";
 class Header extends Component {
     activeSidebar = ()=> {
         alert(112131);
@@ -38,19 +42,19 @@ class Header extends Component {
             <div className="container">
               <div className="row">
                 <div className="col-12">
-                  <div className="MenuHeaderComponent clear wrapper-menu">
+                  <div className="MenuHeaderComponent clear Small-Wrapper-Menu active">
                     <div className="float-left">
-                      <Link to="/" className="d-inline-block">
+                      <Link to="/" className="d-inline-block" >
                         <img src={LOGO.URL} alt={LOGO.ALT} />
                       </Link>
                     </div>
-                    <div className="float-right mobile-fixed-sidebar">
+                    <div className="float-right Small-Fixed-Sidebar">
                       {/* <div className="mobile">
                         <Link to="/" className="d-inline-block">
                           <img src={LOGO.URL} alt={LOGO.ALT} />
                         </Link>
                       </div> */}
-                      <ul className="wrapper-menu-left clear">
+                      <ul className="wrapper-menu-left clear PC-MenuLeft">
                         {data_menu.map((item, index) => {
                           return (
                             <li key={index}>
@@ -61,7 +65,7 @@ class Header extends Component {
                                 }
                               >
                                 {item.title}
-                                {item.submenu && <span><IconAngleDown /></span>}
+                                {item.submenu && <IconAngleDown addClass="Small-Icon-Push-Right"/>}
                               </Link>
                               {item.submenu && (
                                 <ul className="submenu">
@@ -81,11 +85,11 @@ class Header extends Component {
                         })}
                       </ul>
                     </div>
-                    <button
-                        className="btn-toggle-menu mobile"
+                    <a
+                        className="btn-toggle-menu small BTN-Small-Toggle-Menu"
                         onClick={this.activeSidebar}>
                         <IconAlignJustify />
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
