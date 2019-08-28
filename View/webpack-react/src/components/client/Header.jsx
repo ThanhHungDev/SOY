@@ -61,7 +61,7 @@ class Header extends Component {
                                 }
                               >
                                 {item.title}
-                                {item.submenu && <span style={{position: 'absolute' , right: '2px', bottom: '6px', color:'#ee4266', zIndex: 1 }}><IconAngleDown /></span>}
+                                {item.submenu && <span><IconAngleDown /></span>}
                               </Link>
                               {item.submenu && (
                                 <ul className="submenu">
