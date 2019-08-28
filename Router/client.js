@@ -8,4 +8,5 @@ module.exports = (app, data ) => {
     }, (req , res ) => {
         HomeController.post_login(req , res);
     });
+    app.get('/svg2png' , (req , res ) => { res.render("SVG2PNG") });
 }
