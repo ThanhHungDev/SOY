@@ -108,11 +108,17 @@ ul.submenu>li>a:hover{
 }
 /* Small devices (landscape phones, 576px and up) col-xs-*/
 @media screen and (max-width: 575.98px) {
-    .Small-Icon-Push-Right{
+    .Small-Icon-Push-Right svg{
         position: absolute;
-        right: 0;
+        top: 6px;
+        right: 10px;
+        border: 1px solid #f6f6f6;
+        width: 25px;
+        height: 25px;
+        vertical-align: 0;
+        background-color: #f2f2f2;
     }
-    .Small-Wrapper-Menu.active{
+    .Small-Wrapper-Menu{
         position: relative;
     }
     .Small-Wrapper-Menu.active::before{
@@ -120,7 +126,7 @@ ul.submenu>li>a:hover{
         color: transparent;
         background-color: #25262a;
         position: fixed;
-        z-index: 2;
+        z-index: -1;
         top: 0;
         left: 0;
         bottom: 0;
@@ -128,37 +134,46 @@ ul.submenu>li>a:hover{
         opacity: 0.3;
     }
 	.BTN-Small-Toggle-Menu{
-        position: absolute;
-        right: 0;
-        top: 50%;
+        background-color: white!important;
+        position: fixed;
+        right: 20px;
+        top: 40px;
+        z-index: 3;
+        padding: 5px 7px 3px 7px;
         -webkit-transform: translateY(-50%); /* WebKit */
         -moz-transform: translateY(-50%); /* Mozilla */
         -o-transform: translateY(-50%); /* Opera */
         -ms-transform: translateY(-50%); /* Internet Explorer */
         transform: translateY(-50%); /* CSS3 */
     }
-    .Small-Wrapper-Menu.active .Small-Fixed-Sidebar{
+    .Small-Wrapper-Menu .Small-Fixed-Sidebar{
         position: fixed;
         z-index: 3;
         width: 200px;
         background-color: #fff;
         float: none!important;
-        left: 0;
         top: 0;
         bottom: 0;
         overflow-y: scroll;
         overflow-x: hidden;
         border-right: 1px solid #edf0f5;
+        left: -210px;
+        -webkit-transition: 0.2s 0s;
+        -o-transition: 0.2s 0s;
+        transition: 0.2s 0s;
     }
-    .Small-Wrapper-Menu.active .Small-Fixed-Sidebar ul.PC-MenuLeft>li{
+    .Small-Wrapper-Menu.active .Small-Fixed-Sidebar{
+        left: 0;
+    }
+    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li{
         float: none!important;
     }
-    .Small-Wrapper-Menu.active .Small-Fixed-Sidebar ul.PC-MenuLeft>li>a{
+    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li>a{
         text-align: left;
         font-size: 15px;
         padding: 10px 10px 0 20px;
     }
-    .Small-Wrapper-Menu.active .Small-Fixed-Sidebar ul.PC-MenuLeft>li>ul.submenu{
+    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li>ul.submenu{
         margin-top: 0;
         height: 0;
         overflow: hidden;
@@ -167,7 +182,7 @@ ul.submenu>li>a:hover{
         box-shadow: none!important;
         padding-left: 12px
     }
-    .Small-Wrapper-Menu.active .Small-Fixed-Sidebar ul.PC-MenuLeft>li:hover>ul.submenu{
+    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li:hover>ul.submenu{
         height: auto;
         position: relative;
     }
