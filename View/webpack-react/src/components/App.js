@@ -3,6 +3,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 //// css and custom define
 import '../styles/client/App.css';
 import ClientHomePage from './client/HomePage.jsx';
+import ClientLoginPage from './client/Login.jsx';
+import ForgotPassword from "./client/ForgotPassword.jsx"
 
 class App extends Component {
     render() {
@@ -12,7 +14,8 @@ class App extends Component {
                     <Route key="home" exact path="/" render={ ( ) => <ClientHomePage /> } />
                     <Route key="about" path="/about" render={ ( ) => <ClientHomePage /> }/>
                     <Route path="/contact" render={ ( ) => (<h2> contact  </h2>) }/>
-                    <Route path="/admin" render={ ( ) => (<h2> adminPage  </h2>) }/>
+                    <Route path="/login" render={ () => <ClientLoginPage /> }/>
+                    <Route path="/forgot-password" render={()=> <ForgotPassword /> } />
                 </BrowserRouter>
             </div>
         );

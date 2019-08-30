@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import CONFIG from "../../config";
 import IconAlignJustify from "../../icon/svg/align-justify.jsx";
 import IconAngleDown from "../../icon/svg/angle-down.jsx"
+import IconClose from "../../icon/svg/windows-close.jsx"
 /**
  * import css
  */
@@ -40,7 +41,9 @@ class Header extends Component {
                     { url: '/news/familly', title: 'familly' }
                 ]
             },
-            { url: '/admin', title: 'admin' }
+            { url: '/login', title: 'login' },
+            { url: '/login1', title: 'login1' },
+            { url: '/login2', title: 'login2' }
         ];
 
         return (
@@ -52,7 +55,7 @@ class Header extends Component {
                                 <a
                                     className="btn-toggle-menu small BTN-Small-Toggle-Menu"
                                     onClick={this.activeSidebar}>
-                                    <IconAlignJustify />
+                                    {this.state.activeMenuToggle ? <IconClose/> : <IconAlignJustify />}
                                 </a>
                                 <div className="float-left">
                                     <Link to="/" className="d-inline-block" >
@@ -61,14 +64,15 @@ class Header extends Component {
                                 </div>
                                 <div className="float-right Small-Fixed-Sidebar" ref="sidebar">
                                     {/* <div className="mobile">
-                        <Link to="/" className="d-inline-block">
-                          <img src={LOGO.URL} alt={LOGO.ALT} />
-                        </Link>
-                      </div> */}
+                                            <Link to="/" className="d-inline-block">
+                                            <img src={LOGO.URL} alt={LOGO.ALT} />
+                                            </Link>
+                                        </div> */
+                                    }
                                     <ul className="wrapper-menu-left clear PC-MenuLeft">
                                         {data_menu.map((item, index) => {
                                             return (
-                                                <li key={index}>
+                                                <li key={index} onClick={e => console.log(e.target)}>
                                                     <Link
                                                         to={item.url ? item.url : ""}
                                                         onClick={
