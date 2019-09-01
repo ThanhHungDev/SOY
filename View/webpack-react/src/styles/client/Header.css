@@ -19,6 +19,7 @@ ul.PC-MenuLeft>li{
     float: left;
 }
 ul.PC-MenuLeft>li>a{
+    cursor: pointer;
     display: block;
     padding: 10px 10px;
     text-transform: uppercase;

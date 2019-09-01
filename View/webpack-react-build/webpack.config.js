@@ -22,3 +22,4 @@ module.exports = {
         ]
     }
 };
+///sudo rm -R /home/SOY/View/webpack-react-build/src && sudo cp -r /home/SOY/View/webpack-react/src /home/SOY/View/webpack-react-build/src
