@@ -2,7 +2,7 @@ const path = require("path");
 module.exports = {
     entry: "./src/index.js",
     output: {
-        path: path.join(__dirname, "../../Puclic/Js/React/"),
+        path: path.join(__dirname, "../../Public/Js/React"),
         filename: "bundle.js",
         publicPath: '/',
     },
