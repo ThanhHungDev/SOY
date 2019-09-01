@@ -15,3 +15,9 @@ export function actionJobClickDemo(data){
         payload: data.target.id
     }
 }
+export function actionChangeActiveMenu(index){
+    return {
+        type: TYPE.CHANGE_ACTIVE_MENU,
+        payload: index
+    }
+}

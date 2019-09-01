@@ -31,7 +31,7 @@ ul.PC-MenuLeft>li>a{
     text-transform: uppercase;
     position: relative;
 }
-ul.PC-MenuLeft>li>a:hover, ul.PC-MenuLeft>li>a:hover .svg-inline--fa .fa-secondary{
+ul.PC-MenuLeft>li.active>a, ul.PC-MenuLeft>li.active>a .svg-inline--fa .fa-secondary{
     color: #ee4266;
     fill: #ee4266;
     opacity: 1;
@@ -59,7 +59,7 @@ ul.PC-MenuLeft>li>ul.submenu{
     -o-transition: 0.2s 0s;
     transition: 0.2s 0s;
 }
-ul.PC-MenuLeft>li:hover>ul.submenu{
+ul.PC-MenuLeft>li.active>ul.submenu{
     z-index: 1;
     opacity: 1;
     margin-top: 0;
@@ -77,7 +77,7 @@ ul.submenu>li>a{
     letter-spacing: normal;
     text-transform: capitalize;
 }
-ul.submenu>li>a:hover{
+ul.submenu>li.active>a{
     background: #f4f5f9;
     color: #25262a;
 }
@@ -186,7 +186,7 @@ ul.submenu>li>a:hover{
         box-shadow: none!important;
         padding-left: 12px
     }
-    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li:hover>ul.submenu{
+    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li.active>ul.submenu{
         height: auto;
         position: relative;
     }

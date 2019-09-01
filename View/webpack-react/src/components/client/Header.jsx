@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom"
-
+import { connect } from "react-redux";
 /**
  * import define
  */
 import CONFIG from "../../config";
 import IconAlignJustify from "../../icon/svg/align-justify.jsx";
-import IconAngleDown from "../../icon/svg/angle-down.jsx"
 import IconClose from "../../icon/svg/windows-close.jsx"
+import LiMenu from "../genneral/LiMenu.jsx";
 /**
  * import css
  */
@@ -25,27 +25,7 @@ class Header extends Component {
             URL: CONFIG.SERVER.domain + "/logo/logo.png",
             ALT: CONFIG.SERVER.title
         }
-        const data_menu = [
-            { url: '/about', title: 'about' },
-            {
-                url: '/contact', title: 'contact',
-                submenu: [
-                    { url: '/contact/group', title: 'group' },
-                    { url: '/contact/sinh-vien', title: 'sinh viên' }
-                ]
-            },
-            {
-                title: 'tin tức',
-                submenu: [
-                    { url: '/news/child', title: 'child' },
-                    { url: '/news/familly', title: 'familly' }
-                ]
-            },
-            { url: '/login', title: 'login' },
-            { url: '/login1', title: 'login1' },
-            { url: '/login2', title: 'login2' }
-        ];
-
+        const data_menu = this.props.header
         return (
             <div className="HeaderComponent">
                 <div className="container">
@@ -62,42 +42,9 @@ class Header extends Component {
                                         <img src={LOGO.URL} alt={LOGO.ALT} />
                                     </Link>
                                 </div>
-                                <div className="float-right Small-Fixed-Sidebar" ref="sidebar">
-                                    {/* <div className="mobile">
-                                            <Link to="/" className="d-inline-block">
-                                            <img src={LOGO.URL} alt={LOGO.ALT} />
-                                            </Link>
-                                        </div> */
-                                    }
+                                <div className="float-right Small-Fixed-Sidebar">
                                     <ul className="wrapper-menu-left clear PC-MenuLeft">
-                                        {data_menu.map((item, index) => {
-                                            return (
-                                                <li key={index} onClick={e => console.log(e.target)}>
-                                                    <Link
-                                                        to={item.url ? item.url : ""}
-                                                        onClick={
-                                                            !item.url ? e => e.preventDefault() : e => { }
-                                                        }
-                                                    >
-                                                        {item.title}
-                                                        {item.submenu && <IconAngleDown addClass="Small-Icon-Push-Right" actionClick={e => e.preventDefault()} />}
-                                                    </Link>
-                                                    {item.submenu && (
-                                                        <ul className="submenu">
-                                                            {item.submenu.map((sub_item, sub_index) => {
-                                                                return (
-                                                                    <li key={sub_index}>
-                                                                        <Link to={sub_item.url}>
-                                                                            {sub_item.title}
-                                                                        </Link>
-                                                                    </li>
-                                                                );
-                                                            })}
-                                                        </ul>
-                                                    )}
-                                                </li>
-                                            );
-                                        })}
+                                        {data_menu.map((item, index) => <LiMenu index={index} key={index} data_item={item} />)}
                                     </ul>
                                 </div>
                             </div>
@@ -108,5 +55,9 @@ class Header extends Component {
         );
     }
 }
-
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        header: state.header
+    }
+}
+export default connect(mapStateToProps)(Header);
