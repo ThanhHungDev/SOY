@@ -6,17 +6,18 @@ import { connect } from "react-redux";
 ///
 import { Dropdown } from "../../actions";
 
+const DropdownName = "menu";
 class LiMenu extends Component {
     constructor(props){
         super(props);
     }
     handleClickDropdown = e => {
-        this.props.dispatch(Dropdown({active : "menu"+this.props.index , flag_dropdown : true }));
+        this.props.dispatch(Dropdown({active : DropdownName+this.props.index}));
     }
     render() {
         const { active } = this.props.is_click_dropdown;
         var isActiveMenu = false;
-        if(active == "menu"+this.props.index )
+        if(active == DropdownName+this.props.index )
             isActiveMenu = !isActiveMenu;
         const item = this.props.data_item; 
         return (
@@ -50,13 +51,6 @@ class LiMenu extends Component {
 LiMenu.propTypes = {
     data_item : PropTypes.any
 };
-const checkActive = (match, location) => {
-    //some additional logic to verify you are in the home URI
-    if(!location) return false;
-    const {pathname} = location;
-    console.log(pathname);
-    return pathname === "/";
-}
 const mapStateToProps = (state) => {
     return {
         is_click_dropdown: state.is_click_dropdown,
