@@ -15,9 +15,9 @@ export function actionJobClickDemo(data){
         payload: data.target.id
     }
 }
-export function actionChangeActiveMenu(index){
+export function Dropdown(data_indetifier){
     return {
-        type: TYPE.CHANGE_ACTIVE_MENU,
-        payload: index
+        type: TYPE.IDENTIFIER_CLICK_DROPDOWN,
+        payload: data_indetifier
     }
 }

@@ -15,7 +15,8 @@ const initialStateHeader = [
             { url: '/news/familly', title: 'familly' }
         ]
     },
-    { url: '/login', title: 'login'  }
+    { url: '/login', title: 'login'  },
+    { url: '/forgot-password' , title : 'forgot password' }
 ];
 export default function HeaderReducer(state = initialStateHeader , action) {
     switch (action.type) {

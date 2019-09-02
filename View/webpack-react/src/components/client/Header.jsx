@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom"
+import { Link , NavLink } from "react-router-dom"
 import { connect } from "react-redux";
 /**
  * import define
@@ -27,7 +27,7 @@ class Header extends Component {
         }
         const data_menu = this.props.header
         return (
-            <div className="HeaderComponent">
+            <div className="HeaderComponent" >
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -38,7 +38,7 @@ class Header extends Component {
                                     {this.state.activeMenuToggle ? <IconClose/> : <IconAlignJustify />}
                                 </a>
                                 <div className="float-left">
-                                    <Link to="/" className="d-inline-block" >
+                                    <Link to="/" className="d-inline-block">
                                         <img src={LOGO.URL} alt={LOGO.ALT} />
                                     </Link>
                                 </div>

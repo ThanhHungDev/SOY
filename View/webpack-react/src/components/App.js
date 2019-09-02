@@ -6,20 +6,20 @@ import '../styles/client/App.css';
 import ClientHomePage from './client/HomePage.jsx';
 import ClientLoginPage from './client/Login.jsx';
 import ForgotPassword from "./client/ForgotPassword.jsx"
+import ClientAboutPage from "./client/AboutPage.jsx"
+///
+import { Dropdown } from "../actions";
 
 class App extends Component {
-    listenEventDropdown = () => {
-        if(this.props.listen_dropdown)
-            console.log("hung test giá trị đúng của redux")
-        else 
-            console.log("hung test giá trị sai của redux")
+    componentDidMount(){
+        this.props.dispatch(Dropdown({}));
     }
     render() {
         return (
-            <div className="AppComponent" onClick={this.listenEventDropdown}>
+            <div className="AppComponent">
                 <BrowserRouter>
                     <Route key="home" exact path="/" render={ ( ) => <ClientHomePage /> } />
-                    <Route key="about" path="/about" render={ ( ) => <ClientHomePage /> }/>
+                    <Route key="about" path="/about" render={ ( ) => <ClientAboutPage />}/>
                     <Route path="/contact" render={ ( ) => (<h2> contact  </h2>) }/>
                     <Route path="/login" render={ () => <ClientLoginPage /> }/>
                     <Route path="/forgot-password" render={()=> <ForgotPassword /> } />
@@ -31,7 +31,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        listen_dropdown: state.dropdown
+        is_click_dropdown: state.is_click_dropdown,
+        information : state.information_client
     }
 }
 export default connect(mapStateToProps)(App)
