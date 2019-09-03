@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-server.listen(CONFIG.SERVER.PORT, CONFIG.SERVER.DOMAIN ,  () => {
+server.listen(CONFIG.SERVER.PORT,  () => {
     console.log(`server listen: ${server.address().address}:${ server.address().port}`);
 });
 /////////////////////////////////////////////////////////////////////////
