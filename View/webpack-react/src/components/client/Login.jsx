@@ -18,11 +18,11 @@ export default class Login extends Component {
             ALT: CONFIG.SERVER.title
         }
         return (
-            <div className="ComponentLogin Wrapper-Login ripe-malinka-gradient">
-                <Link to="/" className="d-inline-block" >
+            <div className="ComponentLogin Wrapper-Login ripe-malinka-gradient animated fadeIn">
+                <Link to="/" className="d-inline-block animated fast slideInRight" >
                     <img src={LOGO.URL} alt={LOGO.ALT} />
                 </Link>
-                <div className="Wrapper-Form-Login">
+                <div className="Wrapper-Form-Login animated slideInLeft">
                     <form className="Form-Login">
                         <h1 className="Text-Welcome-Login">Welcome Back</h1>
                         <div className="Form-Group">
