@@ -10,7 +10,7 @@ const CONFIG = {
         contact : ''
     },
     SERVER : {
-        domain : "http://localhost:3001",
+        domain : "http://localhost:3000",
         title : 'werewolf online'
     },
     PHP : {

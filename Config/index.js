@@ -1,6 +1,6 @@
 const CONFIG = {
     SERVER : {
-        PORT : 3001,
+        PORT : 3000,
         DOMAIN : "localhost",
         PROTOCOL: "http://" 
     }, 

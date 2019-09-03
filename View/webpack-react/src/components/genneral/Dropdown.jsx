@@ -5,61 +5,51 @@ import "../../styles/general/Dropdown.css";
 class Dropdown extends React.Component {
     constructor(props) {
         super(props);
-        /////////////////////////////////////////////////
-        var list_render = [];
-        const firstItem = this.props.list[0];
-        if (typeof firstItem.label == 'undefined') {
-            ///fix value key
-            list_render = this.props.list.map(
-                (item, key) => {
-                    return (
-                        { value : key , label : item }
-                    )
-                }
-            )
-        }else {
-            list_render = this.props.list;
-        }
         this.state = {
-            isOpen: false,
-            itemValueSelect: 0, 
-            list : list_render
+            displayMenu: false,
         };
-        /////////////////////////////////////////////////
-    }
-    showDropdown = () => {
-        console.log(4354352432);
-        this.setState({ isOpen: true });
-        // document.addEventListener("click", this.hideDropdown.bind(this));
-    };
-    // hideDropdown() {
-    //     this.setState({ isOpen: false });
-    //     document.removeEventListener("click", this.hideDropdown.bind(this));
-    // };
-    chooseItem = index => {
-        console.log(index);
-        if (typeof(this.state.list[index]) != 'undefined') {
-            this.setState({ itemValueSelect : index , isOpen : false })
-        }
     };
 
+    showDropdownMenu = event => {
+        event.preventDefault();
+        this.setState({ displayMenu: true }, () => {
+            document.addEventListener('click', this.hideDropdownMenu);
+        });
+        console.log("showDropdownMenu");
+    }
+
+    hideDropdownMenu = () => {
+        this.setState({ displayMenu: false }, () => {
+            document.removeEventListener('click', this.hideDropdownMenu);
+        });
+
+    }
+
     render() {
-        // const { list } = this.state;
         return (
-            <div className={`dropdown ${this.state.isOpen ? 'open' : ''}`}>
-                <button className="dropdown-toggle" type="button" onClick={this.showDropdown}>
-                    {this.state.list[this.state.itemValueSelect].label}
-                    <span className="caret"></span>
-                </button>
-                <ul className="dropdown-menu">
-                    {this.state.list.map( 
-                        (item, index) => <li key={index} value={item.value} onClick={this.chooseItem.bind(this , index)} >
-                                            <a>{item.label}</a>
-                                        </li>
-                    )}
-                </ul>
+            <div className="dropdown" style={{ background: "red", width: "200px" }} >
+                <div className="button" onClick={this.showDropdownMenu}> My Setting </div>
+
+                {this.state.displayMenu ? (
+                    <ul>
+                        <li><a className="active" href="#Create Page">Create Page</a></li>
+                        <li><a href="#Manage Pages">Manage Pages</a></li>
+                        <li><a href="#Create Ads">Create Ads</a></li>
+                        <li><a href="#Manage Ads">Manage Ads</a></li>
+                        <li><a href="#Activity Logs">Activity Logs</a></li>
+                        <li><a href="#Setting">Setting</a></li>
+                        <li><a href="#Log Out">Log Out</a></li>
+                    </ul>
+                ) :
+                    (
+                        null
+                    )
+                }
+
             </div>
-        )
+
+        );
     }
 }
+
 export default Dropdown;
