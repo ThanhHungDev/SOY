@@ -106,9 +106,9 @@ ul.submenu>li>a.active{
         padding-top: 15px;
         padding-bottom: 10px;
     }
-}
-/* Small devices (landscape phones, 576px and up) col-xs-*/
-@media screen and (max-width: 575.98px) {
+    /**
+    * css menu small
+    */
     .Small-Icon-Push-Right svg{
         position: absolute;
         top: 6px;
@@ -191,5 +191,9 @@ ul.submenu>li>a.active{
         height: auto;
         position: relative;
     }
+}
+/* Small devices (landscape phones, 576px and up) col-xs-*/
+@media screen and (max-width: 575.98px) {
+    
 }
 

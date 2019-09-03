@@ -1,18 +1,18 @@
 import TYPE from '../actions/action_type.js';
 const initialStateHeader = [
-    { url: '/about', title: 'chơi ngay' , active : true },
+    { url: '/play-now', title: 'chơi ngay' , active : true },
     {
-        title: 'contact',
+        title: 'bạn bè',
         submenu: [
-            { url: '/contact/group', title: 'group' },
-            { url: '/contact/sinh-vien', title: 'sinh viên' }
+            { url: '/friend/find', title: 'tìm bạn' },
+            { url: '/friend/play-level', title: 'đấu hạng' }
         ]
     },
     {
-        title: 'tin tức', 
+        title: 'hẹn hò', 
         submenu: [
-            { url: '/news/child', title: 'child' },
-            { url: '/news/familly', title: 'familly' }
+            { url: '/find-love/boy', title: 'tìm bạn trai' },
+            { url: '/find-love/girl', title: 'tìm bạn gái' }
         ]
     },
     { url: '/login', title: 'login'  }

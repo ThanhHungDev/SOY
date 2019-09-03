@@ -33,7 +33,7 @@ class Header extends Component {
                         <div className="col-12">
                             <div className={`MenuHeaderComponent clear Small-Wrapper-Menu ` +( this.state.activeMenuToggle? 'active' : '')}>
                                 <a
-                                    className="btn-toggle-menu small BTN-Small-Toggle-Menu"
+                                    className="btn-toggle-menu mobile BTN-Small-Toggle-Menu"
                                     onClick={this.activeSidebar}>
                                     {this.state.activeMenuToggle ? <IconClose/> : <IconAlignJustify />}
                                 </a>

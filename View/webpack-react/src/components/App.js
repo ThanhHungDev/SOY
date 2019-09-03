@@ -7,6 +7,7 @@ import ClientHomePage from './client/HomePage.jsx';
 import ClientLoginPage from './client/Login.jsx';
 import ForgotPassword from "./client/ForgotPassword.jsx"
 import ClientAboutPage from "./client/AboutPage.jsx"
+import PlayNow from "./client/PlayNow.jsx"
 ///
 import { Dropdown } from "../actions";
 
@@ -18,9 +19,9 @@ class App extends Component {
         return (
             <div className="AppComponent">
                 <BrowserRouter>
-                    <Route key="home" exact path="/" render={ ( ) => <ClientHomePage /> } />
-                    <Route key="about" path="/about" render={ ( ) => <ClientAboutPage />}/>
-                    <Route path="/contact" render={ ( ) => (<h2> contact  </h2>) }/>
+                    <Route exact path="/" render={ ( ) => <ClientHomePage /> } />
+                    <Route path="/play-now" render={ ( ) => <PlayNow /> }/>
+                    <Route path="/friend" render={ ( ) => <ClientAboutPage />}/>
                     <Route path="/login" render={ () => <ClientLoginPage /> }/>
                     <Route path="/forgot-password" render={()=> <ForgotPassword /> } />
                 </BrowserRouter>

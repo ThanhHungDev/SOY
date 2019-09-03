@@ -1,7 +1,8 @@
+const DOMAIN = 'localhost';
 const CONFIG = {
     ASSET : '/',
     SITE : {
-        url : 'http://localhost',
+        url : 'http://'+DOMAIN,
         name : 'Hiệp Nhất Công Giáo',
         owner : "Nhóm Truyền Thông Công Giáo",
         title : 'Catholic',
@@ -10,7 +11,7 @@ const CONFIG = {
         contact : ''
     },
     SERVER : {
-        domain : "http://localhost:3000",
+        domain : "http://"+DOMAIN+":3000",
         title : 'werewolf online'
     },
     PHP : {
