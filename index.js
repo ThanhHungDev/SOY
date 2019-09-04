@@ -35,9 +35,6 @@ server.listen(CONFIG.SERVER.PORT,  () => {
 /////////////////////////////////////////////////////////////////////////
 //////connect database redis ////////////////////////////////////////////
 const client = redis.createClient(CONFIG.SERVER.REDIS.PORT);
-client.on('connect', function() {
-    console.log('connected');
-});
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
 
@@ -58,6 +55,12 @@ io.on('connection', function (socket) {
 app.post('/api/login', (req, res)=>{
     var { email , password } = req.body;
     console.log(email);
+    client.set("email", email, function (err, reply){
+        console.log("set redis email : " + email);
+    });
+    client.get("email", function (err, reply) {
+        console.log("reply.toString()" + reply.toString());
+    });
     var error = null;
     if(email != "thanhhung.dev@gmail.com"){
         error = { message : "sai tên đăng nhập", backend : "không đúng email" , code: 403 };
