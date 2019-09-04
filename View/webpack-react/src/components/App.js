@@ -9,12 +9,8 @@ import ForgotPassword from "./client/ForgotPassword.jsx"
 import ClientAboutPage from "./client/AboutPage.jsx"
 import PlayNow from "./client/PlayNow.jsx"
 ///
-import { Dropdown } from "../actions";
 
 class App extends Component {
-    componentDidMount(){
-        this.props.dispatch(Dropdown({}));
-    }
     render() {
         return (
             <div className="AppComponent">
@@ -32,7 +28,6 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        is_click_dropdown: state.is_click_dropdown,
         information : state.information_client
     }
 }

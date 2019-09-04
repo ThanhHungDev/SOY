@@ -17,6 +17,18 @@ class PlayNow extends Component {
                 <div className="PlayNow">
                     đây là content PlayNow
                 </div>
+                <div className="PlayNow">
+                    đây là content PlayNow
+                </div>
+                <div className="PlayNow">
+                    đây là content PlayNow
+                </div>
+                <div className="PlayNow">
+                    đây là content PlayNow
+                </div>
+                <div className="PlayNow">
+                    đây là content PlayNow
+                </div>
                 <div className="container mean-fruit-gradient">
                     <div className="row">
                         <div className="col-6 col-xs-12 text-default">

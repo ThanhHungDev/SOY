@@ -1,6 +1,6 @@
 import TYPE from '../actions/action_type.js';
 const initialStateHeader = [
-    { url: '/play-now', title: 'chơi ngay' , active : true },
+    { url: '/play-now', title: 'chơi ngay'},
     {
         title: 'bạn bè',
         submenu: [

@@ -4,7 +4,7 @@ class Footer extends Component {
     render() {
         return (
             <div className="FooterComponent">
-                <img src="" alt="thumbnail" className="img-thumbnail" />
+                đây là foooter
             </div>
         );
     }

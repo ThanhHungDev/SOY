@@ -1,24 +1,29 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom"
-import PropTypes from 'prop-types';
+import { NavLink } from "react-router-dom"
 import IconAngleDown from "../../icon/svg/angle-down.jsx";
-import { connect } from "react-redux";
-///
-import { Dropdown } from "../../actions";
 
 const DropdownName = "menu";
 class LiMenu extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            showSubmenu : false
+        }
     }
-    handleClickDropdown = e => {
-        this.props.dispatch(Dropdown({active : DropdownName+this.props.index}));
+    showDropdownMenu = () => {
+        this.setState({ showSubmenu: true }, () => {
+            document.addEventListener('click', this.hideDropdownMenu);
+        });
+    }
+    hideDropdownMenu = () => {
+        this.setState({ showSubmenu: false }, () => {
+            document.removeEventListener('click', this.hideDropdownMenu);
+        });
+    }
+    componentWillUnmount() {
+        document.removeEventListener('click', this.hideDropdownMenu );
     }
     render() {
-        const { active } = this.props.is_click_dropdown;
-        var isActiveMenu = false;
-        if(active == DropdownName+this.props.index )
-            isActiveMenu = !isActiveMenu;
         const item = this.props.data_item; 
         return (
             item.url ? 
@@ -29,10 +34,10 @@ class LiMenu extends Component {
             </li>
             : 
             <li>
-                <a onClick={this.handleClickDropdown}>
+                <a onClick={this.showDropdownMenu}>
                     {item.title} <IconAngleDown addClass="Small-Icon-Push-Right" />
                 </a>
-                <ul className={isActiveMenu ? 'submenu active' : 'submenu'}>
+                <ul className={"submenu" + (this.state.showSubmenu ? ' active' : '')}>
                     {item.submenu.map((sub_item, sub_index) => {
                         return (
                             <li key={sub_index}>
@@ -47,14 +52,4 @@ class LiMenu extends Component {
         );
     }
 }
-
-LiMenu.propTypes = {
-    data_item : PropTypes.any
-};
-const mapStateToProps = (state) => {
-    return {
-        is_click_dropdown: state.is_click_dropdown,
-        information : state.information_client
-    }
-}
-export default connect(mapStateToProps)(LiMenu);
+export default LiMenu;

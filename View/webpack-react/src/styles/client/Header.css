@@ -78,7 +78,7 @@ ul.submenu>li>a{
     letter-spacing: normal;
     text-transform: capitalize;
 }
-ul.submenu>li>a.active{
+ul.submenu>li>a:hover{
     background: #f4f5f9;
     color: #25262a;
 }
