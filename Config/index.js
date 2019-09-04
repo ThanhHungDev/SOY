@@ -4,7 +4,7 @@ const CONFIG = {
         DOMAIN : "localhost",
         PROTOCOL: "http://",
         REDIS : {
-            HOST : "192.168.100.36",
+            HOST : "45.32.116.12",
             PORT : "6379"
         }
     }, 

@@ -34,7 +34,7 @@ server.listen(CONFIG.SERVER.PORT,  () => {
 });
 /////////////////////////////////////////////////////////////////////////
 //////connect database redis ////////////////////////////////////////////
-const client = redis.createClient(CONFIG.SERVER.REDIS.PORT, CONFIG.SERVER.REDIS.HOST);
+const client = redis.createClient(CONFIG.SERVER.REDIS.PORT);
 client.on('connect', function() {
     console.log('connected');
 });
