@@ -1,16 +1,30 @@
 import React, { Component } from "react";
 import { connect  } from 'react-redux';
+import socketIOClient from "socket.io-client";
 
 ////define
 // import {actionJobClickDemo} from '../../actions';
-
+import CONFIG from "../../config";
 import Header from './Header.jsx';
 import Footer from "./Footer.jsx";
 import NowChat from "./NowChat.jsx";
 import NowPlayer from "./NowPlayer.jsx";
 
 class PlayNow extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            response: false,
+            endpoint: CONFIG.SERVER.domain
+        };
+    }
+    componentDidMount() {
+        const { endpoint } = this.state;
+        const socket = socketIOClient(endpoint);
+        socket.on("FromAPI", data => this.setState({ response: data }));
+    }    
     render() {
+        console.log(this.state.response);
         return (
             <div className="PlayNowComponent">
                 <Header />

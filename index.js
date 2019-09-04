@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { CONFIG } =  require('./Config');
+const redis = require('redis');
 /***
  * nodejs allow origin localhost *
  */
@@ -32,9 +33,15 @@ server.listen(CONFIG.SERVER.PORT,  () => {
     console.log(`server listen: ${server.address().address}:${ server.address().port}`);
 });
 /////////////////////////////////////////////////////////////////////////
+//////connect database redis ////////////////////////////////////////////
+const client = redis.createClient(CONFIG.SERVER.REDIS.PORT, CONFIG.SERVER.REDIS.HOST);
+client.on('connect', function() {
+    console.log('connected');
+});
+/////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
-    ///duy nhất chính client đã kết nối được gọi....
-    socket.emit('id_socket', socket.id);
+
+    socket.io.emit('FromAPI', socket.id);
     console.log("người kết nối: " + socket.id);
     //////////////////////////////////////////////////////////
     

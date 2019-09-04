@@ -1,8 +1,12 @@
 const CONFIG = {
     SERVER : {
-        PORT : 3000,
+        PORT : 2000,
         DOMAIN : "localhost",
-        PROTOCOL: "http://" 
+        PROTOCOL: "http://",
+        REDIS : {
+            HOST : "192.168.100.36",
+            PORT : "6379"
+        }
     }, 
     database : {
         username: 'postgres',
