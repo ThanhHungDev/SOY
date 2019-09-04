@@ -54,6 +54,24 @@ io.on('connection', function (socket) {
 /////////////////////////////////////////////////////////////////////////
 //// router express /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+app.post('/api/login', (req, res)=>{
+    var { email , password } = req.body;
+    console.log(email);
+    var error = null;
+    if(email != "thanhhung.dev@gmail.com"){
+        error = { message : "sai tên đăng nhập", backend : "không đúng email" , code: 403 };
+    }else if(password != "123456"){
+        error = { message : "sai tên password", backend : "không đúng pass" , code: 403 };
+    }else {
+        var success = { message : "đăng nhập thành công", backend : "login true" , code: 200 };
+    }
+    res.setHeader('Content-Type', 'application/json');
+    if(!error){
+        return res.end(JSON.stringify(success));
+    }
+    return res.end(JSON.stringify(error));
+});
 app.get('*', (req, res)=>{ res.render("index") });
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////

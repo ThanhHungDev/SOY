@@ -12,6 +12,26 @@ export default class Login extends Component {
     constructor(props){
         super(props);
     }
+    Login = () => {
+        var email = this.refs.email.value;
+        var password = this.refs.password.value;
+        fetch("http://localhost:2000/api/login", {
+            method: "POST",
+            dataType: "JSON",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email , password})
+        })
+            .then(resp => {
+                return resp.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => {
+                console.log(error, "catch the hoop");
+            });
+    }
     render() {
         const LOGO = {
             URL: CONFIG.SERVER.domain + "/logo/logo.png",
@@ -27,16 +47,17 @@ export default class Login extends Component {
                         <h1 className="Text-Welcome-Login">Welcome Back</h1>
                         <div className="Form-Group">
                             <IconEmail />
-                            <input type="text" className="Input-Control" placeholder="Email Address" />
+                            <input name="email" ref="email" type="text" className="Input-Control" placeholder="Email Address" />
                         </div>
                         <div className="Form-Group">
                             <IconPassword />
-                            <input type="password" className="Input-Control" placeholder="Password Address" />
+                            <input name="password" ref="password" type="password" className="Input-Control" placeholder="Password Address" />
                         </div>
                         <div className="Forgot-Password">
 						    <Link to="/forgot-password">Forgot password?</Link>
 					    </div>
-                        <button type="submit" className="btn Btn-Login blue-gradient-rgba">
+                        <button type="button" onClick={this.Login}
+                            className="btn Btn-Login blue-gradient-rgba">
                             Log In
                         </button>
                     </form>

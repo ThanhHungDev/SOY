@@ -30,7 +30,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html",
-            SERVER_URL : "http://localhost:4000"
+            SERVER_URL : "http://localhost:2000"
         })
     ]
 };
