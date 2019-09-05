@@ -68,17 +68,15 @@ app.post('/api/login', async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
     var { email , password } = req.body;
     var error = null;
-    console.log("check api 1")
     var userModel = require("./Model/User.js");
     var result = await userModel.checkLogin( email , password );
-    console.log("check api 2")
-    console.log(result)
     if( !result ){
         error = { message : "sai tên đăng nhập hoặc mật khẩu", backend : "email or password fail" , code: 403 };
     }
     if( !error ){
         var success = { message : "đăng nhập thành công", backend : "login true" , code: 200 };
         /// save database sequelize 1 refesh token
+        var checkInsertToken = await userModel.insertTokenRefesh();
     }
     if(!error){
         return res.end(JSON.stringify(success));

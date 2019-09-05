@@ -24,7 +24,6 @@ const checkLogin = async function( _email , _password ){
     }
     return false;    
 }
-
 module.exports = {
     Model : USER , 
     checkLogin : checkLogin

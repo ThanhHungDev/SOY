@@ -8,7 +8,7 @@ CREATE TABLE user_accounts
   password character varying(255) NOT NULL,
   name character varying(255),
   mobile character varying(20),
-  flag_active boolean DEFAULT '0',
+  flag_active boolean DEFAULT '1',
   create_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW(),
   CONSTRAINT user_account_pkey PRIMARY KEY (id)
@@ -17,13 +17,7 @@ WITH (
   OIDS=FALSE
 );
 
-thanhung.abc@gmail.com
-123456
-$2b$10$7L9Yx9DyCYXQFRrZAn4LN.8SHuW1lAdLBG2ybgB3dkgz0MSHSHSHe
-
-
-INSERT INTO user_accounts (email, password, name, mobile )
-VALUES ("thanhhung.tud@gmail.com", "$2b$10$7L9Yx9DyCYXQFRrZAn4LN.8SHuW1lAdLBG2ybgB3dkgz0MSHSHSHe", "hùng tt" , "0797581480");
+INSERT INTO user_accounts (email, password, name, mobile ) VALUES ('thanhhung.tud@gmail.com', '$2b$10$7L9Yx9DyCYXQFRrZAn4LN.8SHuW1lAdLBG2ybgB3dkgz0MSHSHSHe', 'hùng tt' , '0797581480');
 
 DROP TABLE IF EXISTS token_refesh;
 DROP SEQUENCE IF EXISTS token_refesh_id_seq;
