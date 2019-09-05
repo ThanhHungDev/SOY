@@ -1,6 +1,6 @@
 const CONFIG = {
     SERVER : {
-        PORT : 2000,
+        PORT : 2001,
         DOMAIN : "localhost",
         PROTOCOL: "http://",
         REDIS : {

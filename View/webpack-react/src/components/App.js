@@ -12,6 +12,7 @@ import PlayNow from "./client/PlayNow.jsx"
 
 class App extends Component {
     render() {
+        console.log(this.props.information)
         return (
             <div className="AppComponent">
                 <BrowserRouter>

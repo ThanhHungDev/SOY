@@ -235,13 +235,13 @@ function detectClient() {
     return {
         screen: screenSize,
         browser: browser,
-        browserVersion: version,
-        browserMajorVersion: majorVersion,
+        browser_version: version,
+        browser_major_version: majorVersion,
         mobile: mobile,
         os: os,
-        osVersion: osVersion,
+        os_version: osVersion,
         cookies: cookieEnabled,
-        flashVersion: flashVersion
+        flash_version: flashVersion
     }
 }
 export default function DetectClientReducer(state = detectClient()) {

@@ -15,7 +15,7 @@ export default class Login extends Component {
     Login = () => {
         var email = this.refs.email.value;
         var password = this.refs.password.value;
-        fetch("http://localhost:2000/api/login", {
+        fetch(CONFIG.SERVER.domain + "/api/login", {
             method: "POST",
             dataType: "JSON",
             headers: {
