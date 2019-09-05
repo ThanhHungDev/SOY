@@ -13,7 +13,8 @@ const CONFIG = {
         password: 'admin123',
         database_name: 'hospital',
         host: "127.0.0.1",
-        dialect: 'postgres'
+        dialect: 'postgres',
+        logging : true
     }
 };
 module.exports.CONFIG = CONFIG;

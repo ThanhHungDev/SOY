@@ -34,7 +34,19 @@ server.listen(CONFIG.SERVER.PORT,  () => {
 });
 /////////////////////////////////////////////////////////////////////////
 //////connect database redis ////////////////////////////////////////////
-const client = redis.createClient(CONFIG.SERVER.REDIS.PORT);
+const client = redis.createClient(CONFIG.SERVER.REDIS.PORT , CONFIG.SERVER.REDIS.HOST);
+client.on('connect', function() {
+    console.log('connected redis server' + CONFIG.SERVER.REDIS.HOST);
+});
+client.on("error", function(err) {
+    console.error("Error connecting to redis", err);
+});
+// client.set("email", email, function (err, reply){
+//     console.log("set redis email : " + email);
+// });
+// client.get("email", function (err, reply) {
+//     console.log("reply.toString()" + reply.toString());
+// });
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
 
@@ -52,24 +64,19 @@ io.on('connection', function (socket) {
 //// router express /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-app.post('/api/login', (req, res)=>{
-    var { email , password } = req.body;
-    console.log(email);
-    client.set("email", email, function (err, reply){
-        console.log("set redis email : " + email);
-    });
-    client.get("email", function (err, reply) {
-        console.log("reply.toString()" + reply.toString());
-    });
-    var error = null;
-    if(email != "thanhhung.dev@gmail.com"){
-        error = { message : "sai tên đăng nhập", backend : "không đúng email" , code: 403 };
-    }else if(password != "123456"){
-        error = { message : "sai tên password", backend : "không đúng pass" , code: 403 };
-    }else {
-        var success = { message : "đăng nhập thành công", backend : "login true" , code: 200 };
-    }
+app.post('/api/login', async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
+    var { email , password } = req.body;
+    var error = null;
+    var userModel = require("./Model/User.js");
+    var result = await userModel.checkLogin( email , password );
+    if( !result ){
+        error = { message : "sai tên đăng nhập hoặc mật khẩu", backend : "email or password fail" , code: 403 };
+    }
+    if( !error ){
+        var success = { message : "đăng nhập thành công", backend : "login true" , code: 200 };
+        /// save database sequelize 1 refesh token
+    }
     if(!error){
         return res.end(JSON.stringify(success));
     }

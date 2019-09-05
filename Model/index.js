@@ -7,7 +7,8 @@ const sequelize = new Sequelize(
     CONFIG.database.password, 
     {
         host: CONFIG.database.host, 
-        dialect: CONFIG.database.dialect
+        dialect: CONFIG.database.dialect,
+        logging:  CONFIG.database.logging
     }
 );
 module.exports = sequelize;
