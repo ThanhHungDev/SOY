@@ -1,8 +1,6 @@
 var Sequelize = require("sequelize");
-const bcrypt = require('bcrypt');
-
-const sequelize_connect = require("../Model/index.js");
-const USER = sequelize_connect.define('USER', {
+const sequelize = require("../Model/index.js");
+const USER = sequelize.define('USER', {
     id: { type: Sequelize.BIGINT, autoIncrement: true, primaryKey: true },
     email: { 
         type: Sequelize.STRING,
@@ -15,22 +13,4 @@ const USER = sequelize_connect.define('USER', {
     timestamps: false,
     tableName: "user_accounts",
 });
-const checkLogin = async function( _email , _password ){
-    var result = await USER.findAll({ where: { email : _email } });
-    if(result.length){
-        var password_compare = result[0].password;
-        var check_password = await bcrypt.compareSync(_password, password_compare);
-        if(check_password){
-            return result[0];
-        }
-    }
-    return false;    
-}
-module.exports = {
-    Model : USER , 
-    checkLogin : checkLogin
-};
-// const salt = 10;
-// var hash = bcrypt.hashSync(_password, salt);
-// console.log(hash);
-// console.log("hash-");
+module.exports = USER;

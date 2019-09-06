@@ -4,7 +4,7 @@ const CONFIG = {
         DOMAIN : "localhost",
         PROTOCOL: "http://",
         REDIS : {
-            HOST : "45.32.116.12",
+            HOST : "127.0.0.1",
             PORT : "6379"
         }
     }, 
@@ -14,7 +14,8 @@ const CONFIG = {
         database_name: 'ma-soi',
         host: "127.0.0.1",
         dialect: 'postgres',
-        logging : true
-    }
+        logging : false
+    },
+    TimeExpireAccessToken : 2,
 };
 module.exports.CONFIG = CONFIG;

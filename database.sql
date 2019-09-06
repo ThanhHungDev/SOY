@@ -27,16 +27,12 @@ CREATE TABLE token_refesh
   id integer NOT NULL DEFAULT nextval('token_refesh_id_seq'),
   user_id integer NOT NULL,
   token_refesh character varying(255) NOT NULL,
-  browser character varying(64),
-  browser_major_version character varying(64),
-  browser_version character varying(64),
-  os character varying(64),
-  os_version character varying(64),
+  client character varying(1024),
   create_at TIMESTAMP DEFAULT NOW(),
-  cookies boolean DEFAULT '0',
-  mobile boolean DEFAULT '0',
   CONSTRAINT token_refesh_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
+-- {"browser":"browser","browser_major_version":"browser_major_version","browser_version":"browser_version","cookies":1,"mobi
+-- le":1,"os":"os","os_version":"os_version"}
