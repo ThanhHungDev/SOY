@@ -10,7 +10,7 @@ const USER = sequelize_connect.define('USER', {
     }, 
     password : { type: Sequelize.STRING },
     create_at: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
-    updated_at: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
+    update_at: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
 },{
     timestamps: false,
     tableName: "user_accounts",
@@ -20,7 +20,9 @@ const checkLogin = async function( _email , _password ){
     if(result.length){
         var password_compare = result[0].password;
         var check_password = await bcrypt.compareSync(_password, password_compare);
-        return check_password;
+        if(check_password){
+            return result[0];
+        }
     }
     return false;    
 }

@@ -34,11 +34,12 @@ server.listen(CONFIG.SERVER.PORT,  () => {
 });
 /////////////////////////////////////////////////////////////////////////
 //////connect database redis ////////////////////////////////////////////
-const client = redis.createClient(CONFIG.SERVER.REDIS.PORT , CONFIG.SERVER.REDIS.HOST);
-client.on('connect', function() {
+const REDIS = redis.createClient(CONFIG.SERVER.REDIS.PORT , CONFIG.SERVER.REDIS.HOST);
+
+REDIS.on('connect', function() {
     console.log('connected redis server' + CONFIG.SERVER.REDIS.HOST);
 });
-client.on("error", function(err) {
+REDIS.on("error", function(err) {
     console.error("Error connecting to redis", err);
 });
 // client.set("email", email, function (err, reply){
@@ -66,22 +67,55 @@ io.on('connection', function (socket) {
 /////////////////////////////////////////////////////////////////////////
 app.post('/api/login', async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
-    var { email , password } = req.body;
-    var error = null;
     var userModel = require("./Model/User.js");
-    var result = await userModel.checkLogin( email , password );
-    if( !result ){
+    var tokenRefeshModel = require("./Model/TokenRefesh.js");
+    var { email , password , client } = req.body;
+    var error = null;
+    if(!email || !password ){
+        error = { message : "sai tên đăng nhập hoặc mật khẩu", backend : "email or password fail" , code: 403 };
+    }else
+    var _user = await userModel.checkLogin( email , password );
+    if( !error && !_user ){
         error = { message : "sai tên đăng nhập hoặc mật khẩu", backend : "email or password fail" , code: 403 };
     }
     if( !error ){
-        var success = { message : "đăng nhập thành công", backend : "login true" , code: 200 };
         /// save database sequelize 1 refesh token
-        var checkInsertToken = await userModel.insertTokenRefesh();
+        var insertTokenRefesh = await tokenRefeshModel.insertTokenRefesh(_user , client);
+        if( insertTokenRefesh.code && insertTokenRefesh.code == 200 ){
+            ///render token access
+            var access = require("./Model/TokenAccess.js")(_user);
+            var setAccess = await REDIS.set( email , access , 'EX', 20 * 60  );
+            if( !setAccess ){
+                error = { user_message : "xác thực không thành công" , internal_message : "không thể tạo refesh token" , code : 400 };
+            }
+        }else{
+            error = insertTokenRefesh;
+        }
     }
     if(!error){
+        var data_success = {
+            email : _user.email, 
+            token_access : access,
+            token_refesh : insertTokenRefesh.data.token
+        }
+        var success = { user_message : "đăng nhập thành công", internal_message : "login true" , code: 200 , data : data_success };
         return res.end(JSON.stringify(success));
     }
     return res.end(JSON.stringify(error));
+});
+app.post('/api/get-data-have-login', async (req, res)=>{
+    res.setHeader('Content-Type', 'application/json');
+    var userModel = require("./Model/User.js");
+    var tokenRefeshModel = require("./Model/TokenRefesh.js");
+    var { email , token_access, token_refesh , client  } = req.body;
+    var error = null;
+    console.log("getAccess2" );
+    var hung = await REDIS.get(email, function (err, reply) {
+        console.log("reply2");
+        console.log(reply);
+    });
+    console.log("reply1" + hung);
+    return res.end(JSON.stringify({ user_message : "đăng nhập thành công", internal_message : "login true" , code: 200 }));
 });
 app.get('*', (req, res)=>{ res.render("index") });
 /////////////////////////////////////////////////////////////////////////

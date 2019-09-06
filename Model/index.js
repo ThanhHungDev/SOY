@@ -11,4 +11,5 @@ const sequelize = new Sequelize(
         logging:  CONFIG.database.logging
     }
 );
+console.log("new sequelize")
 module.exports = sequelize;

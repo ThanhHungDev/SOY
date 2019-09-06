@@ -10,7 +10,7 @@ CREATE TABLE user_accounts
   mobile character varying(20),
   flag_active boolean DEFAULT '1',
   create_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW(),
+  update_at TIMESTAMP DEFAULT NOW(),
   CONSTRAINT user_account_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -30,11 +30,11 @@ CREATE TABLE token_refesh
   browser character varying(64),
   browser_major_version character varying(64),
   browser_version character varying(64),
-  cookies boolean DEFAULT '0',
-  mobile boolean DEFAULT '0',
   os character varying(64),
   os_version character varying(64),
   create_at TIMESTAMP DEFAULT NOW(),
+  cookies boolean DEFAULT '0',
+  mobile boolean DEFAULT '0',
   CONSTRAINT token_refesh_pkey PRIMARY KEY (id)
 )
 WITH (
