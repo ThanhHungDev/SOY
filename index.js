@@ -173,6 +173,7 @@ app.post('/api/login', async (req, res)=>{
 });
 app.post('/api/refesh', async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
+    var UserModel = require("./Model/User.js");
     var TokenRefeshModel = require("./Model/TokenRefesh.js");
     var { id, refesh, client } = req.body;
     var error = _user = str_client = null;
@@ -212,6 +213,16 @@ app.post('/api/refesh', async (req, res)=>{
                 internal_message : "refesh token not found" , 
                 code : 500 
             };
+        }else{
+            var new_refesh = bcrypt.hashSync( isTokenRefeshExist.token_refesh , salt );
+            var is_save = await isTokenRefeshExist.update({ token_refesh : new_refesh }).then(newRefesh => true ).catch(error => false );
+            if( !is_save ){
+                error = { 
+                    user_message : "authenticate fail", 
+                    internal_message : "error update refesh token" , 
+                    code : 500 
+                };
+            }
         }
     }
     if( !error ){
@@ -230,7 +241,7 @@ app.post('/api/refesh', async (req, res)=>{
             var data_success = {
                 id : id,
                 token_access : access,
-                token_refesh : refesh
+                token_refesh : new_refesh
             }
             var success = { 
                 user_message : "login success", 
@@ -296,7 +307,7 @@ app.post('/api/get-data-user', async (req, res)=>{
             }
             if( !error ){
                 var _user = await UserModel.findOne({ where : {id }}).then(result => result ).catch(error => false);
-                console.log(_user);
+                // console.log(_user);
                 var success = { 
                     user_message : "login success", 
                     internal_message : "login true" , 
