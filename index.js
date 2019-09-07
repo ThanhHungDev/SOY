@@ -38,18 +38,6 @@ server.listen(CONFIG.SERVER.PORT,  () => {
 /////////////////////////////////////////////////////////////////////////
 //////connect database redis ////////////////////////////////////////////
 const REDIS = redis.createClient(CONFIG.SERVER.REDIS.PORT , CONFIG.SERVER.REDIS.HOST);
-// async function setREDIS(_key , _value ){
-//     var hung = await REDIS.set(_key, _value, function (err, reply){
-//         console.log("hung set 2 : " + reply);
-//     });
-//     console.log("hung set 1" + hung);
-// }
-// async function getREDIS(_key ){
-//     var hung = await REDIS.get(_key, function (err , reply){
-//         console.log("hung get 2 : " + reply);
-//     });
-//     console.log("hung get 1" + hung);
-// }
 REDIS.on('connect', async function() {
     console.log('connected redis server' + CONFIG.SERVER.REDIS.HOST);
 });
@@ -81,7 +69,6 @@ app.post('/api/login', async (req, res)=>{
     var { email , password , client } = req.body;
     var error = _user = str_client = null;
     var user_agent = req.headers['user-agent'] ? req.headers['user-agent'] : '' ;
-    // console.log(user_agent)
     if(!email || !password || !client ){
         error = { 
             user_message : "login fail", 
@@ -104,8 +91,6 @@ app.post('/api/login', async (req, res)=>{
         !client.browser ||
         !client.browser_version ||
         !client.browser_major_version ||
-        !client.cookies ||
-        !client.mobile ||
         !client.os ||
         !client.os_version
     ){
@@ -116,21 +101,15 @@ app.post('/api/login', async (req, res)=>{
         };
     }
     if( !error ){
-        // console.log(1);
         var UserExist = await UserModel.findAll({ where: { email } });
-        // console.log(2);
         if(UserExist.length){
             var password_in_db = UserExist[0].password;
-            // console.log(3);
             var check_password = bcrypt.compareSync( password, password_in_db);
-            // console.log(4 + check_password);
             if( check_password ){
                 _user = UserExist[0];
             }
         }
-        // console.log(5);
     }
-    // console.log(6);
     if( !_user ){
         error = { 
             user_message : "email or password fail", 
@@ -139,36 +118,19 @@ app.post('/api/login', async (req, res)=>{
         };
     }
     if( !error ){
-        /// đến đây là có user đó thật trong db, nhưng ta vẫn check xem trong bảng refesh token có 
-        /// user data tương ứng client chưa
         client = { ... client , user_agent };
-        var client_sort = {};
-        Object.keys(client).sort().forEach(function(key) {
-            client_sort[key] = client[key];
-        });
-        var str_client = JSON.stringify(client_sort);
-        // console.log(str_client);
-        // console.log(7);
-        /// b1/ query xem có user_id cùng client bị trùng không
+        var str_client = JSON.stringify(client);
         var isTokenRefeshExist = await TokenRefeshModel.findOne({ where: { user_id : _user.id , client : str_client } });
-        // console.log(8);
-        // console.log(isTokenRefeshExist);
         if( isTokenRefeshExist){
-            // console.log(9);
-            // console.log(isTokenRefeshExist.token_refesh)
             var refesh = isTokenRefeshExist.token_refesh;
         }else {
-            // console.log(10);
             var refesh = bcrypt.hashSync( JSON.stringify(_user) , salt );
-            // console.log(11);
-            // console.log(refesh);
             var tokenRefeshCreate = {
                 user_id: _user.id,
                 token_refesh: refesh,
                 client : str_client
             }
             var is_save_token_refesh = await TokenRefeshModel.build(tokenRefeshCreate).save().then(newRefesh => true ).catch(error => false);
-            // console.log(12 + " " + is_save_token_refesh);
             if( !is_save_token_refesh ){
                 error = { 
                     user_message : "authenticate fail", 
@@ -178,14 +140,11 @@ app.post('/api/login', async (req, res)=>{
             }
         }
     }
-    // console.log(13);
     if( !error ){
-        // console.log(14);
         var access = bcrypt.hashSync( refesh , salt );
-        // console.log(15);
-        var key_redis = _user.id + client.browser + client.browser_version + client.browser_major_version + client.os + client.os_version;
+        var key_obj = { id : _user.id, ... client }
+        var key_redis = JSON.stringify(key_obj);
         REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
-            // console.log(16);
             if(err){
                 error = { 
                     user_message : "authenticate fail", 
@@ -209,41 +168,31 @@ app.post('/api/login', async (req, res)=>{
             return res.end(JSON.stringify(success));
         });
     }else {
-        // console.log(17);
         return res.end(JSON.stringify(error));
     }
 });
-app.post('/api/refesh', (req, res)=>{
+app.post('/api/refesh', async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
-    var UserModel = require("./Model/User.js");
     var TokenRefeshModel = require("./Model/TokenRefesh.js");
-    var { id, email, refesh, client } = req.body;
+    var { id, refesh, client } = req.body;
     var error = _user = str_client = null;
     var user_agent = req.headers['user-agent'] ? req.headers['user-agent'] : '' ;
-    if(!id || !email || !refesh || !client ){
+    if(!id || !refesh || !client ){
         error = { 
             user_message : "refesh fail", 
             internal_message : "block" , 
             code: 403
         };
-    }else if(!validator.isNumeric(id)){
+    }else if(!validator.isNumeric(id + "")){
         error = { 
             user_message : "format id fail", 
             internal_message : "invalid id", 
-            code: 400
-        };
-    }else if(!validator.isEmail(email)){
-        error = { 
-            user_message : "format email fail", 
-            internal_message : "invalid email", 
             code: 400
         };
     }else if(
         !client.browser ||
         !client.browser_version ||
         !client.browser_major_version ||
-        !client.cookies ||
-        !client.mobile ||
         !client.os ||
         !client.os_version
     ){
@@ -255,11 +204,7 @@ app.post('/api/refesh', (req, res)=>{
     }
     if( !error ){
         client = { ... client , user_agent };
-        var client_sort = {};
-        Object.keys(client).sort().forEach(function(key) {
-            client_sort[key] = client[key];
-        });
-        var str_client = JSON.stringify(client_sort);
+        var str_client = JSON.stringify(client);
         var isTokenRefeshExist = await TokenRefeshModel.findOne({ where: { user_id : id , client : str_client } });
         if( !isTokenRefeshExist){
             error = { 
@@ -271,7 +216,8 @@ app.post('/api/refesh', (req, res)=>{
     }
     if( !error ){
         var access = bcrypt.hashSync( refesh , salt );
-        var key_redis = _user.id + client.browser + client.browser_version + client.browser_major_version + client.os + client.os_version;
+        var key_obj = { id , ...client };
+        var key_redis = JSON.stringify(key_obj);
         REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
             if(err){
                 error = { 
@@ -282,7 +228,7 @@ app.post('/api/refesh', (req, res)=>{
                 return res.end(JSON.stringify(error));
             }
             var data_success = {
-                id : _user.id,
+                id : id,
                 token_access : access,
                 token_refesh : refesh
             }
@@ -293,6 +239,73 @@ app.post('/api/refesh', (req, res)=>{
                 data : data_success 
             };
             return res.end(JSON.stringify(success));
+        });
+    }else {
+        return res.end(JSON.stringify(error));
+    }
+});
+app.post('/api/get-data-user', async (req, res)=>{
+    res.setHeader('Content-Type', 'application/json');
+    var UserModel = require("./Model/User.js");
+    var { id, access, client } = req.body;
+    var error = str_client = null;
+    var user_agent = req.headers['user-agent'] ? req.headers['user-agent'] : '' ;
+    if(!id || !access || !client ){
+        error = { 
+            user_message : "data fail", 
+            internal_message : "block" , 
+            code: 403
+        };
+    }else if(!validator.isNumeric(id + "")){
+        error = { 
+            user_message : "format id fail", 
+            internal_message : "invalid id", 
+            code: 400
+        };
+    }else if(
+        !client.browser ||
+        !client.browser_version ||
+        !client.browser_major_version ||
+        !client.os ||
+        !client.os_version
+    ){
+        error = { 
+            user_message : "failure for data", 
+            internal_message : "invalid object data", 
+            code: 400
+        };
+    }
+    if( !error ){
+        client = { ...client , user_agent};
+        var key_obj = { id  , ...client }
+        var key_redis = JSON.stringify(key_obj);
+        REDIS.get( key_redis, async (err , value ) => {
+            if(err){
+                error = { 
+                    user_message : "get access fail", 
+                    internal_message : "get access token fail",
+                    code : 500 
+                };
+            }
+            if(access != value ){
+                error = { 
+                    user_message : "token timeout", 
+                    internal_message : "token fail",
+                    code : 500 
+                };
+            }
+            if( !error ){
+                var _user = await UserModel.findOne({ where : {id }}).then(result => result ).catch(error => false);
+                console.log(_user);
+                var success = { 
+                    user_message : "login success", 
+                    internal_message : "login true" , 
+                    code: 200 , 
+                    data : _user 
+                };
+                return res.end(JSON.stringify(success));
+            }
+            return res.end(JSON.stringify(error));
         });
     }else {
         return res.end(JSON.stringify(error));

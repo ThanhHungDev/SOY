@@ -1,13 +1,6 @@
 function detectClient() {
     {
         var unknown = 'unknown';
-        // screen
-        var screenSize = '';
-        if (screen.width) {
-            var width = (screen.width) ? screen.width : '';
-            var height = (screen.height) ? screen.height : '';
-            screenSize += '' + width + " x " + height;
-        }
         // browser
         var nVer = navigator.appVersion;
         var nAgt = navigator.userAgent;
@@ -78,16 +71,7 @@ function detectClient() {
             version = '' + parseFloat(navigator.appVersion);
             majorVersion = parseInt(navigator.appVersion, 10);
         }
-        // mobile version
-        var mobile = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(nVer);
 
-        // cookie
-        var cookieEnabled = (navigator.cookieEnabled) ? true : false;
-
-        if (typeof navigator.cookieEnabled == 'undefined' && !cookieEnabled) {
-            document.cookie = 'testcookie';
-            cookieEnabled = (document.cookie.indexOf('testcookie') != -1) ? true : false;
-        }
         // system
         var os = unknown;
         var clientStrings = [{
@@ -221,27 +205,14 @@ function detectClient() {
                 osVersion = osVersion[1] + '.' + osVersion[2] + '.' + (osVersion[3] | 0);
                 break;
         }
-        var flashVersion = 'no check';
-        if (typeof swfobject != 'undefined') {
-            var fv = swfobject.getFlashPlayerVersion();
-            if (fv.major > 0) {
-                flashVersion = fv.major + '.' + fv.minor + ' r' + fv.release;
-            } else {
-                flashVersion = unknown;
-            }
-        }
     }
 
     return {
-        screen: screenSize,
         browser: browser,
         browser_version: version,
         browser_major_version: majorVersion,
-        mobile: mobile,
         os: os,
-        os_version: osVersion,
-        cookies: cookieEnabled,
-        flash_version: flashVersion
+        os_version: osVersion
     }
 }
 export default function DetectClientReducer(state = detectClient()) {
