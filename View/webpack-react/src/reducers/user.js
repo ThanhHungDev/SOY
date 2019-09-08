@@ -5,6 +5,8 @@ const USER_INITIAL = {
     user_infor : null
 };
 
+
+
 import TYPE from '../actions/action_type.js';
 export default function UserReducer(state = USER_INITIAL, action) {
     switch (action.type) {
