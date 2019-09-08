@@ -47,11 +47,9 @@ REDIS.on("error", function(err) {
 
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
-
-    socket.io.emit('FromAPI', socket.id);
+    socket.emit('authentication-required', socket.id);
     console.log("người kết nối: " + socket.id);
     //////////////////////////////////////////////////////////
-    
     //////////////////////////////////////////////////////////
     socket.on('disconnect', function () {
         console.log('có 1 người ngắt kết nối ' + socket.id)
@@ -173,7 +171,6 @@ app.post('/api/login', async (req, res)=>{
 });
 app.post('/api/refesh', async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
-    var UserModel = require("./Model/User.js");
     var TokenRefeshModel = require("./Model/TokenRefesh.js");
     var { id, refesh, client } = req.body;
     var error = _user = str_client = null;
@@ -302,7 +299,7 @@ app.post('/api/get-data-user', async (req, res)=>{
                 error = { 
                     user_message : "token timeout", 
                     internal_message : "token fail",
-                    code : 500 
+                    code : 403 
                 };
             }
             if( !error ){
@@ -319,6 +316,65 @@ app.post('/api/get-data-user', async (req, res)=>{
             return res.end(JSON.stringify(error));
         });
     }else {
+        return res.end(JSON.stringify(error));
+    }
+});
+app.post('/api/register', async (req, res )=>{
+    var { email, password, confirm, name , mobile } = req.body;
+    var error  = null;
+    var UserModel = require("./Model/User.js");
+    if(!email || !password || !name ){
+        error = { 
+            user_message : "register fail", 
+            internal_message : "block" , 
+            code: 400
+        };
+    }else if(!validator.isLength(password , {min: 6, max: 64} )){
+        error = { 
+            user_message : "password character number >= 6 and <= 64 ", 
+            internal_message : "invalid password", 
+            code: 400
+        };
+    }else if(!validator.isEmail( email )){
+        error = { 
+            user_message : "email fail", 
+            internal_message : "invalid email", 
+            code: 400
+        };
+    }else{
+        var findUserByEmail = await UserModel.findOne({where : { email }}).then(result => result ).catch(error => false);
+        if(findUserByEmail){
+            error = { 
+                user_message : "email exist", 
+                internal_message : "exist email", 
+                code: 400
+            };
+        }
+    }
+    if( !error ){
+        var hash_password = bcrypt.hashSync( password , salt );
+        var new_user = {
+            email,
+            password : hash_password,
+            name
+        }
+        var is_save_user = await UserModel.build(new_user).save().then(new_record => true ).catch(error => false);
+        if( !is_save_user ){
+            error = { 
+                user_message : "register fail", 
+                internal_message : "error register user" , 
+                code : 400 
+            };
+        }
+    }
+    if( !error ){
+        var success = { 
+            user_message : "register success", 
+            internal_message : "register true" , 
+            code: 200 
+        };
+        return res.end(JSON.stringify(success));
+    }else  {
         return res.end(JSON.stringify(error));
     }
 });

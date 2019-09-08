@@ -8,6 +8,7 @@ import ClientLoginPage from './client/Login.jsx';
 import ForgotPassword from "./client/ForgotPassword.jsx"
 import ClientAboutPage from "./client/AboutPage.jsx"
 import PlayNow from "./client/PlayNow.jsx"
+import ClientRegisterPage from './client/Register.jsx';
 ///
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
                     <Route path="/play-now" render={ ( ) => <PlayNow /> }/>
                     <Route path="/friend" render={ ( ) => <ClientAboutPage />}/>
                     <Route path="/login" render={ () => <ClientLoginPage /> }/>
+                    <Route path="/register" render={ () => <ClientRegisterPage /> }/>
                     <Route path="/forgot-password" render={()=> <ForgotPassword /> } />
                 </BrowserRouter>
             </div>

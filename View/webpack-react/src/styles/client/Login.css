@@ -65,14 +65,18 @@
     -ms-transform: translateY(-50%); /* Internet Explorer */
     transform: translateY(-50%); /* CSS3 */
 }
-.Forgot-Password a{
+.Forgot-Password{
     display: block;
+    text-align: right
+}
+.Forgot-Password a{
+    display: inline-block;
     font-size: 14px;
     text-align: right;
     font-weight: 300;
     line-height: 24px;
     padding: 0!important;
-    color: #007bfc;
+    color: #f5576c;
 }
 .Forgot-Password a:hover {
     color: #51b9ff;
@@ -88,6 +92,19 @@
     margin-left: auto;
     margin-right: auto;
     padding: 18px 0;
+}
+.Register{
+    display: block;
+    text-align: center;
+    padding-top: 20px
+}
+.Register a{
+    display: inline-block;
+    text-decoration: none;
+    color: #f5576c;
+}
+.Register a:hover {
+    color: #51b9ff;
 }
 /* Medium devices (desktops, 992px to 1199px and down) 
 = @media (min-width: 992px) col-xl-*/

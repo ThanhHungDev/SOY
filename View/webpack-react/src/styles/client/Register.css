@@ -1,14 +1,14 @@
-.Wrapper-Forgot-Password {
+.Wrapper-Register {
     width: 100%;
     min-height: 100vh;
     padding: 45px 0;
     text-align: center;
 }
-.Wrapper-Form-Forgot-Password{
+.Wrapper-Form-Register{
     padding: 36px 56px 48px;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
-.Form-Forgot-Password{
+.Form-Register{
     background: #fff;
     box-shadow: 0 4px 32px 0 rgba(10,14,29,.02), 0 8px 64px 0 rgba(10,14,29,.08);
     border-radius: 3px;
@@ -18,7 +18,7 @@
     min-height: 356px;
     padding: 24px;
 }
-.Text-Forgot-Password{
+.Text-Register{
     font-size: 32px;
     font-weight: 700;
     line-height: 40px;
@@ -26,19 +26,9 @@
     text-align: center;
     margin-bottom: 24px
 }
-.Text-Description-Forgot-Password{
-    color: #525666;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    font-size: 17px;
-    font-weight: 100;
-    line-height: 20px;
-    text-align: center;
-    margin-bottom: 24px;
-    padding: 0 30px;
-}
 .Form-Group{
     display: block;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     position: relative;
     height: 54px;
 }
@@ -77,21 +67,18 @@
 }
 .Login-Link{
     display: block;
-    text-align: right;
+    text-align: center;
+    padding-top: 20px
 }
 .Login-Link a{
     display: inline-block;
-    font-size: 14px;
-    text-align: right;
-    font-weight: 300;
-    line-height: 24px;
-    padding: 0!important;
+    text-decoration: none;
     color: #f5576c;
 }
 .Login-Link a:hover {
     color: #51b9ff;
 }
-.Btn-Forgot-Password.btn{
+.Btn-Register.btn{
     margin-top: 30px;
     color: #fff;
     background: #007bfc;
@@ -123,16 +110,12 @@
 }
 /* Small devices (landscape phones, 576px and up) col-xs-*/
 @media screen and (max-width: 575.98px) {
-    .Wrapper-Form-Forgot-Password{
+    .Wrapper-Form-Register{
         padding: 36px 15px 48px;
     }
-    .Text-Forgot-Password{
+    .Text-Register{
         font-size: 29px;
         margin-bottom: 10px;
-    }
-    .Text-Description-Forgot-Password{
-        font-size: 14px;
-        padding: 0;
     }
 }
 

@@ -51,15 +51,18 @@ export default class Login extends Component {
                         </div>
                         <div className="Form-Group">
                             <IconPassword />
-                            <input name="password" ref="password" type="password" className="Input-Control" placeholder="Password Address" />
+                            <input name="password" ref="password" type="password" className="Input-Control" placeholder="Password" />
                         </div>
                         <div className="Forgot-Password">
-						    <Link to="/forgot-password">Forgot password?</Link>
+                            <Link to="/forgot-password">Forgot password?</Link>
 					    </div>
                         <button type="button" onClick={this.Login}
                             className="btn Btn-Login blue-gradient-rgba">
                             Log In
                         </button>
+                        <div className="Register">
+                            Sign in <Link to="/register">Simple Register</Link> instead.
+					    </div>
                     </form>
                 </div>
             </div>

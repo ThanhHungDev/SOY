@@ -28,12 +28,12 @@ export default class ForgotPassword extends Component {
                             <IconEmail />
                             <input type="text" className="Input-Control" placeholder="Email Address" />
                         </div>
-                        <div className="Login-Link">
-						    <Link to="/login">Back to login page</Link>
-					    </div>
                         <button type="submit" className="btn Btn-Forgot-Password blue-gradient-rgba">
                             Retrieve Password
                         </button>
+                        <div className="Login-Link">
+                            Back to <Link to="/login">login</Link> page.
+					    </div>
                     </form>
                 </div>
             </div>
