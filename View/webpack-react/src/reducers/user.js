@@ -1,16 +1,15 @@
-const USER_INITIAL =  [
-    { id: 1, name : "hùng" },
-    { id: 2, name : "đẹp" },
-    { id: 3, name : "trai" }
-];
+const USER_INITIAL = {
+    access : null,
+    id : null,
+    refesh : null,
+    user_infor : null
+};
 
 import TYPE from '../actions/action_type.js';
 export default function UserReducer(state = USER_INITIAL, action) {
     switch (action.type) {
-        case TYPE.CLICK_DEMO:
-            return state.filter(
-                ( item ) => item.id % 2 == 0 
-            );
+        case TYPE.INITIIAL:
+            return action.payload;
         default:
             return state;
     }

@@ -21,3 +21,9 @@ export function Dropdown(data_indetifier){
         payload: data_indetifier
     }
 }
+export function actionInitialUser( data ){
+    return {
+        type : TYPE.INITIIAL,
+        payload : data
+    }
+}

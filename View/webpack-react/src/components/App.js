@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import {connect} from "react-redux";
 //// css and custom define
 import '../styles/client/App.css';
 import ClientHomePage from './client/HomePage.jsx';
@@ -13,7 +12,6 @@ import ClientRegisterPage from './client/Register.jsx';
 
 class App extends Component {
     render() {
-        console.log(this.props.information)
         return (
             <div className="AppComponent">
                 <BrowserRouter>
@@ -28,10 +26,4 @@ class App extends Component {
         );
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        information : state.information_client
-    }
-}
-export default connect(mapStateToProps)(App)
+export default App;

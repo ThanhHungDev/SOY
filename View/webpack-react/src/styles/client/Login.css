@@ -11,12 +11,13 @@
 .Form-Login{
     background: #fff;
     box-shadow: 0 4px 32px 0 rgba(10,14,29,.02), 0 8px 64px 0 rgba(10,14,29,.08);
-    border-radius: 3px;
+    border-radius: 0;
     background-color: white;
     margin: 0 auto;
     max-width: 480px;
     min-height: 356px;
     padding: 24px;
+    position: relative;
 }
 .Text-Welcome-Login{
     font-size: 32px;
@@ -43,7 +44,7 @@
     color: #525666;
     background-color: #fff;
     padding-left: 45px;
-    border-radius: 3px;
+    border-radius: 0;
     font-size: 15px;
     transition: border .3s linear;
     border: 1px solid #ccc;

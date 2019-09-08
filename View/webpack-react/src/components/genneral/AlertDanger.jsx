@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "../../styles/general/Alert.css"
-class Message extends Component {
+class AlertDanger extends Component {
     render() {
         return (
             <div className="AlertDangerComponent alert alert-warning">
@@ -9,4 +9,4 @@ class Message extends Component {
         );
     }
 }
-export default Message;
+export default AlertDanger;

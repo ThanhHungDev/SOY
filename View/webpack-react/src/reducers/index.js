@@ -6,12 +6,14 @@ import UserReducer from './user.js';
 import HeaderReducer from './header.js'
 import DetectClientReducer from "./detect.js";
 import PlayerReducer from "./player.js";
+import ConfigReducer from "./config.js"
 //// khởi tạo 1 biến biểu diễn REDUCER ALL 
 const Reducer = combineReducers({
-    information_client : DetectClientReducer,
+    client : DetectClientReducer,
     header : HeaderReducer,
     jobs : JobReducer,
-    users : UserReducer,
-    player : PlayerReducer
+    authentication : UserReducer,
+    player : PlayerReducer,
+    config : ConfigReducer
 });
 export default Reducer;
