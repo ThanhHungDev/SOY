@@ -1,6 +1,6 @@
 const CONFIG = {
     SERVER : {
-        PORT : 2001,
+        PORT : 8081,
         DOMAIN : "localhost",
         PROTOCOL: "http://",
         REDIS : {
@@ -16,6 +16,6 @@ const CONFIG = {
         dialect: 'postgres',
         logging : false
     },
-    TimeExpireAccessToken : 2,
+    TimeExpireAccessToken : 30,
 };
 module.exports.CONFIG = CONFIG;
