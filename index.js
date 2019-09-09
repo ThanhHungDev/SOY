@@ -15,10 +15,8 @@ app.use(function(req, res, next) {
     next();
 });
 /**
- * setting directeries of view and asset root 
+ * setting directeries asset root 
  */
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'View'));
 app.use("", express.static(path.join(__dirname, 'Public')));
 /////////////////////////////////////////////////////////////////////////
 // for parsing application/x-www-form-urlencoded/////////////////////////
@@ -378,8 +376,6 @@ app.post('/api/register', async (req, res )=>{
         return res.end(JSON.stringify(error));
     }
 });
-app.get('*', (req, res)=>{ res.render("index") });
+app.get('*', (req, res)=>{ res.sendFile(path.join(__dirname, 'View/index.html')); });
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
-
