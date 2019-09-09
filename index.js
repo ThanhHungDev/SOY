@@ -50,6 +50,24 @@ io.on('connection', function (socket) {
     socket.emit('authentication-required', socket.id);
     console.log("người kết nối: " + socket.id);
     //////////////////////////////////////////////////////////
+	//default username
+	socket.username = "Hùng Đẹp trai"
+
+    //listen on change_username
+    socket.on('change_username', (data) => {
+        socket.username = data.username
+    })
+
+    //listen on new_message
+    socket.on('new_message', (data) => {
+        //broadcast the new message
+        io.sockets.emit('new_message', {message : data.message, username : socket.username});
+    })
+
+    //listen on typing
+    socket.on('typing', (data) => {
+    	socket.broadcast.emit('typing', {username : socket.username})
+    })
     //////////////////////////////////////////////////////////
     socket.on('disconnect', function () {
         console.log('có 1 người ngắt kết nối ' + socket.id)
