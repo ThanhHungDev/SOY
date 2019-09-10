@@ -16,16 +16,6 @@ class Login extends Component {
         super(props);
         this.state = { alert : false , progress : false , login_success : false }
     }
-    // componentDidMount(){
-    //     if( !this.props.authentication.access || 
-    //         !this.props.authentication.refesh || 
-    //         !this.propso.id ||
-    //         !this.props.authentication.user_infor ){
-    //         console.log("not login")
-    //     }else{
-    //         this.setState({ login_success : true });
-    //     }
-    // }
     Login = e => {
         this.setState({alert : false , progress : true}, ()=>{
             var email = this.refs.email.value;
@@ -46,11 +36,10 @@ class Login extends Component {
             }).then( response => {
                 if(response.code == 200){
                     if (typeof(Storage) !== 'undefined') {
-                        localStorage.setItem('user', response.data);
-                        /// dispatch to home page
+                        localStorage.setItem('user', JSON.stringify(response.data));
+                        console.log("đã có dữ liệu của user login từ login component")
                         this.props.dispatch( actionInitialUser(response.data) );
-                        console.log(this.props.authentication);
-                        this.setState({ login_success : true });
+                        this.setState({ login_success : true } );
                     } else {
                         alert('ứng dụng không chạy tốt trên trình duyệt này, vui lòng nâng cấp trình duyệt');
                         this.setState({ alert : response.user_message , progress : false });

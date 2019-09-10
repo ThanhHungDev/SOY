@@ -11,7 +11,7 @@ const CONFIG = {
         contact : ''
     },
     SERVER : {
-        domain : "http://"+DOMAIN+":2001",
+        domain : "http://"+DOMAIN+":8081",
         title : 'werewolf online'
     },
     PHP : {

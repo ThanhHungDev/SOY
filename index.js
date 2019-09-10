@@ -45,15 +45,65 @@ REDIS.on("error", function(err) {
 
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
-    socket.emit('authentication-required', socket.id);
     console.log("người kết nối: " + socket.id);
     //////////////////////////////////////////////////////////
-	//default username
-	socket.username = "Hùng Đẹp trai"
 
     //listen on change_username
-    socket.on('change_username', (data) => {
-        socket.username = data.username
+    socket.on('authentication', (data) => {
+        var error = null;
+        var { id } = data.authentication;
+        var access = data.authentication.token_access;
+        var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
+        var client = { ... data.client , user_agent };
+        if(!id || !access || !client ){
+            error = { 
+                user_message : "data fail", 
+                internal_message : "block" , 
+                code: 403
+            };
+        }else if(!validator.isNumeric(id + "")){
+            error = { 
+                user_message : "format id fail", 
+                internal_message : "invalid id", 
+                code: 400
+            };
+        }else if(
+            !client.browser ||
+            !client.browser_version ||
+            !client.browser_major_version ||
+            !client.os ||
+            !client.os_version
+        ){
+            error = { 
+                user_message : "failure for data", 
+                internal_message : "invalid object data", 
+                code: 400
+            };
+        }
+        var key_obj = { id  , ...client }
+        var key_redis = JSON.stringify(key_obj);
+        console.log(key_redis);
+        REDIS.get( key_redis, async (err , value ) => {
+            if(err){
+                error = { 
+                    user_message : "get access fail", 
+                    internal_message : "get access token fail",
+                    code : 500 
+                };
+            }
+            if(access != value ){
+                error = { 
+                    user_message : "token timeout", 
+                    internal_message : "token fail",
+                    code : 403 
+                };
+            }
+            if( !error ){
+                socket.emit('authentication_response', "đã xác thực thành công");
+            }else{
+                socket.emit('authentication_response', error);
+            }
+        });
     })
 
     //listen on new_message
@@ -70,6 +120,9 @@ io.on('connection', function (socket) {
     socket.on('disconnect', function () {
         console.log('có 1 người ngắt kết nối ' + socket.id)
         console.log(socket.adapter.rooms)
+    });
+    socket.on('forceDisconnect', function(){
+        socket.disconnect();
     });
 });
 /////////////////////////////////////////////////////////////////////////
@@ -120,7 +173,8 @@ app.post('/api/login', async (req, res)=>{
             var password_in_db = UserExist[0].password;
             var check_password = bcrypt.compareSync( password, password_in_db);
             if( check_password ){
-                _user = UserExist[0];
+                var temp_user = UserExist[0];
+                _user = { id: temp_user.id, email : temp_user.email , mobile : temp_user.mobile , name : temp_user.name}
             }
         }
     }
@@ -158,6 +212,7 @@ app.post('/api/login', async (req, res)=>{
         var access = bcrypt.hashSync( refesh , salt );
         var key_obj = { id : _user.id, ... client }
         var key_redis = JSON.stringify(key_obj);
+        console.log(key_redis);
         REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
             if(err){
                 error = { 

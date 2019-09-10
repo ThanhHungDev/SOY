@@ -13,14 +13,23 @@ import { actionInitialUser } from "../actions"
 ///
 
 class App extends Component {
+    constructor(props){
+        super(props);
+    }
     componentDidMount(){
-        if(!this.props.authentication){
+        // localStorage.setItem('user', null)
+        if(!this.props.authentication.access || !this.props.authentication.id ){
             if (typeof(Storage) !== 'undefined') {
-                var user = localStorage.getItem('user');
-                this.props.dispatch( actionInitialUser(user) );
-                console.log(user);
+                var user = JSON.parse(localStorage.getItem('user'));
+                if( user && user.id ){
+                    console.log("đã có dữ liệu của user login từ app component" + JSON.stringify(user) )
+                    this.props.dispatch( actionInitialUser(user) );
+                }
             }
         }
+    }
+    componentWillUnmount(){
+        this.state.socket.emit('forceDisconnect');
     }
     render() {
         return (

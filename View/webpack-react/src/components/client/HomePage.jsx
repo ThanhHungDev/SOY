@@ -8,7 +8,6 @@ import Footer from "./Footer.jsx";
 
 class HomePage extends Component {
     render() {
-        console.log(this.props.authentication)
         return (
             <div className="HomePageComponent">
                 <Header />

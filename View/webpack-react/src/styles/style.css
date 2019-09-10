@@ -176,7 +176,121 @@ body {
   }
 
 /**************************************************/
+
+.text-xs {
+	font-size: .75rem!important
+}
+
+.text-sm {
+	font-size: .875rem!important
+}
+
+.text-base {
+	font-size: 1rem!important
+}
+
+.text-lg {
+	font-size: 1.125rem!important
+}
+
+.text-xl {
+	font-size: 1.25rem!important
+}
+
+.text-2xl {
+	font-size: 1.5rem!important
+}
+
+.text-3xl {
+	font-size: 1.875rem!important
+}
+
+.text-4xl {
+	font-size: 2.25rem!important
+}
+
+.text-5xl {
+	font-size: 3rem!important
+}
+
+.text-6xl {
+	font-size: 4rem!important
+}
+
+.italic {
+	font-style: italic!important
+}
+
+.not-italic {
+	font-style: normal!important
+}
+
+.uppercase {
+	text-transform: uppercase!important
+}
+
+.lowercase {
+	text-transform: lowercase!important
+}
+
+.capitalize {
+	text-transform: capitalize!important
+}
+
+.normal-case {
+	text-transform: none!important
+}
+
+.underline {
+	text-decoration: underline!important
+}
+
+.line-through {
+	text-decoration: line-through!important
+}
+
+.no-underline {
+	text-decoration: none!important
+}
+
 /**************************************************/
+
+.font-hairline {
+	font-weight: 100!important
+}
+
+.font-thin {
+	font-weight: 200!important
+}
+
+.font-light {
+	font-weight: 300!important
+}
+
+.font-normal {
+	font-weight: 400!important
+}
+
+.font-medium {
+	font-weight: 500!important
+}
+
+.font-semibold {
+	font-weight: 600!important
+}
+
+.font-bold {
+	font-weight: 700!important
+}
+
+.font-extrabold {
+	font-weight: 800!important
+}
+
+.font-black {
+	font-weight: 900!important
+}
+
 /*** font awesome***********************************************/
 .svg-inline--fa {
 	display: inline-block;
@@ -1106,6 +1220,70 @@ body {
 	.col-xs-1 {
 		width: 8.33333333%;
 	}
+	/**********************************************************/
+	.pb-xs-1, .py-xs-1 {
+		padding-bottom: 0.25rem!important;
+	}
+	.pt-xs-1, .py-xs-1 {
+		padding-top: 0.25rem!important;
+	}
+	.pb-xs-2, .py-xs-2 {
+		padding-bottom: 0.5rem!important;
+	}
+	.pt-xs-2, .py-xs-2 {
+		padding-top: 0.5rem!important;
+	}
+	.pb-xs-3, .py-xs-3 {
+		padding-bottom: 1rem!important;
+	}
+	.pt-xs-3, .py-xs-3 {
+		padding-top: 1rem!important;
+	}
+	.pb-xs-4, .py-xs-4 {
+		padding-bottom: 1.5rem!important;
+	}
+	.pt-xs-4, .py-xs-4 {
+		padding-top: 1.5rem!important;
+	}
+	.pb-xs-5, .py-xs-5 {
+		padding-bottom: 3rem!important;
+	}
+	.pt-xs-5, .py-xs-5 {
+		padding-top: 3rem!important;
+	}
+
+
+	.pl-xs-1, .px-xs-1 {
+		padding-left: 0.25rem!important;
+	}
+	.pr-xs-1, .px-xs-1 {
+		padding-right: 0.25rem!important;
+	}
+	.pl-xs-2, .px-xs-2 {
+		padding-left: 0.5rem!important;
+	}
+	.pr-xs-2, .px-xs-2 {
+		padding-right: 0.5rem!important;
+	}
+	.pl-xs-3, .px-xs-3 {
+		padding-left: 1rem!important;
+	}
+	.pr-xs-3, .px-xs-3 {
+		padding-right: 1rem!important;
+	}
+	.pl-xs-4, .px-xs-4 {
+		padding-left: 1.5rem!important;
+	}
+	.pr-xs-4, .px-xs-4 {
+		padding-right: 1.5rem!important;
+	}
+	.pl-xs-5, .px-xs-5 {
+		padding-left: 3rem!important;
+	}
+	.pr-xs-5, .px-xs-5 {
+		padding-right: 3rem!important;
+	}
+	/**********************************************************/
 	.small{
         display: block;
     }
