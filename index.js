@@ -47,7 +47,15 @@ REDIS.on("error", function(err) {
 io.on('connection', function (socket) {
     console.log("người kết nối: " + socket.id);
     //////////////////////////////////////////////////////////
-
+	REDIS.hset("hash key", "hashtest 1", "some value", redis.print);
+	REDIS.hset(["hash key", "hashtest 2", "some other value"], redis.print);
+	REDIS.hkeys("hash key", function (err, replies) {
+		console.log(replies.length + " replies:");
+		replies.forEach(function (reply, i) {
+			console.log("    " + i + ": " + reply);
+		});
+		REDIS.quit();
+	});
     //listen on change_username
     socket.on('authentication', (data) => {
         var error = null;
