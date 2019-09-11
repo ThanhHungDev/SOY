@@ -105,7 +105,10 @@ io.on('connection', function (socket) {
     }
 	REDIS.hmset('channel', channel);
     REDIS.hgetall('channel', function(err, object) {
-        console.log(object);
+        if(err){
+            console.log("test redis error hmget")
+        }
+        console.log(JSON.stringify(object));
     });
     //listen on change_username
     socket.on('authentication', (data) => {
