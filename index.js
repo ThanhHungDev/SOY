@@ -6,6 +6,10 @@ const { CONFIG } =  require('./Config');
 const redis = require('redis');
 const bcrypt = require('bcrypt');
 const salt = 5;
+const renderKeyRedis = function ( _id , client ){
+    var key_obj = { id : _id , ... client }
+    return JSON.stringify(key_obj);
+}
 /***
  * nodejs allow origin localhost *
  */
@@ -48,60 +52,8 @@ io.on('connection', function (socket) {
     console.log("người kết nối: " + socket.id);
     //////////////////////////////////////////////////////////
     var channel = {
-        "channel_beginner_1234567890876" : {
-            "level" : 1, 
-            "people" : 10, 
-            "max" : 20, 
-            "people" : {
-                "1234567890876" : {
-                    "socketId" : "1234567890876",
-                    "user_id" : "2342",
-                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb"
-                },
-                "1234567890877" : {
-                    "socketId" : "1234567890877",
-                    "user_id" : "234",
-                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyuds7"
-                },
-                "1234567890878" : {
-                    "socketId" : "1234567890878",
-                    "user_id" : "23",
-                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb8"
-                },
-                "1234567890879" : {
-                    "socketId" : "1234567890879",
-                    "user_id" : "2",
-                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb9"
-                }                
-            }
-        },
-        "channel_ngao_34567890876" : {
-            "level" : 1, 
-            "people" : 10, 
-            "max" : 20, 
-            "people" : {
-                "34567890876" : {
-                    "socketId" : "34567890876",
-                    "user_id" : "2342",
-                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb"
-                },
-                "34567890877" : {
-                    "socketId" : "34567890877",
-                    "user_id" : "234",
-                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyuds7"
-                },
-                "34567890878" : {
-                    "socketId" : "34567890878",
-                    "user_id" : "23",
-                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb8"
-                },
-                "34567890879" : {
-                    "socketId" : "34567890879",
-                    "user_id" : "2",
-                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb9"
-                }                
-            }
-        }
+        "channel__1234567890876" : { "level" : 1,  "people" : 10,  "max" : 20  },
+        "channel__3456789087665" : { "level" : 1,  "people" : 15,  "max" : 20 }
     }
 	REDIS.hmset('channel', channel);
     REDIS.hgetall('channel', function(err, object) {
@@ -142,9 +94,7 @@ io.on('connection', function (socket) {
                 code: 400
             };
         }
-        var key_obj = { id  , ...client }
-        var key_redis = JSON.stringify(key_obj);
-        console.log(key_redis);
+        var key_redis = renderKeyRedis( id , client );
         REDIS.get( key_redis, async (err , value ) => {
             if(err){
                 error = { 
@@ -272,9 +222,7 @@ app.post('/api/login', async (req, res)=>{
     }
     if( !error ){
         var access = bcrypt.hashSync( refesh , salt );
-        var key_obj = { id : _user.id, ... client }
-        var key_redis = JSON.stringify(key_obj);
-        console.log(key_redis);
+        var key_redis = renderKeyRedis( _user.id , client );
         REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
             if(err){
                 error = { 
@@ -357,8 +305,7 @@ app.post('/api/refesh', async (req, res)=>{
     }
     if( !error ){
         var access = bcrypt.hashSync( refesh , salt );
-        var key_obj = { id , ...client };
-        var key_redis = JSON.stringify(key_obj);
+        var key_redis = renderKeyRedis( id , client );
         REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
             if(err){
                 error = { 
@@ -418,8 +365,7 @@ app.post('/api/get-data-user', async (req, res)=>{
     }
     if( !error ){
         client = { ...client , user_agent};
-        var key_obj = { id  , ...client }
-        var key_redis = JSON.stringify(key_obj);
+        var key_redis = renderKeyRedis( id , client );
         REDIS.get( key_redis, async (err , value ) => {
             if(err){
                 error = { 
