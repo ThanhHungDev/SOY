@@ -50,18 +50,21 @@ REDIS.on("error", function(err) {
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
     console.log("người kết nối: " + socket.id);
-    //////////////////////////////////////////////////////////
-    var channel = {
-        "channel__1234567890876" : { "level" : 1,  "people" : 10,  "max" : 20  },
-        "channel__3456789087665" : { "level" : 1,  "people" : 15,  "max" : 20 }
-    }
-	REDIS.hmset('channel', channel);
-    REDIS.hgetall('channel', function(err, object) {
-        if(err){
-            console.log("test redis error hmget")
+    /////////////////////////////////////////////////////////////////////
+    REDIS.hmset('channel__1234567890876', { "level" : 1,  "people" : 8,  "max" : 20 , min : 10 });
+    REDIS.hmset('channel__3456789087665', { "level" : 1,  "people" : 12,  "max" : 20 , min : 9});
+    REDIS.keys('*', function (err, keys) {
+        if (err) return console.log(err);
+        for(var i = 0, len = keys.length; i < len; i++) {
+            console.log(keys[i]);
+            REDIS.hgetall(keys[i], function(err, object) {
+                if(err){
+                    console.log("test redis error hmget")
+                }
+                console.log(JSON.stringify(object));
+            });
         }
-        console.log(JSON.stringify(object));
-    });
+    });    
     //listen on change_username
     socket.on('authentication', (data) => {
         var error = null;
