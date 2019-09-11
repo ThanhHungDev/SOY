@@ -54,14 +54,18 @@ io.on('connection', function (socket) {
     REDIS.hmset('channel__1234567890876', { "level" : 1,  "people" : 8,  "max" : 20 , min : 10 });
     REDIS.hmset('channel__3456789087665', { "level" : 1,  "people" : 12,  "max" : 20 , min : 9});
     REDIS.keys('*', function (err, keys) {
-        if (err) return console.log(err);
+        console.log("VAO TRONG LIST KEYS");
+        if (err) {
+            console.log(err);
+        }
         for(var i = 0, len = keys.length; i < len; i++) {
-            console.log(keys[i]);
+            console.log("VAO TRONG for KEYS / TO : " + keys[i]);
             REDIS.hgetall(keys[i], function(err, object) {
                 if(err){
                     console.log("test redis error hmget")
+                }else {
+                    console.log(JSON.stringify(object));
                 }
-                console.log(JSON.stringify(object));
             });
         }
     });    
