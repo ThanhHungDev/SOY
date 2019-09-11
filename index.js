@@ -47,15 +47,66 @@ REDIS.on("error", function(err) {
 io.on('connection', function (socket) {
     console.log("người kết nối: " + socket.id);
     //////////////////////////////////////////////////////////
-	REDIS.hset("hash key", "hashtest 1", "some value", redis.print);
-	REDIS.hset(["hash key", "hashtest 2", "some other value"], redis.print);
-	REDIS.hkeys("hash key", function (err, replies) {
-		console.log(replies.length + " replies:");
-		replies.forEach(function (reply, i) {
-			console.log("    " + i + ": " + reply);
-		});
-		REDIS.quit();
-	});
+    var channel = {
+        "channel_beginner_1234567890876" : {
+            "level" : 1, 
+            "people" : 10, 
+            "max" : 20, 
+            "people" : {
+                "1234567890876" : {
+                    "socketId" : "1234567890876",
+                    "user_id" : "2342",
+                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb"
+                },
+                "1234567890877" : {
+                    "socketId" : "1234567890877",
+                    "user_id" : "234",
+                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyuds7"
+                },
+                "1234567890878" : {
+                    "socketId" : "1234567890878",
+                    "user_id" : "23",
+                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb8"
+                },
+                "1234567890879" : {
+                    "socketId" : "1234567890879",
+                    "user_id" : "2",
+                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb9"
+                }                
+            }
+        },
+        "channel_ngao_34567890876" : {
+            "level" : 1, 
+            "people" : 10, 
+            "max" : 20, 
+            "people" : {
+                "34567890876" : {
+                    "socketId" : "34567890876",
+                    "user_id" : "2342",
+                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb"
+                },
+                "34567890877" : {
+                    "socketId" : "34567890877",
+                    "user_id" : "234",
+                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyuds7"
+                },
+                "34567890878" : {
+                    "socketId" : "34567890878",
+                    "user_id" : "23",
+                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb8"
+                },
+                "34567890879" : {
+                    "socketId" : "34567890879",
+                    "user_id" : "2",
+                    "token" : "4356789dfbvcxnvjrstahdnjsdydcxbyrwesyucjghyudsb9"
+                }                
+            }
+        }
+    }
+	REDIS.hmset('channel', channel);
+    REDIS.hgetall('channel', function(err, object) {
+        console.log(object);
+    });
     //listen on change_username
     socket.on('authentication', (data) => {
         var error = null;
