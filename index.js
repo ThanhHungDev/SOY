@@ -68,10 +68,10 @@ io.on('connection', function (socket) {
         console.log("checkAuthentication 1 begin")
         var key_redis = METHOD.renderKeyRedis( id , client );
         METHOD.redisGetPromise( key_redis , REDIS )
-        .then( result => {
+        .then( (err , result) => {
             console.log(result);
             return METHOD.checkAuthentication(result, REDIS , id, access, client )
-        }).then(res_check => console.log(res_check));
+        }).then(( err , res_check ) => console.log(res_check));
         // console.log("authen");
         // console.log(authen);
         // console.log( "JSON.stringify(find_channel)" );
