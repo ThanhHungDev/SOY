@@ -6,10 +6,7 @@ const { CONFIG } =  require('./Config');
 const redis = require('redis');
 const bcrypt = require('bcrypt');
 const salt = 5;
-const renderKeyRedis = function ( _id , client ){
-    var key_obj = { id : _id , ... client }
-    return JSON.stringify(key_obj);
-}
+var METHOD = require("./method.js")
 /***
  * nodejs allow origin localhost *
  */
@@ -51,24 +48,28 @@ REDIS.on("error", function(err) {
 io.on('connection', function (socket) {
     console.log("người kết nối: " + socket.id);
     /////////////////////////////////////////////////////////////////////
-    REDIS.hmset('channel__1234567890876', { "level" : 1,  "people" : 8,  "max" : 20 , min : 10 });
-    REDIS.hmset('channel__3456789087665', { "level" : 1,  "people" : 12,  "max" : 20 , min : 9});
-    REDIS.keys('*', function (err, keys) {
-        console.log("VAO TRONG LIST KEYS");
-        if (err) {
-            console.log(err);
-        }
-        for(var i = 0, len = keys.length; i < len; i++) {
-            console.log("VAO TRONG for KEYS / TO : " + keys[i]);
-            REDIS.hgetall(keys[i], function(err, object) {
-                if(err){
-                    console.log("test redis error hmget")
-                }else {
-                    console.log(JSON.stringify(object));
-                }
-            });
-        }
-    });    
+    socket.on('FIND_CHANNEL', data => {
+        var { id, access, client } = data;
+        var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
+        var client = { ... data.client , user_agent };
+        // vì cần socket chạy tiến trình song song
+        // 1. xác thực người dùng là 1 promise 
+        // 2. tìm kiếm channel tương ứng cũng là 1 promise
+        //khi đó let auth = await authentication; let channel = await findchanel; sẽ chạy cùng lúc
+        console.log("checkAuthentication 1 begin")
+        METHOD.checkAuthentication( REDIS , id, access, client ).then( data => {
+            console.log("checkAuthentication 1 the end")
+            console.log(data);
+        })
+        // console.log("authen");
+        // console.log(authen);
+        // console.log( "JSON.stringify(find_channel)" );
+        // console.log( JSON.stringify(find_channel) );
+    });
+    REDIS.hmset('channel__1_', { "level" : 1,  "people" : 8,  "max" : 20 , min : 10 });
+    REDIS.hmset('channel__2_', { "level" : 1,  "people" : 12,  "max" : 20 , min : 9});
+    REDIS.hmset('channel__3_', { "level" : 1,  "people" : 19,  "max" : 20 , min : 9});
+    REDIS.hmset('channel__4_', { "level" : 1,  "people" : 20,  "max" : 20 , min : 9});
     //listen on change_username
     socket.on('authentication', (data) => {
         var error = null;
@@ -101,7 +102,7 @@ io.on('connection', function (socket) {
                 code: 400
             };
         }
-        var key_redis = renderKeyRedis( id , client );
+        var key_redis = METHOD.renderKeyRedis( id , client );
         REDIS.get( key_redis, async (err , value ) => {
             if(err){
                 error = { 
@@ -229,7 +230,7 @@ app.post('/api/login', async (req, res)=>{
     }
     if( !error ){
         var access = bcrypt.hashSync( refesh , salt );
-        var key_redis = renderKeyRedis( _user.id , client );
+        var key_redis = METHOD.renderKeyRedis( _user.id , client );
         REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
             if(err){
                 error = { 
@@ -312,7 +313,7 @@ app.post('/api/refesh', async (req, res)=>{
     }
     if( !error ){
         var access = bcrypt.hashSync( refesh , salt );
-        var key_redis = renderKeyRedis( id , client );
+        var key_redis = METHOD.renderKeyRedis( id , client );
         REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
             if(err){
                 error = { 
@@ -372,7 +373,7 @@ app.post('/api/get-data-user', async (req, res)=>{
     }
     if( !error ){
         client = { ...client , user_agent};
-        var key_redis = renderKeyRedis( id , client );
+        var key_redis = METHOD.renderKeyRedis( id , client );
         REDIS.get( key_redis, async (err , value ) => {
             if(err){
                 error = { 
