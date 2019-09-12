@@ -61,16 +61,11 @@ io.on('connection', function (socket) {
         // 1. xác thực người dùng là 1 promise 
         // 2. tìm kiếm channel tương ứng cũng là 1 promise
         //khi đó let auth = await authentication; let channel = await findchanel; sẽ chạy cùng lúc
-        // METHOD.checkAuthentication( REDIS , id, access, client ).then( data => {
-        //     console.log("checkAuthentication 1 the end")
-        //     console.log(data);
-        // })
-        console.log("checkAuthentication 1 begin")
         var key_redis = METHOD.renderKeyRedis( id , client );
         METHOD.redisGetPromise( key_redis , REDIS )
-        .then( result => {
-            console.log(result);
-        }).catch(function(error) {
+        .then( result => METHOD.checkAuthentication( result , REDIS , id, access , client ))
+        .then( result => console.log(result))
+        .catch(function(error) {
             console.log('Error occurred!', error);
         })
         // console.log("authen");
