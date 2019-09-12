@@ -181,7 +181,7 @@ app.post('/api/login', async (req, res)=>{
     if( !error ){
         var access = bcrypt.hashSync( refesh , salt );
         var key_redis = METHOD.renderKeyRedis( _user.id , client );
-        REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
+        REDIS.set( key_redis , access , 'EX', (20 * 60) , (err , status ) => {
             if(err){
                 error = { 
                     user_message : "authenticate fail", 
@@ -202,6 +202,7 @@ app.post('/api/login', async (req, res)=>{
                 code: 200 , 
                 data : data_success 
             };
+            console.log("login :" + key_redis + "-:-" + access);
             return res.end(JSON.stringify(success));
         });
     }else {
