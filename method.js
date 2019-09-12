@@ -4,7 +4,7 @@ const renderKeyRedis = function ( _id , client ){
 }
 const redisGetPromise = ( _key_redis , _REDIS ) => {
     return new Promise(function(resolve, reject) {
-        _REDIS.get( key_redis, async (err , value ) => {
+        _REDIS.get( _key_redis, (err , value ) => {
             if(err){
                 return reject(false);
             }
@@ -16,6 +16,10 @@ const connectRedisCheckAccess = async function (_REDIS ,  id , access , client )
     console.log("checkAuthentication 3 in")
     var key_redis = renderKeyRedis( id , client );
     var value_redis = await redisGetPromise( key_redis , _REDIS );
+    if( !value_redis ){
+        console.log("checkAuthentication 3 in false");
+        return false;
+    }
     console.log("checkAuthentication 4 in");
     if(access != value_redis ){
         console.log("checkAuthentication 5 in");
