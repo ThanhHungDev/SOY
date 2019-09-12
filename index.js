@@ -46,7 +46,7 @@ REDIS.on("error", function(err) {
 
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
-    console.log("người kết nối: " + socket.id);
+    console.log("have connect: " + socket.id);
     /////////////////////////////////////////////////////////////////////
     REDIS.hmset('channel__1_', { "level" : 1,  "people" : 8,  "max" : 20 , min : 10 });
     REDIS.hmset('channel__2_', { "level" : 1,  "people" : 12,  "max" : 20 , min : 9});
@@ -88,7 +88,7 @@ io.on('connection', function (socket) {
     })
     //////////////////////////////////////////////////////////
     socket.on('disconnect', function () {
-        console.log('có 1 người ngắt kết nối ' + socket.id)
+        console.log('disconnect ' + socket.id)
         console.log(socket.adapter.rooms)
     });
     socket.on('forceDisconnect', function(){
