@@ -2,7 +2,7 @@ const renderKeyRedis = function ( _id , client ){
     var key_obj = { id : _id , ... client }
     return JSON.stringify(key_obj);
 }
-const redisGetPromise =  _key_redis => {
+const redisGetPromise = ( _key_redis , _REDIS ) => {
     return new Promise(function(resolve, reject) {
         _REDIS.get( key_redis, async (err , value ) => {
             if(err){
@@ -15,7 +15,7 @@ const redisGetPromise =  _key_redis => {
 const connectRedisCheckAccess = async function (_REDIS ,  id , access , client ){
     console.log("checkAuthentication 3 in")
     var key_redis = renderKeyRedis( id , client );
-    var value_redis = await redisGetPromise( key_redis );
+    var value_redis = await redisGetPromise( key_redis , _REDIS );
     console.log("checkAuthentication 4 in");
     if(access != value_redis ){
         console.log("checkAuthentication 5 in");
