@@ -68,10 +68,6 @@ io.on('connection', function (socket) {
         .catch(function(error) {
             console.log('Error occurred!', error);
         })
-        // console.log("authen");
-        // console.log(authen);
-        // console.log( "JSON.stringify(find_channel)" );
-        // console.log( JSON.stringify(find_channel) );
     })
 
     //listen on new_message
@@ -197,7 +193,6 @@ app.post('/api/login', async (req, res)=>{
                 code: 200 , 
                 data : data_success 
             };
-            console.log("login :" + key_redis + "-:-" + access);
             return res.end(JSON.stringify(success));
         });
     }else {

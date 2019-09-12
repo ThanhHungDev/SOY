@@ -30,8 +30,7 @@ const checkAuthentication = function( check_REDIS, _REDIS, id , access , client)
         !client.os ||
         !client.os_version
     ){check_input = false;}
-    console.log(check_input + " " + access + " " +value_redis );
-    if( check_input && access == value_redis ){
+    if( check_input && access == check_REDIS ){
         return true;
     }
     return false;
