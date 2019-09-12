@@ -4,11 +4,15 @@ const renderKeyRedis = function ( _id , client ){
 }
 const redisGetPromise = ( _key_redis , _REDIS ) => {
     return new Promise(function(resolve, reject) {
+        console.log("get key begin");
         _REDIS.get( _key_redis, (err , value ) => {
             if(err){
+                console.log("get key redis err");
                 reject(err);
+            }else {
+                console.log("get key redis succ");
+                resolve(value);
             }
-            resolve(value);
         });
     });
 }
