@@ -6,7 +6,7 @@ const redisGetPromise = ( _key_redis , _REDIS ) => {
     return new Promise(function(resolve, reject) {
         _REDIS.get( _key_redis, (err , value ) => {
             if(err){
-                reject(false);
+                reject(err);
             }
             resolve(value);
         });

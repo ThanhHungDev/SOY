@@ -70,8 +70,9 @@ io.on('connection', function (socket) {
         METHOD.redisGetPromise( key_redis , REDIS )
         .then( result => {
             console.log(result);
-            return METHOD.checkAuthentication(result, REDIS , id, access, client )
-        }).then( res_check => console.log(res_check));
+        }).catch(function(error) {
+            console.log('Error occurred!', error);
+        })
         // console.log("authen");
         // console.log(authen);
         // console.log( "JSON.stringify(find_channel)" );
