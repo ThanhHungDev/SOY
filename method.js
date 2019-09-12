@@ -14,7 +14,6 @@ const redisGetPromise = ( _key_redis , _REDIS ) => {
     });
 }
 const checkAuthentication = function( check_REDIS, id , access , client){
-    console.log( check_REDIS +"-:-" + id + "-:-" + access + "-:-" + JSON.stringify(client))
     if( !check_REDIS ){
         return false;
     }
@@ -30,7 +29,6 @@ const checkAuthentication = function( check_REDIS, id , access , client){
         !client.os ||
         !client.os_version
     ){check_input = false;}
-    console.log( check_input +"-:-" + access + "-:-" + check_REDIS)
     if( check_input && access == check_REDIS ){
         return true;
     }

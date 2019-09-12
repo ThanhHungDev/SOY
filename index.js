@@ -54,7 +54,7 @@ io.on('connection', function (socket) {
     REDIS.hmset('channel__4_', { "level" : 1,  "people" : 20,  "max" : 20 , min : 9});
     //listen on change_username
     socket.on('authentication', (data) => {
-        var {id, access } = data.authentication , { client } = data;
+        var { id } = data.authentication, access = data.authentication.token_access , { client } = data;
         var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
         var client = { ... data.client , user_agent };
         // vì cần socket chạy tiến trình song song
@@ -64,7 +64,6 @@ io.on('connection', function (socket) {
         var key_redis = METHOD.renderKeyRedis( id , client );
         METHOD.redisGetPromise( key_redis , REDIS )
         .then( result => {
-            console.log( result +"-:-" + id + "-:-" + access + "-:-" + JSON.stringify(client))
             return METHOD.checkAuthentication( result , id, access , client )
         })
         .then( result => console.log(result))
