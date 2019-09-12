@@ -10,7 +10,7 @@ const redisGetPromise = ( _key_redis , _REDIS ) => {
                 console.log("get key redis err");
                 reject(err);
             }else {
-                console.log("get key redis succ");
+                console.log("get key redis succ" + _key_redis + " -:- " +  value);
                 resolve(value);
             }
         });
