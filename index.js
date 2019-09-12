@@ -64,7 +64,7 @@ io.on('connection', function (socket) {
         var key_redis = METHOD.renderKeyRedis( id , client );
         METHOD.redisGetPromise( key_redis , REDIS )
         .then( result => {
-            return METHOD.checkAuthentication( result , id, access , client )
+            return METHOD.checkAuthentication( result , id, access , client , validator)
         })
         .then( result => console.log(result))
         .catch(function(error) {

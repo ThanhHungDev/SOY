@@ -13,7 +13,7 @@ const redisGetPromise = ( _key_redis , _REDIS ) => {
         });
     });
 }
-const checkAuthentication = function( check_REDIS, id , access , client){
+const checkAuthentication = function( check_REDIS, id , access , client , validator){
     if( !check_REDIS ){
         return false;
     }
