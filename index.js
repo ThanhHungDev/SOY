@@ -94,9 +94,6 @@ io.on('connection', function (socket) {
         console.log('disconnect ' + socket.id)
         console.log(socket.adapter.rooms)
     });
-    socket.on('forceDisconnect', function(){
-        socket.disconnect();
-    });
 });
 /////////////////////////////////////////////////////////////////////////
 //// router express /////////////////////////////////////////////////////
