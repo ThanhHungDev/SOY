@@ -48,7 +48,12 @@ REDIS.on("error", function(err) {
 io.on('connection', function (socket) {
     console.log("người kết nối: " + socket.id);
     /////////////////////////////////////////////////////////////////////
-    socket.on('FIND_CHANNEL', data => {
+    REDIS.hmset('channel__1_', { "level" : 1,  "people" : 8,  "max" : 20 , min : 10 });
+    REDIS.hmset('channel__2_', { "level" : 1,  "people" : 12,  "max" : 20 , min : 9});
+    REDIS.hmset('channel__3_', { "level" : 1,  "people" : 19,  "max" : 20 , min : 9});
+    REDIS.hmset('channel__4_', { "level" : 1,  "people" : 20,  "max" : 20 , min : 9});
+    //listen on change_username
+    socket.on('authentication', (data) => {
         var { id, access, client } = data;
         var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
         var client = { ... data.client , user_agent };
@@ -65,65 +70,6 @@ io.on('connection', function (socket) {
         // console.log(authen);
         // console.log( "JSON.stringify(find_channel)" );
         // console.log( JSON.stringify(find_channel) );
-    });
-    REDIS.hmset('channel__1_', { "level" : 1,  "people" : 8,  "max" : 20 , min : 10 });
-    REDIS.hmset('channel__2_', { "level" : 1,  "people" : 12,  "max" : 20 , min : 9});
-    REDIS.hmset('channel__3_', { "level" : 1,  "people" : 19,  "max" : 20 , min : 9});
-    REDIS.hmset('channel__4_', { "level" : 1,  "people" : 20,  "max" : 20 , min : 9});
-    //listen on change_username
-    socket.on('authentication', (data) => {
-        var error = null;
-        var { id } = data.authentication;
-        var access = data.authentication.token_access;
-        var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
-        var client = { ... data.client , user_agent };
-        if(!id || !access || !client ){
-            error = { 
-                user_message : "data fail", 
-                internal_message : "block" , 
-                code: 403
-            };
-        }else if(!validator.isNumeric(id + "")){
-            error = { 
-                user_message : "format id fail", 
-                internal_message : "invalid id", 
-                code: 400
-            };
-        }else if(
-            !client.browser ||
-            !client.browser_version ||
-            !client.browser_major_version ||
-            !client.os ||
-            !client.os_version
-        ){
-            error = { 
-                user_message : "failure for data", 
-                internal_message : "invalid object data", 
-                code: 400
-            };
-        }
-        var key_redis = METHOD.renderKeyRedis( id , client );
-        REDIS.get( key_redis, async (err , value ) => {
-            if(err){
-                error = { 
-                    user_message : "get access fail", 
-                    internal_message : "get access token fail",
-                    code : 500 
-                };
-            }
-            if(access != value ){
-                error = { 
-                    user_message : "token timeout", 
-                    internal_message : "token fail",
-                    code : 403 
-                };
-            }
-            if( !error ){
-                socket.emit('authentication_response', "đã xác thực thành công");
-            }else{
-                socket.emit('authentication_response', error);
-            }
-        });
     })
 
     //listen on new_message
