@@ -47,29 +47,48 @@ REDIS.on("error", function(err) {
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
     console.log("have connect: " + socket.id);
-    /////////////////////////////////////////////////////////////////////
-    REDIS.hmset('channel__1_', { "level" : 1,  "people" : 8,  "max" : 20 , min : 10 });
-    REDIS.hmset('channel__2_', { "level" : 1,  "people" : 12,  "max" : 20 , min : 9});
-    REDIS.hmset('channel__3_', { "level" : 1,  "people" : 19,  "max" : 20 , min : 9});
-    REDIS.hmset('channel__4_', { "level" : 1,  "people" : 20,  "max" : 20 , min : 9});
-    //listen on change_username
-    socket.on('authentication', (data) => {
+    // /////////////////////////////////////////////////////////////////////
+    /**
+     * vì cần socket chạy tiến trình song song
+     * 1. xác thực người dùng là 1 promise 
+     * 2. tìm kiếm channel tương ứng cũng là 1 promise
+     */
+    socket.on('authentication', async (data) => {
         var { id } = data.authentication, access = data.authentication.token_access , { client } = data;
         var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
         var client = { ... data.client , user_agent };
-        // vì cần socket chạy tiến trình song song
-        // 1. xác thực người dùng là 1 promise 
-        // 2. tìm kiếm channel tương ứng cũng là 1 promise
-        //khi đó let auth = await authentication; let channel = await findchanel; sẽ chạy cùng lúc
         var key_redis = METHOD.renderKeyRedis( id , client );
-        METHOD.redisGetPromise( key_redis , REDIS )
-        .then( result => {
-            return METHOD.checkAuthentication( result , id, access , client , validator)
-        })
-        .then( result => console.log(result))
-        .catch(function(error) {
-            console.log('Error occurred!', error);
-        })
+        /// đăng kí tiến trình 1
+        var check_auth = METHOD.redisGetPromise( key_redis , REDIS )
+        .then( result => METHOD.checkAuthentication( result , id, access , client , validator))
+        .catch(error => false);
+        /// đăng kí tiến trình 2
+        var get_channel = METHOD.redisGetListChannelKey( REDIS )
+        .then(list_key =>  METHOD.getListChannelObjectByLstKey( list_key , REDIS))
+        .then(list_channel_obj => METHOD.findChannel( list_channel_obj, { REDIS , id : socket.id } ))
+        .catch( error => false);
+        let auth = await check_auth;
+        let chanel = await get_channel;
+        if( auth ){
+            /// bây giờ mình phải lưu làm sao để lấy tất cả user trong cùng 1 room/channel?
+            /// thông qua mỗi room/channel, mình đều lấy đc list socket id đang onl
+            /// mình dùng thủ thuật để giải quyết bài toán trên bằng hàm : listSocketClient = io.sockets.clients( channel_name );
+            socket.user_infor = data.authentication.user_infor;
+            /// add user to room name : channel
+            socket.join( chanel );
+            io.in(chanel).clients((err, listSocketClient) => {
+                console.log(socket.user_infor)
+                if(listSocketClient.length > 0 && err == null) {
+                    var list_user_infor = listSocketClient.map( socket => socket.user_infor )
+                    console.log(list_user_infor);
+                    /// đẩy dữ liệu ra socket người dùng
+                    io.in(chanel).emit( 'authentication_response' , { list_user_infor, socket_id : socket.id, chanel, id, message : " user có id là "+ id +" đã tham gia phòng : "+ chanel } )
+                }
+            });
+        }else {
+            socket.emit( 'authentication_response' , { message : " user có id là "+ id +" không tham gia phòng" } )
+        }
+        console.log(socket.adapter.rooms);
     })
 
     //listen on new_message
@@ -85,7 +104,8 @@ io.on('connection', function (socket) {
     //////////////////////////////////////////////////////////
     socket.on('disconnect', function () {
         console.log('disconnect ' + socket.id)
-        console.log(socket.adapter.rooms)
+        socket.leaveAll();
+        console.log(socket.adapter.rooms);
     });
 });
 /////////////////////////////////////////////////////////////////////////
