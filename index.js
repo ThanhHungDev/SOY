@@ -54,7 +54,7 @@ io.on('connection', function (socket) {
     REDIS.hmset('channel__4_', { "level" : 1,  "people" : 20,  "max" : 20 , min : 9});
     //listen on change_username
     socket.on('authentication', (data) => {
-        var { id, access, client } = data;
+        var {id, access } = data.authentication , { client } = data;
         var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
         var client = { ... data.client , user_agent };
         // vì cần socket chạy tiến trình song song
