@@ -63,7 +63,10 @@ io.on('connection', function (socket) {
         //khi đó let auth = await authentication; let channel = await findchanel; sẽ chạy cùng lúc
         var key_redis = METHOD.renderKeyRedis( id , client );
         METHOD.redisGetPromise( key_redis , REDIS )
-        .then( result => METHOD.checkAuthentication( result , REDIS , id, access , client ))
+        .then( result => {
+            console.log( result +"-:-" + id + "-:-" + access + "-:-" + JSON.stringify(client))
+            return METHOD.checkAuthentication( result , id, access , client )
+        })
         .then( result => console.log(result))
         .catch(function(error) {
             console.log('Error occurred!', error);

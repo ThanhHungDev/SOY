@@ -13,8 +13,8 @@ const redisGetPromise = ( _key_redis , _REDIS ) => {
         });
     });
 }
-const checkAuthentication = function( check_REDIS, _REDIS, id , access , client){
-    console.log("check  : " + check_REDIS);
+const checkAuthentication = function( check_REDIS, id , access , client){
+    console.log( result +"-:-" + id + "-:-" + access + "-:-" + JSON.stringify(client))
     if( !check_REDIS ){
         return false;
     }
