@@ -13,6 +13,8 @@ const redisGetPromise = ( _key_redis , _REDIS ) => {
     });
 }
 const checkAuthentication = function( check_REDIS, _REDIS, id , access , client){
+    console.log("check  : ");
+    console.log(check_REDIS);
     if( !check_REDIS ){
         return false;
     }
@@ -28,6 +30,7 @@ const checkAuthentication = function( check_REDIS, _REDIS, id , access , client)
         !client.os ||
         !client.os_version
     ){check_input = false;}
+    console.log(check_input + " " + access + " " +value_redis );
     if( check_input && access == value_redis ){
         return true;
     }
