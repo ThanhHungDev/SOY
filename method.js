@@ -35,18 +35,39 @@ const checkAuthentication = function( check_REDIS, id , access , client , valida
     return false;
 }
 /**
- * hàm này nhiệm vụ sẽ nhận vào 1 list key, trả ra 1 list data
+ * key : name channel
+ * REdis là thông tin kết nối redis
+ * io.sockets = io.sockets để lấy tất cả user trong 1 phòng chat ra so sánh 
+ * xem có nên đưa socket mới vào channel này không
+ * hàm này nhận vào key + REDIS dùng để  lấy object trong database redis ra 
+ * sau đó kiểm tra tính đúng đắn của channel để trả ra obj tương ứng
  */
-const redisHGetAllSync = function( key , _REDIS){
+const redisHGetAllObjectByKeySync = function( key , _REDIS , io , user_id){
     return new Promise( ( resolve , reject ) => {
         _REDIS.hgetall(key, function(err, object) {
             if(err){
-                reject({ key , can : false });
-            }else { 
-                if( parseInt(object.people) < parseInt (object.max) ){
-                    resolve ({ key , can : true });
+                reject({ key , can : false , duplicate : false });
+            }else {
+                var detect_room = io.sockets.adapter.rooms[key];
+                var number_socketid_in_room = 0;
+                if(detect_room)
+                    number_socketid_in_room = detect_room.length;
+                if( parseInt(number_socketid_in_room) < parseInt (object.max) ){
+                    resolve ({ key , can : true , duplicate : false });
+                }else if( number_socketid_in_room >= parseInt (object.max) ){
+                    /// nếu 1 user nào đó đăng nhập trên nhiều thiết bị
+                    /// khi đó user đó mà ở trong channel/room rồi 
+                    /// thì ta nên return đúng channel/room đã login từ trước
+                    var list_socketid_in_room = io.sockets.adapter.rooms[key].sockets;
+                    for (var socketid in list_socketid_in_room ) { 
+                        var client_socket = io.sockets.connected[socketid];
+                        if(client_socket.user_infor.id == user_id){
+                            resolve ({ key , can : false, duplicate : true });
+                            break;
+                        }
+                    }
                 }
-                resolve ({ key , can : false });
+                resolve ({ key , can : false, duplicate : false });
             }
         });
     });
@@ -62,27 +83,25 @@ const redisGetListChannelKey = function( _REDIS ){
         });   
     });
 }
-const getListChannelObjectByLstKey = function( keys , _REDIS ){
+const getListChannelObjectByLstKey = function( keys , _REDIS , global_socket ,user_id){
     return Promise.all(keys.map( 
-        key => redisHGetAllSync( key , _REDIS)
+        key => redisHGetAllObjectByKeySync( key , _REDIS , global_socket , user_id)
     ));
 }
 const findChannel = function ( list_channel , create = null ) {
     var { REDIS, id } = create , channel = null;
-    var listTrue = list_channel.map(
-        item => {
-            if( item.can )
-                return item.key;
-            return false;
-        }
-    ).filter( item => item );
+    var listTrue = list_channel.filter( item => item.can );
     if(listTrue.length){
-        channel = listTrue[0];
+        var list_duplicate = listTrue.filter( item => item.duplicate )
+        if(list_duplicate.length){
+            channel = list_duplicate[0].key;
+        }
+        channel = listTrue[0].key;
     }
     if(!channel){
         /// create new channel same : channel__*_
         channel = 'channel__'+id+'_';
-        REDIS.hmset(channel , { "level" : 1,  "people" : 0,  "max" : 20 , "min" : 10 });
+        REDIS.hmset(channel , { "max" : 5 , "min" : 3 });
     }
     return channel;
 }

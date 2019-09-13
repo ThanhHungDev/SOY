@@ -68,7 +68,7 @@ io.on('connection', function (socket) {
         .catch(error => false);
         /// đăng kí tiến trình 2
         var get_channel = METHOD.redisGetListChannelKey( REDIS )
-        .then(list_key =>  METHOD.getListChannelObjectByLstKey( list_key , REDIS))
+        .then(list_key =>  METHOD.getListChannelObjectByLstKey( list_key , REDIS , io , id ))
         .then(list_channel_obj => METHOD.findChannel( list_channel_obj, { REDIS , id : socket.id } ))
         .catch( error => false);
         /// cho 2 tuyến trình chạy cùng lúc thì ta cần đợi
@@ -79,6 +79,7 @@ io.on('connection', function (socket) {
             socket.join( chanel );
             /// set data user cho socket
             socket.user_infor = data.authentication.user_infor;
+            socket.channel = chanel;
             /// bây giờ mình phải lấy tất cả user trong cùng 1 room/channel?
             var list_user_infor = [];
             /// thông qua mỗi room/channel, mình đều lấy đc list socket id đang onl
