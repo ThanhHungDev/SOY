@@ -46,6 +46,7 @@ REDIS.on("error", function(err) {
 
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function (socket) {
+    // console.log(socket.adapter.rooms); cái này khá quan trọng vì hàm này trả ra những room của socket
     console.log("have connect: " + socket.id);
     // /////////////////////////////////////////////////////////////////////
     /**
@@ -54,6 +55,9 @@ io.on('connection', function (socket) {
      * 2. tìm kiếm channel tương ứng cũng là 1 promise
      */
     socket.on('authentication', async (data) => {
+        /// variable define default
+        var response = { status : 204 , message : "server handle authentication" , data : [] };
+        /// variable input
         var { id } = data.authentication, access = data.authentication.token_access , { client } = data;
         var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
         var client = { ... data.client , user_agent };
@@ -67,39 +71,31 @@ io.on('connection', function (socket) {
         .then(list_key =>  METHOD.getListChannelObjectByLstKey( list_key , REDIS))
         .then(list_channel_obj => METHOD.findChannel( list_channel_obj, { REDIS , id : socket.id } ))
         .catch( error => false);
+        /// cho 2 tuyến trình chạy cùng lúc thì ta cần đợi
         let auth = await check_auth;
         let chanel = await get_channel;
+        /// lưu ý: khi auth đúng, mặc định ta luôn có channel đc trả ra nên sẽ join socket id vào channel
         if( auth ){
-            /// bây giờ mình phải lưu làm sao để lấy tất cả user trong cùng 1 room/channel?
-            /// thông qua mỗi room/channel, mình đều lấy đc list socket id đang onl
-            /// mình dùng thủ thuật để giải quyết bài toán trên bằng hàm : listSocketClient = io.sockets.clients( channel_name );
-            socket.user_infor = data.authentication.user_infor;
-            /// add user to room name : channel
             socket.join( chanel );
-            io.in(chanel).clients((err, listSocketClient) => {
-                console.log(socket.user_infor)
-                if(listSocketClient.length > 0 && err == null) {
-                    var list_user_infor = listSocketClient.map( socket => socket.user_infor )
-                    console.log(list_user_infor);
-                    /// đẩy dữ liệu ra socket người dùng
-                    io.in(chanel).emit( 'authentication_response' , { list_user_infor, socket_id : socket.id, chanel, id, message : " user có id là "+ id +" đã tham gia phòng : "+ chanel } )
-                }
-            });
-        }else {
-            socket.emit( 'authentication_response' , { message : " user có id là "+ id +" không tham gia phòng" } )
+            /// set data user cho socket
+            socket.user_infor = data.authentication.user_infor;
+            /// bây giờ mình phải lấy tất cả user trong cùng 1 room/channel?
+            var list_user_infor = [];
+            /// thông qua mỗi room/channel, mình đều lấy đc list socket id đang onl
+            var list_socketid_in_room = io.sockets.adapter.rooms[chanel].sockets;
+            /// mình dùng thủ thuật để giải quyết bài toán trên bằng hàm : io.sockets.connected[socketid]
+            /// loop id in list and connect to socket of id then get infor
+            for (var socketid in list_socketid_in_room ) { 
+                var client_socket = io.sockets.connected[socketid];
+                list_user_infor.push(client_socket.user_infor);
+            }
+            response.data = [{
+                online : list_user_infor,
+                channel : chanel,
+                socket : socket.id
+            }];
         }
-        console.log(socket.adapter.rooms);
-    })
-
-    //listen on new_message
-    socket.on('new_message', (data) => {
-        //broadcast the new message
-        io.sockets.emit('new_message', {message : data.message, username : socket.username});
-    })
-
-    //listen on typing
-    socket.on('typing', (data) => {
-    	socket.broadcast.emit('typing', {username : socket.username})
+        io.in(chanel).emit( 'authentication_response' , response );
     })
     //////////////////////////////////////////////////////////
     socket.on('disconnect', function () {
