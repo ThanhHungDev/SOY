@@ -1,0 +1,23 @@
+.LogoFooter{
+    max-width: 250px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+/*Medium devices (Small devices, 576px to 768px)
+sm
+*/
+@media screen and (max-width: 767.98px) {
+    .FooterInforcontact{
+        width: 250px!important;
+        margin: 0 auto;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) 
+xs*/
+
+@media screen and (max-width: 575.98px) {
+	
+}
+

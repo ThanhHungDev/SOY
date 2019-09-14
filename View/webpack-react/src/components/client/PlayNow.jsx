@@ -31,7 +31,6 @@ class PlayNow extends Component {
         alert("ahihi");
     }  
     render() {
-        console.log(this.props.authentication )
         return (
             <div className="PlayNowComponent">
                 <Header />

@@ -98,28 +98,31 @@ io.on('connection', function (socket) {
                 channel : channel,
                 socket : socket.id
             }];
+            io.in(channel).emit( 'authentication_response' , response );
+            /// lưu token đó gắn với channel trong 30p để khi 1 user chat 
+            /// sẽ gửi thông tin token lên server thì check điều kiện cần là 
+            /// token có đang thực sự dùng channel đó không?
+            /// điều kiện đủ là token còn thời gian sống không
+            REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60), (err , status ) => {
+                if(err){
+                    response = { status : 204 , message : "server refesh token fail" , data : [] };
+                    io.in(channel).emit( 'server_fail' , response );
+                }
+                response = { status : 200 , message : "server refesh token ready" , data : [] };
+                io.in(channel).emit( 'ready_refesh' , response );
+            });
+            REDIS.set( access , channel , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
+                if(err){
+                    response = { status : 204 , message : "server refesh token fail" , data : [] };
+                    io.in(channel).emit( 'server_fail' , response );
+                }
+                response = { status : 200 , message : "server refesh channel ready" , data : [] };
+                io.in(channel).emit( 'ready_set_channel' , response );
+            });
+        }else{
+            response.status = 403;
+            socket.emit( 'authentication_response' , response );
         }
-        io.in(channel).emit( 'authentication_response' , response );
-        /// lưu token đó gắn với channel trong 30p để khi 1 user chat 
-        /// sẽ gửi thông tin token lên server thì check điều kiện cần là 
-        /// token có đang thực sự dùng channel đó không?
-        /// điều kiện đủ là token còn thời gian sống không
-        REDIS.set( key_redis , access , 'EX', (CONFIG.TimeExpireAccessToken * 60), (err , status ) => {
-            if(err){
-                response = { status : 204 , message : "server refesh token fail" , data : [] };
-                io.in(channel).emit( 'server_fail' , response );
-            }
-            response = { status : 200 , message : "server refesh token ready" , data : [] };
-            io.in(channel).emit( 'ready_refesh' , response );
-        });
-        REDIS.set( access , channel , 'EX', (CONFIG.TimeExpireAccessToken * 60) , (err , status ) => {
-            if(err){
-                response = { status : 204 , message : "server refesh token fail" , data : [] };
-                io.in(channel).emit( 'server_fail' , response );
-            }
-            response = { status : 200 , message : "server refesh channel ready" , data : [] };
-            io.in(channel).emit( 'ready_set_channel' , response );
-        });
     })
     //////////////////////////////////////////////////////////
     socket.on('disconnect', function () {

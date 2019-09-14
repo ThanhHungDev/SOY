@@ -292,6 +292,11 @@ body {
 }
 
 /*** font awesome***********************************************/
+.icon{
+	display: inline-block;
+    min-width: 22px;
+    min-height: 22px;
+}
 .svg-inline--fa {
 	display: inline-block;
 	font-size: inherit;
@@ -326,6 +331,12 @@ body {
 /**********************************************************/
 .text-center {
 	text-align: center
+}
+.text-center-mobile{
+	text-align: initial;
+}
+.vertical-align-middle{
+	vertical-align: middle;
 }
 .mg-auto{
 	margin-left: auto;
@@ -585,9 +596,7 @@ body {
 .bg-dark {
 	background-color: #212121 !important;
 }
-.border-dark {
-	border-color: #212121 !important;
-}
+
 .bg-light {
 	background-color: #e0e0e0 !important;
 }
@@ -608,6 +617,12 @@ body {
 }
 .border-left {
     border-left: 1px solid #dee2e6!important;
+}
+.border-brown {
+	border-color: #795548!important;
+}
+.border-dark {
+	border-color: #212121 !important;
 }
 .border-primary {
 	border-color: #4285f4 !important;
@@ -1173,7 +1188,9 @@ body {
 	.col-sm-1 {
 		width: 8.33333333%;
 	}
-
+	.text-center-mobile{
+		text-align: center;
+	}
 
 	
 }
