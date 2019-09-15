@@ -7,6 +7,9 @@ const USER = sequelize.define('USER', {
         unique: { args: true, msg: 'Email address already in use!' }
     }, 
     password : { type: Sequelize.STRING },
+    mobile : { type: Sequelize.STRING },
+    name : { type: Sequelize.STRING },
+    avatar : { type: Sequelize.STRING },
     create_at: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
     update_at: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
 },{

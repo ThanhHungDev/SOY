@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from 'react-redux';
+import socketIOClient from "socket.io-client";
 //// css and custom define
 import '../styles/client/App.css';
 import ClientHomePage from './client/HomePage.jsx';
@@ -9,27 +10,27 @@ import ForgotPassword from "./client/ForgotPassword.jsx"
 import ClientAboutPage from "./client/AboutPage.jsx"
 import PlayNow from "./client/PlayNow.jsx"
 import ClientRegisterPage from './client/Register.jsx';
-import { actionInitialUser } from "../actions"
+import { actionInitialUser, actionInitialSocketListen } from "../actions"
 ///
+import CONFIG from "../config";
 
 class App extends Component {
     constructor(props){
         super(props);
-    }
-    componentDidMount(){
+        const socket = socketIOClient(CONFIG.SERVER.domain);
+        this.props.dispatch(actionInitialSocketListen(socket));
+        ////
+        // console.log("constructor app");
         // localStorage.setItem('user', null)
         if(!this.props.authentication.access || !this.props.authentication.id ){
             if (typeof(Storage) !== 'undefined') {
                 var user = JSON.parse(localStorage.getItem('user'));
                 if( user && user.id ){
-                    console.log("đã có dữ liệu của user login từ app component" + JSON.stringify(user) )
+                    // console.log("localStorage user app component" + JSON.stringify(user) )
                     this.props.dispatch( actionInitialUser(user) );
                 }
             }
         }
-    }
-    componentWillUnmount(){
-        this.state.socket.emit('forceDisconnect');
     }
     render() {
         return (

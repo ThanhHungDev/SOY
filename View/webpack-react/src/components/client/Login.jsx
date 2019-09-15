@@ -36,8 +36,8 @@ class Login extends Component {
             }).then( response => {
                 if(response.code == 200){
                     if (typeof(Storage) !== 'undefined') {
+                        console.log(JSON.stringify(response.data));
                         localStorage.setItem('user', JSON.stringify(response.data));
-                        console.log("đã có dữ liệu của user login từ login component")
                         this.props.dispatch( actionInitialUser(response.data) );
                         this.setState({ login_success : true } );
                     } else {
@@ -48,7 +48,6 @@ class Login extends Component {
                     this.setState({ alert : response.user_message , progress : false });
                 }
             }).catch(error => {
-                console.log(error.message);
                 this.setState({ alert : "đã có lỗi, vui lòng thử lại sau" , progress : false });
             });
         });

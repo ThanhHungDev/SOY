@@ -603,6 +603,9 @@ body {
 
 /********************************************************************/
 /**** border */
+.rounded-circle {
+    border-radius: 50% !important;
+}
 .border {
     border: 1px solid #dee2e6!important;
 }

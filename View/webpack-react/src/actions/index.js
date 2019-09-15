@@ -27,3 +27,9 @@ export function actionInitialUser( data ){
         payload : data
     }
 }
+export function actionInitialSocketListen(socket){
+    return {
+        type : TYPE.INITIIALSOCKET,
+        payload : socket
+    }
+}

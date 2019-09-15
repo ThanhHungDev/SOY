@@ -7,6 +7,7 @@ import HeaderReducer from './header.js'
 import DetectClientReducer from "./detect.js";
 import PlayerReducer from "./player.js";
 import ConfigReducer from "./config.js"
+import SocketReducer from "./socket.js"
 //// khởi tạo 1 biến biểu diễn REDUCER ALL 
 const Reducer = combineReducers({
     client : DetectClientReducer,
@@ -14,6 +15,7 @@ const Reducer = combineReducers({
     jobs : JobReducer,
     authentication : UserReducer,
     player : PlayerReducer,
-    config : ConfigReducer
+    config : ConfigReducer,
+    socket : SocketReducer
 });
 export default Reducer;

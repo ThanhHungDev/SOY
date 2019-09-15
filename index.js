@@ -60,7 +60,7 @@ io.on('connection', function (socket) {
         /// variable define default
         var response = { status : 204 , message : "server handle authentication" , data : [] };
         /// variable input
-        var { id } = data.authentication, access = data.authentication.token_access , { client } = data;
+        var { id, access } = data.authentication, { client } = data;
         var user_agent = socket.request.headers['user-agent'] ? socket.request.headers['user-agent'] : '' ;
         var client = { ... data.client , user_agent };
         var key_redis = METHOD.renderKeyRedis( id , client );
@@ -77,6 +77,7 @@ io.on('connection', function (socket) {
         let auth = await check_auth;
         let channel = await get_channel;
         /// lưu ý: khi auth đúng, mặc định ta luôn có channel đc trả ra nên sẽ join socket id vào channel
+        console.log(auth);
         if( auth ){
             socket.join( channel );
             /// set data user cho socket
@@ -121,8 +122,26 @@ io.on('connection', function (socket) {
             });
         }else{
             response.status = 403;
+            response.auth = data.authentication;
             socket.emit( 'authentication_response' , response );
         }
+    })
+    socket.on('channel_message', (data) => {
+        /// variable define default
+        var response = { status : 204 , message : "server handle ChannelMessage" , data : [] };
+        /// variable input
+        var { id, access , message, channel, user_infor } = data;
+        REDIS.get( access, (err , value ) => {
+            if(err){
+                response.status = 403;
+            }else if( value == channel ){
+                response.status = 200;
+                response.data = { id, message , user_infor};
+                io.in(channel).emit( 'channel_message_response' , response );
+            }else{
+                socket.emit( 'channel_message_response' , response );
+            }
+        });
     })
     //////////////////////////////////////////////////////////
     socket.on('disconnect', function () {
@@ -180,7 +199,13 @@ app.post('/api/login', async (req, res)=>{
             var check_password = bcrypt.compareSync( password, password_in_db);
             if( check_password ){
                 var temp_user = UserExist[0];
-                _user = { id: temp_user.id, email : temp_user.email , mobile : temp_user.mobile , name : temp_user.name}
+                _user = { 
+                    id: temp_user.id, 
+                    email : temp_user.email , 
+                    mobile : temp_user.mobile , 
+                    name : temp_user.name,
+                    avatar: temp_user.avatar
+                }
             }
         }
     }
@@ -227,9 +252,9 @@ app.post('/api/login', async (req, res)=>{
                 return res.end(JSON.stringify(error));
             }
             var data_success = {
-                id : _user.id,
-                token_access : access,
-                token_refesh : refesh,
+                id : _user.id, 
+                access, 
+                refesh,
                 user_infor : _user
             }
             var success = { 
@@ -310,9 +335,9 @@ app.post('/api/refesh', async (req, res)=>{
                 return res.end(JSON.stringify(error));
             }
             var data_success = {
-                id : id,
-                token_access : access,
-                token_refesh : new_refesh
+                id : id, 
+                access,
+                refesh : new_refesh
             }
             var success = { 
                 user_message : "login success", 

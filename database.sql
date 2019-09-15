@@ -8,6 +8,7 @@ CREATE TABLE user_accounts
   password character varying(255) NOT NULL,
   name character varying(255),
   mobile character varying(20),
+  avatar character varying(255),
   flag_active boolean DEFAULT '1',
   create_at TIMESTAMP DEFAULT NOW(),
   update_at TIMESTAMP DEFAULT NOW(),
