@@ -1,2 +1,5 @@
 node_modules
 View/webpack-react/node_modules
+View/render/node_modules
+View/render/v8-compile-cache-0
+View/render/dist
