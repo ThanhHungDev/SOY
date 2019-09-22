@@ -41,7 +41,9 @@ class App extends Component {
                     <Route path="/friend" render={ ( ) => <ClientAboutPage />}/>
                     <Route path="/login" render={ () => <ClientLoginPage /> }/>
                     <Route path="/register" render={ () => <ClientRegisterPage /> }/>
-                    <Route path="/forgot-password" render={()=> <ForgotPassword /> } />
+                    <Route path="/setting/logout" render={()=> <ForgotPassword /> } />
+                    <Route path="/setting/accounts" render={()=> <ForgotPassword /> } />
+                    <Route path="/developer" render={()=> <ForgotPassword /> } />
                 </BrowserRouter>
             </div>
         );

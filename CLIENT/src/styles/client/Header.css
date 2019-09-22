@@ -7,20 +7,30 @@ Author URI: https://www.facebook.com/HungSmurf
 * css begin 
 * col-number
 */
-.HeaderComponent{
-    border-bottom:1px solid #eee;
-    padding: 10px 80px 0 20px;
+.MenuHeaderComponent{
+    position: initial;
+    padding: 20px 15px;
 }
-ul.PC-MenuLeft{
+.btn-toggle-menu{
+    display: none;
+}
+.LinkHomePage{
+    float: left;
+}
+.WrapperMenu{
+    float: right;
+}
+.Menu {
+    width : 100%;
     padding-top: 15px;
     padding-bottom: 10px;
 }
-ul.PC-MenuLeft>li{
+ul.Menu>li{
     float: left;
 }
-ul.PC-MenuLeft>li>a{
+ul.Menu>li>a {
     cursor: pointer;
-    display: block;
+    display: inline-block;
     padding: 10px 10px;
     text-transform: uppercase;
     font-size: 15px;
@@ -32,12 +42,12 @@ ul.PC-MenuLeft>li>a{
     text-transform: uppercase;
     position: relative;
 }
-ul.PC-MenuLeft>li>a.active, ul.PC-MenuLeft>li>a.active .svg-inline--fa .fa-secondary{
+ul.Menu>li>a.active{
     color: #ee4266;
     fill: #ee4266;
     opacity: 1;
 }
-ul.PC-MenuLeft>li>ul.submenu{
+ul.submenu {
     text-align: left;
     border-top: 2px solid #ee4266;
     -webkit-box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.05);
@@ -45,31 +55,26 @@ ul.PC-MenuLeft>li>ul.submenu{
     border-left: 1px solid #edf0f5;
     border-right: 1px solid #edf0f5;
     border-bottom: 1px solid #edf0f5;
-    padding: 0px 0;
-    margin-top: 20px;
+    padding: 0;
     margin-left: 0px;
     background: #fff;
-    /**begin css hide ul submenu*/
     position: absolute;
     z-index: -1;
     opacity: 0;
     margin-top: 30px;
-    /**end css hide ul submenu*/
-    /**begin animation */
     -webkit-transition: 0.2s 0s;
     -o-transition: 0.2s 0s;
     transition: 0.2s 0s;
 }
-ul.PC-MenuLeft>li>ul.submenu.active{
+ul.submenu.active {
     z-index: 1;
     opacity: 1;
     margin-top: 0;
 }
-/**css ul.submenu */
-ul.submenu>li{
+ul.submenu>li {
     min-width: 200px;
 }
-ul.submenu>li>a{
+ul.submenu>li>a {
     color: #868995;
     font-size: 12px;
     padding: 9px 20px;
@@ -78,9 +83,16 @@ ul.submenu>li>a{
     letter-spacing: normal;
     text-transform: capitalize;
 }
-ul.submenu>li>a:hover{
-    background: #f4f5f9;
-    color: #25262a;
+.SocialWrapper{
+    display: none;
+}
+.btn-toggle-menu path:nth-child(1){
+    fill: #5e1308;
+    opacity: 0.4;
+}
+.btn-toggle-menu path:nth-child(2){
+    fill: #5e1308;
+    opacity: 1;
 }
 /* Medium devices (desktops, 992px to 1199px and down) 
 = @media (min-width: 992px) col-xl-*/
@@ -98,98 +110,122 @@ ul.submenu>li>a:hover{
 }
 /*Medium devices (Small devices, 576px to 768px) col-sm-*/
 @media screen and (max-width: 767.98px) {
-	.HeaderComponent{
-        border-bottom:1px solid #eee;
-        padding: 10px 10px 0 0;
-    }
-    ul.PC-MenuLeft{
-        padding-top: 15px;
-        padding-bottom: 10px;
-    }
-    /**
-    * css menu small
-    */
-    .Small-Icon-Push-Right svg{
-        position: absolute;
-        top: 6px;
-        right: 10px;
-        border: 1px solid #f6f6f6;
-        width: 25px;
-        height: 25px;
-        vertical-align: 0;
-        background-color: #f2f2f2;
-    }
-    .Small-Wrapper-Menu{
+    .MenuHeaderComponent{
         position: relative;
     }
-    .Small-Wrapper-Menu.active::before{
-        content: ".";
-        color: transparent;
-        background-color: #25262a;
-        position: fixed;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        opacity: 0.3;
-    }
-	.BTN-Small-Toggle-Menu{
+	.btn-toggle-menu{
+        display: block;
+        width: 32px;
+        height: 32px;
         position: absolute;
         right: 0;
-        top: 15%;
-    }
-    .Small-Wrapper-Menu.active .BTN-Small-Toggle-Menu{
-        background-color: white!important;
-        position: fixed;
-        right: 10px;
-        top: 40px;
-        padding: 5px 7px 3px 7px;
+        top: 50%;
         -webkit-transform: translateY(-50%); /* WebKit */
         -moz-transform: translateY(-50%); /* Mozilla */
         -o-transform: translateY(-50%); /* Opera */
         -ms-transform: translateY(-50%); /* Internet Explorer */
         transform: translateY(-50%); /* CSS3 */
     }
-    .Small-Wrapper-Menu .Small-Fixed-Sidebar{
+    .LinkHomePage{
+        float: none;
+    }
+    .WrapperMenu{
+        float: none;
         position: fixed;
-        z-index: 3;
-        width: 260px;
-        background-color: #fff;
-        float: none!important;
+        background: #333145;
+        background: -moz-linear-gradient(top, #333145 0%, #b8333e 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, #333145), color-stop(100%, #b8333e));
+        background: -webkit-linear-gradient(top, #333145 0%, #b8333e 100%);
+        background: -o-linear-gradient(top, #333145 0%, #b8333e 100%);
+        background: -ms-linear-gradient(top, #333145 0%, #b8333e 100%);
+        background: linear-gradient(to bottom, #333145 0%, #b8333e 100%);
+        z-index: 2;
         top: 0;
+        left: -768px;
+        right: 768px;
         bottom: 0;
         overflow-y: scroll;
-        overflow-x: hidden;
-        border-right: 1px solid #edf0f5;
-        left: -300px;
+        padding: 15px;
+    }
+    .MenuHeaderComponent.active .WrapperMenu{
+        z-index: 2;
+        left: 0;
+        right: 0;
+    }
+    .Menu {
+        width : 100%;
+        padding: 30px 0 0 0;
+    }
+    ul.Menu>li{
+        float: none;
+    }
+    ul.Menu>li>a {
+        display: block;
+        line-height: 21px;
+        font-size: 21px;
+        color: #fff;
+        margin-left: 0;
+        padding: 12px 30px 12px 12px;
+        font-weight: bold;
+        text-align: left
+    }
+    ul.Menu>li>a.active{
+        color: #a6c1ee;
+        fill: #a6c1ee;
+        opacity: 1;
+    }
+    ul.submenu {
+        text-align: left;
+        border-top: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+        padding: 0 0 0 20px;
+        margin-left: 0px;
+        background: transparent;
+        position: initial;
+        opacity: 0;
+        z-index: 1;
+        height: 0;
+        margin-top: 0;
         -webkit-transition: 0.2s 0s;
         -o-transition: 0.2s 0s;
         transition: 0.2s 0s;
     }
-    .Small-Wrapper-Menu.active .Small-Fixed-Sidebar{
-        left: 0;
-    }
-    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li{
-        float: none!important;
-    }
-    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li>a{
-        text-align: left;
-        font-size: 18px;
-        padding: 10px 10px 0 20px;
-    }
-    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li>ul.submenu{
-        margin-top: 0;
-        height: 0;
-        overflow: hidden;
-        border: none!important;
-        -webkit-box-shadow: none!important;
-        box-shadow: none!important;
-        padding-left: 12px
-    }
-    .Small-Wrapper-Menu .Small-Fixed-Sidebar ul.PC-MenuLeft>li>ul.submenu.active{
+    ul.submenu.active {
+        opacity: 1;
         height: auto;
-        position: relative;
+    }
+    ul.submenu>li>a {
+        color: #f1f1f1;
+        line-height: 19px;
+        font-size: 16px;
+    }
+    /**
+    * child
+    */
+    .SocialWrapper{
+        display: block;
+        padding: 20px 0 10px 0;
+        border-bottom: 1px solid #f2f2f2;
+    }
+    .SocialWrapper a{
+        color : white;
+        padding-left : 20px
+    }
+    .btn-toggle-close{
+        float: right;
+    }
+    .IconWindowsClose svg{
+        display: block;
+        width: 36px;
+        max-width: 36px;
+        max-height: 36px;
+    }
+    .IconWindowsClose path{
+        fill : #fff!important;
+        color : #fff!important;
+        background-color: #fff!important;
     }
 }
 /* Small devices (landscape phones, 576px and up) col-xs-*/

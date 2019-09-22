@@ -8,6 +8,9 @@ import CONFIG from "../../config";
 import IconAlignJustify from "../../icon/svg/align-justify.jsx";
 import IconClose from "../../icon/svg/windows-close.jsx"
 import LiMenu from "../genneral/LiMenu.jsx";
+import Facebook from "../../icon/svg/facebook.jsx";
+import Youtube from "../../icon/svg/youtube.jsx";
+import Instagram from "../../icon/svg/instagram.jsx";
 /**
  * import css
  */
@@ -31,20 +34,37 @@ class Header extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <div className={`MenuHeaderComponent clear Small-Wrapper-Menu ` +( this.state.activeMenuToggle? 'active' : '')}>
+                            <div className={`MenuHeaderComponent clear ` +( this.state.activeMenuToggle? 'active' : '')}>
                                 <a
-                                    className="btn-toggle-menu mobile BTN-Small-Toggle-Menu"
+                                    className="btn-toggle-menu"
                                     onClick={this.activeSidebar}>
-                                    {this.state.activeMenuToggle ? <IconClose/> : <IconAlignJustify />}
+                                    <IconAlignJustify />
                                 </a>
-                                <div className="float-left">
-                                    <Link to="/" className="d-inline-block">
-                                        <img src={LOGO.URL} alt={LOGO.ALT} />
-                                    </Link>
-                                </div>
-                                <div className="float-right Small-Fixed-Sidebar">
-                                    <ul className="wrapper-menu-left clear PC-MenuLeft">
-                                        {data_menu.map((item, index) => <LiMenu index={index} key={index} data_item={item} />)}
+                                <Link to="/" className="LinkHomePage">
+                                    <img src={LOGO.URL} alt={LOGO.ALT} />
+                                </Link>
+                                <div className="WrapperMenu">
+                                    <div className="SocialWrapper clear">
+                                        <a href="https://www.facebook.com/HungSmurf">
+                                            <Facebook />
+                                        </a>
+                                        <a href="https://www.facebook.com/HungSmurf">
+                                            <Youtube />
+                                        </a>
+                                        <a href="https://www.facebook.com/HungSmurf">
+                                            <Instagram />
+                                        </a>
+                                        <a className="btn-toggle-close"
+                                            onClick={this.activeSidebar}>
+                                            <IconClose/>
+                                        </a>
+                                    </div>
+                                    <ul className="Menu clear">
+                                        {data_menu.map(
+                                            (item, index) => {
+                                                return (
+                                                    <LiMenu index={index} key={index} data_item={item} />)}
+                                            )}
                                     </ul>
                                 </div>
                             </div>

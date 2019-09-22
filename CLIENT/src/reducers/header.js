@@ -15,7 +15,15 @@ const initialStateHeader = [
             { url: '/find-love/girl', title: 'tìm bạn gái' }
         ]
     },
-    { url: '/login', title: 'login'  }
+    {
+        title: 'cài đặt', 
+        submenu: [
+            { url: '/setting/accounts', title: 'tài khoản' },
+            { url: '/setting/logout', title: 'đăng xuất' }
+        ]
+    },
+    { url: '/developer', title: 'developer'},
+    { url: '/login', title: 'login'  },
 ];
 export default function HeaderReducer(state = initialStateHeader , action) {
     switch (action.type) {

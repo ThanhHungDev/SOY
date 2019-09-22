@@ -35,7 +35,7 @@ class LiMenu extends Component {
             : 
             <li>
                 <a onClick={this.showDropdownMenu}>
-                    {item.title} <IconAngleDown addClass="Small-Icon-Push-Right" />
+                    {item.title} <IconAngleDown />
                 </a>
                 <ul className={"submenu" + (this.state.showSubmenu ? ' active' : '')}>
                     {item.submenu.map((sub_item, sub_index) => {
