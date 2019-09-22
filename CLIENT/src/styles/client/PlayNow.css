@@ -1,0 +1,204 @@
+.TitleChat{
+    color: #2bbbad !important;
+    font-weight: 700 !important;
+    text-decoration: none;
+    color: #007bff;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    font-size: 1.75rem;
+    padding: 30px 0
+}
+.ListPlayer{
+    width: 40%;
+    float: left;
+    padding-right: 15px;
+    border: 1px solid #f2f2f2
+}
+.wrapperPlayer{
+    width: 100%;
+    padding: 15px
+}
+.ListMessage{
+    width: 60%;
+    float: right;
+    padding-left: 15px;
+}
+.wrapperMessage{
+    padding: 15px;
+    border: 1px solid #f2f2f2
+}
+.MySelf{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f2f2f2
+}
+.MySelf img.avatar {
+    height: 3rem;
+    width: 3rem;
+}
+.MySelf .UserInfor .name,.MySelf .UserInfor .mobile {
+    display: block;
+    color: #2bbbad !important;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    padding-left: 15px;
+    line-height: 1.3;
+}
+.MySelf .UserInfor .mobile {
+    color: #ccc !important;
+    font-size: 13px;
+}
+.scrollbar-light-defaul::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbar-light-defaul::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-light-defaul::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #2bbbad;
+}
+.Chat{
+    padding-top: 15px;
+    padding-right: 15px;
+    height: 420px;
+    overflow-y: scroll;
+}
+.ChannelMessage{
+    position: relative;
+    padding: 5px 15px;
+}
+.MySelfMessage{
+    position: relative;
+    padding: 5px 15px;
+}
+.ChannelMessage .ContentMessage{
+    padding-left: 3rem;
+}
+.MySelfMessage .ContentMessage{
+    padding-right: 3rem;
+}
+.ChannelMessage .AvatarMessage{
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    left: 0;
+    top: 15%;
+    border-radius: 50% !important;
+}
+.MySelfMessage .AvatarMessage{
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    right: 0;
+    top: 15%;
+    border-radius: 50% !important;
+}
+.InforUserSend{
+    font-weight: 100;
+    line-height: 1;
+    color: #ccc;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+    padding-left: 20px;
+}
+.Message{
+    font-size: 0.85rem;
+    color: #222;
+    background-color: #f1f0f0;
+    padding: 5px 15px;
+    border-radius: 25px;
+    width: 80%;
+    min-width: 150px;
+    white-space: pre-line;
+}
+.MySelfMessage .InforUserSend{
+    text-align: right;
+    color: #186d6d;
+    padding-right: 20px;
+}
+.MySelfMessage .Message{
+    margin-left: 20%;
+    background-color: #c9f1ee;
+}
+.WriteMessage {
+    padding: 15px 0 0 0;
+    position: relative;
+}
+.Write{
+    background-color: white !important;
+    color:#222 !important;
+    width: 100%!important;
+    height: 60px !important;
+    overflow-y: auto;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    padding: 10px 15px;
+    font-family: "Roboto", sans-serif;
+    border: 1px solid #f2f2f2;
+}
+.Write:focus{
+    /* box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;  */
+    outline:0px !important;
+}
+.Write::-webkit-scrollbar-track {
+    box-shadow: 0!important;
+    -webkit-box-shadow: 0!important;
+    background-color: transparent;
+    border-radius: 0;
+}
+.Write::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+}
+.Write::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    box-shadow: 0!important;
+    -webkit-box-shadow: 0!important;
+    background-color: transparent;
+}
+.btnSendMessage{
+    cursor: pointer;
+    position: absolute;
+    right: 1px;
+    height: 54px;
+    width: 60px;
+    background-color: white;
+    border: transparent !important;
+    top: 58%;
+    -webkit-transform: translateY(-50%); /* WebKit */
+    -moz-transform: translateY(-50%); /* Mozilla */
+    -o-transform: translateY(-50%); /* Opera */
+    -ms-transform: translateY(-50%); /* Internet Explorer */
+    transform: translateY(-50%); /* CSS3 */
+}
+/*Medium devices (Small devices, 576px to 768px)*/
+@media screen and (max-width: 767.98px) {
+	.ListPlayer{
+        width: 100%;
+        float: none;
+    }
+    .ListMessage{
+        width: 100%;
+        float: none;
+        padding: 15px 0 0 0; 
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (max-width: 575.98px) {
+	.Message{
+        width: 100%;
+    }
+    .MySelfMessage .Message{
+        margin-left: 0;
+    }
+}
