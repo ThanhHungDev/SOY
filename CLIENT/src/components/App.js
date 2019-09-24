@@ -10,6 +10,7 @@ import ForgotPassword from "./client/ForgotPassword.jsx"
 import ClientAboutPage from "./client/AboutPage.jsx"
 import PlayNow from "./client/PlayNow.jsx"
 import ClientRegisterPage from './client/Register.jsx';
+import Developer from "./client/Developer.jsx"
 import { actionInitialUser, actionInitialSocketListen } from "../actions"
 ///
 import CONFIG from "../config";
@@ -43,7 +44,7 @@ class App extends Component {
                     <Route path="/register" render={ () => <ClientRegisterPage /> }/>
                     <Route path="/setting/logout" render={()=> <ForgotPassword /> } />
                     <Route path="/setting/accounts" render={()=> <ForgotPassword /> } />
-                    <Route path="/developer" render={()=> <ForgotPassword /> } />
+                    <Route path="/developer" render={()=> <Developer /> } />
                 </BrowserRouter>
             </div>
         );

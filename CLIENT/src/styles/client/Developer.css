@@ -1,0 +1,48 @@
+.BlackImage{
+    position: relative;
+}
+.BlackImage img{
+    width: 100%;
+    height: 100%;
+    opacity: .3; 
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    filter: grayscale(1);
+}
+.BlackImage svg.hero-triangles {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    bottom: 6px;
+    width: 15%;
+}
+.BlackImage .primary-triangle {
+    fill: #d67456;
+    opacity: .7;
+}
+.BlackImage .gray-triangle {
+    fill: #000;
+    opacity: .5;
+}
+.BlackImage h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4.5em;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: 300;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    z-index: 3;
+    -webkit-transform: translateY(-50%); /* WebKit */
+    -moz-transform: translateY(-50%); /* Mozilla */
+    -o-transform: translateY(-50%); /* Opera */
+    -ms-transform: translateY(-50%); /* Internet Explorer */
+    transform: translateY(-50%); /* CSS3 */
+}
+.BlackImage h1 span{
+    display: block;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.5rem;
+}

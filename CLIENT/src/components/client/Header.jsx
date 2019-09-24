@@ -11,6 +11,7 @@ import LiMenu from "../genneral/LiMenu.jsx";
 import Facebook from "../../icon/svg/facebook.jsx";
 import Youtube from "../../icon/svg/youtube.jsx";
 import Instagram from "../../icon/svg/instagram.jsx";
+import "../../styles/client/Developer.css"
 /**
  * import css
  */
@@ -30,10 +31,10 @@ class Header extends Component {
         }
         const data_menu = this.props.header
         return (
-            <div className="HeaderComponent" >
+            <div className="HeaderComponent bg-unique-color-dark" >
                 <div className="container">
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-12 ">
                             <div className={`MenuHeaderComponent clear ` +( this.state.activeMenuToggle? 'active' : '')}>
                                 <a
                                     className="btn-toggle-menu"
@@ -59,7 +60,7 @@ class Header extends Component {
                                             <IconClose/>
                                         </a>
                                     </div>
-                                    <ul className="Menu clear">
+                                    <ul className="Menu clear" id="fixed">
                                         {data_menu.map(
                                             (item, index) => {
                                                 return (

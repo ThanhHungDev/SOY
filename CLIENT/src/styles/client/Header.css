@@ -7,15 +7,25 @@ Author URI: https://www.facebook.com/HungSmurf
 * css begin 
 * col-number
 */
+.svg-inline--fa .fa-primary {
+	fill: #4285f4;
+	opacity: 1;
+}
+
+.svg-inline--fa .fa-secondary {
+	fill: #aaa;
+	opacity: 1;
+}
 .MenuHeaderComponent{
     position: initial;
-    padding: 20px 15px;
+    padding: 5px 15px;
 }
 .btn-toggle-menu{
     display: none;
 }
 .LinkHomePage{
     float: left;
+    width: 180px;
 }
 .WrapperMenu{
     float: right;
@@ -36,26 +46,25 @@ ul.Menu>li>a {
     font-size: 15px;
     text-decoration: none;
     font-size: 13px;
-    color: #5e1308;
+    color: #f1f1f1;
     text-decoration: none;
     text-align: center;
     text-transform: uppercase;
     position: relative;
 }
 ul.Menu>li>a.active{
-    color: #ee4266;
-    fill: #ee4266;
+    color: #00bcd4;
+    fill: #00bcd4;
     opacity: 1;
 }
 ul.submenu {
     text-align: left;
-    border-top: 2px solid #ee4266;
     -webkit-box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.05);
     box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.05);
     border-left: 1px solid #edf0f5;
     border-right: 1px solid #edf0f5;
     border-bottom: 1px solid #edf0f5;
-    padding: 0;
+    padding: 4px 0 8px 0;
     margin-left: 0px;
     background: #fff;
     position: absolute;
@@ -72,12 +81,15 @@ ul.submenu.active {
     margin-top: 0;
 }
 ul.submenu>li {
-    min-width: 200px;
+    min-width: 175px;
+}
+ul.submenu>li:hover{
+    background-color: #f7f7f7;
 }
 ul.submenu>li>a {
-    color: #868995;
-    font-size: 12px;
-    padding: 9px 20px;
+    color: #222;
+    font-size: 14px;
+    padding: 8px 20px 6px 35px;
     display: block;
     text-transform: none;
     letter-spacing: normal;
@@ -87,11 +99,11 @@ ul.submenu>li>a {
     display: none;
 }
 .btn-toggle-menu path:nth-child(1){
-    fill: #5e1308;
+    fill: #ccc;
     opacity: 0.4;
 }
 .btn-toggle-menu path:nth-child(2){
-    fill: #5e1308;
+    fill: #fff;
     opacity: 1;
 }
 /* Medium devices (desktops, 992px to 1199px and down) 
@@ -143,7 +155,7 @@ ul.submenu>li>a {
         top: 0;
         left: -768px;
         right: 768px;
-        bottom: 0;
+        bottom: -200px;
         overflow-y: scroll;
         padding: 15px;
     }
@@ -206,7 +218,7 @@ ul.submenu>li>a {
     */
     .SocialWrapper{
         display: block;
-        padding: 20px 0 10px 0;
+        padding: 10px 0;
         border-bottom: 1px solid #f2f2f2;
     }
     .SocialWrapper a{
