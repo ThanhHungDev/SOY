@@ -13,14 +13,16 @@ import Send from "../../icon/svg/send.jsx";
 class Developer extends Component {
     render() {
         const background = {
-            URL: CONFIG.SERVER.domain + "/background/temp.jpg",
+            URL_MOBILE: CONFIG.SERVER.domain + "/background/bg-developer.jpg",
+            URL_PC: CONFIG.SERVER.domain + "/background/bg-developer-pc.jpg",
             ALT: CONFIG.SERVER.title
         }
         return (
             <div className="DeveloperComponent">
                 <Header />
                 <div className="BlackImage">
-                    <img src={background.URL} alt={background.ALT} />
+                    <img className="mobile" src={background.URL_MOBILE} alt={background.ALT} />
+                    <img className="pc" src={background.URL_PC} alt={background.ALT} />
                     <svg className="hero-triangles" viewBox="0 0 263.07 394.61" preserveAspectRatio="xMinYMax meet">
                         <polygon className="primary-triangle" points="0 394.61 0 0 263.07 263.07 131.53 394.61 0 394.61"></polygon>
                         <polygon className="gray-triangle" points="0 394.61 0 263.07 131.53 394.61 0 394.61"></polygon>

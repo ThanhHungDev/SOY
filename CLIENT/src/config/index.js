@@ -1,14 +1,13 @@
-const DOMAIN = 'ma-soi.online';
+const DOMAIN = 'localhost';
 const CONFIG = {
     ASSET : '/',
     SITE : {
-        url : 'http://'+DOMAIN,
-        name : 'Hiệp Nhất Công Giáo',
-        owner : "Nhóm Truyền Thông Công Giáo",
-        title : 'Catholic',
+        name : "HUNGTT",
+        owner : "Trương Thanh Hùng",
+        title : '',
         address : '',
         version : '0.1.0',
-        contact : ''
+        contact : 'thanhhung.tud@gmail.com'
     },
     SERVER : {
         domain : "http://"+DOMAIN+":8081",
