@@ -25,14 +25,15 @@
     opacity: .5;
 }
 .BlackImage h1{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Times New Roman", Times, serif;
     font-size: 4.5em;
-    text-transform: uppercase;
-    letter-spacing: 10px;
+    text-transform: capitalize;
+    letter-spacing: 6px;
     font-weight: 300;
-    color: #fff;
+    color: rgb(138, 136, 136);
     position: absolute;
-    top: 50%;
+    z-index: 1;
+    top: 70%;
     left: 5%;
     -webkit-transform: translateY(-50%); /* WebKit */
     -moz-transform: translateY(-50%); /* Mozilla */
@@ -44,6 +45,34 @@
     display: block;
     font-family: "Times New Roman", Times, serif;
     font-size: 1.5rem;
+    color:#444
+}
+.BaseInformation{
+    display: table;
+    margin: 0 auto;
+}
+.BaseInformation .WrapperItemInfor p{
+    display: table-cell;
+    padding: 8px 0
+}
+.BaseInformation .WrapperItemInfor p.title{
+    text-transform: capitalize;
+    font-weight: bold;
+    min-width: 100px;
+}
+.title-section{
+    letter-spacing: 2px;
+    padding: 20px 0 30px 0;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 700;
+    color: #142149;
+}
+.AvatarDeveloper{
+    text-align: right;
+    padding-right: 30px;
+    line-height: 0;
 }
 /* Medium devices (desktops, 992px to 1199px and down) 
 = @media (min-width: 992px) col-xl-*/
@@ -63,26 +92,42 @@
 /*Tablet devices (768px to 992px and down) col-md-*/
 @media screen and (max-width: 991.98px) {
 	.BlackImage h1{
-        font-size: 2em;
+        font-size: 2rem;
     }
 }
 /*Medium devices (Small devices, 576px to 768px) col-sm-*/
 @media screen and (max-width: 767.98px) {
     .BlackImage h1{
         letter-spacing: 5px;
-        font-size: 1.5em;
+        font-size: 2rem;
     }
-    .BlackImage h1 span{
-        font-size: 14px;
+    .BaseInformation>tbody>tr>td.title{
+        display: block
+    }
+    .AvatarDeveloper{
+        text-align: center;
+        margin-top: -80px
+    }
+    .AvatarDeveloper img{
+        border-radius: 50%;
+        width: 180px;
+    }
+    .title-section{
+        text-align: center
     }
 }
 /* Small devices (landscape phones, 576px and up) col-xs-*/
 @media screen and (max-width: 575.98px) {
     .BlackImage h1{
-        font-size: 1rem;
+        top: 40%;
+        letter-spacing: initial;
+        font-size: 1.7rem;
     }
     .BlackImage h1 span{
-        font-size: 8px;
+        font-size: 18px;
+    }
+    .AvatarDeveloper img{
+        width: 120px;
     }
 }
 

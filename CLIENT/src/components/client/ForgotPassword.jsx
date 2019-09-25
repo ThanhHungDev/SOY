@@ -12,7 +12,7 @@ export default class ForgotPassword extends Component {
     }
     render() {
         const LOGO = {
-            URL: CONFIG.SERVER.domain + "/logo/logo.png",
+            URL: CONFIG.SERVER.domain + "/logo/logo-temp.png",
             ALT: CONFIG.SERVER.title
         }
         return (
@@ -27,7 +27,7 @@ export default class ForgotPassword extends Component {
                         <div className="Form-Group">
                             <IconEmail />
                             <input type="text" className="Input-Control" 
-                            autocorrect="off" autocapitalize="none"
+                            autoCorrect="off" autoCapitalize="none"
                             placeholder="Email Address" />
                         </div>
                         <button type="submit" className="btn Btn-Forgot-Password blue-gradient-rgba">

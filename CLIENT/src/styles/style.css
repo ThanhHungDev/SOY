@@ -89,7 +89,9 @@ h1,h2,h3,h4,h5,h6 {
 
 /*page
 ----------------------------------------------------*/
-
+.line-height-0{
+	line-height: 0;
+}
 body {
 	margin: 0px;
 	padding: 0px;
@@ -100,9 +102,8 @@ body {
 	font-weight: normal;
 	color: #39464f;
 	text-decoration: none;
-	line-height: 0;
+	line-height: 1.7;
 }
-
 .float-left {
     float: left!important;
 }
@@ -592,7 +593,9 @@ body {
 .bg-light {
 	background-color: #e0e0e0 !important;
 }
-
+.bg-grey-x{
+	background-color: #f9f9f9 !important;
+}
 /********************************************************************/
 /**** border */
 .rounded-circle {

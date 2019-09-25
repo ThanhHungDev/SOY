@@ -14,6 +14,7 @@ import "../../styles/client/Developer.css"
 class Developer extends Component {
     render() {
         const background = {
+            URL_AVATAR: CONFIG.SERVER.domain + "/background/avatar-developer.jpg",
             URL_MOBILE: CONFIG.SERVER.domain + "/background/bg-developer.jpg",
             URL_PC: CONFIG.SERVER.domain + "/background/bg-developer-pc.jpg",
             ALT: CONFIG.SERVER.title
@@ -21,7 +22,7 @@ class Developer extends Component {
         return (
             <div className="DeveloperComponent">
                 <Header />
-                <div className="BlackImage">
+                <div className="BlackImage line-height-0">
                     <svg className="hero-triangles" viewBox="0 0 263.07 394.61" preserveAspectRatio="xMinYMax meet">
                         <polygon className="primary-triangle" points="0 394.61 0 0 263.07 263.07 131.53 394.61 0 394.61"></polygon>
                         <polygon className="gray-triangle" points="0 394.61 0 263.07 131.53 394.61 0 394.61"></polygon>
@@ -31,14 +32,36 @@ class Developer extends Component {
                     <img className="mobile" src={background.URL_MOBILE} alt={background.ALT} />
                     <img className="pc" src={background.URL_PC} alt={background.ALT} />
                 </div>
-                <div className="container bg-light">
-                    <div className="row">
-                        <div className="col-12 bg-white">
-                            <h1 className="DeveloperTitle">
-                                đây là trang developer
-                            </h1>
-                            <div className="progress">
-                                <div className="progress-bar w-25"></div>
+                <div className="bg-grey-x">
+                    <div className="container bg-white">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="row bg-grey-x py-3">
+                                    <div className="col-4 col-lg-5 col-sm-12 AvatarDeveloper">
+                                        <img src={background.URL_AVATAR} alt={background.ALT} />
+                                    </div>
+                                    <div className="col-8 col-lg-7 col-sm-12">
+                                        <h2 className="title-section">Thông Tin Cơ Bản</h2>
+                                        <div className="BaseInformation">
+                                            <div className="WrapperItemInfor">
+                                                <p className="title">Tên Đầy Đủ</p>
+                                                <p>Trương Thanh Hùng</p>
+                                            </div>
+                                            <div className="WrapperItemInfor">
+                                                <p className="title">Địa Chỉ</p>
+                                                <p>0674, lộc hòa, bình giã, Châu Đức, Bà Rịa - Vũng Tàu</p>
+                                            </div>
+                                            <div className="WrapperItemInfor">
+                                                <p className="title">Số Điện Thoại</p>
+                                                <p>079.7581.480</p>
+                                            </div>
+                                            <div className="WrapperItemInfor">
+                                                <p className="title">email</p>
+                                                <p>thanhhung.tud@gmail.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -48,7 +48,7 @@ class Register extends Component {
     }
     render() {
         const LOGO = {
-            URL: CONFIG.SERVER.domain + "/logo/logo.png",
+            URL: CONFIG.SERVER.domain + "/logo/logo-temp.png",
             ALT: CONFIG.SERVER.title
         }
         return (
@@ -64,13 +64,13 @@ class Register extends Component {
                         <div className="Form-Group">
                             <IconEmail />
                             <input type="text" ref="email" className="Input-Control" 
-                            autocorrect="off" autocapitalize="none"
+                            autoCorrect="off" autoCapitalize="none"
                             placeholder="Email Address" />
                         </div>
                         <div className="Form-Group">
                             <IconPassword />
                             <input name="password" ref="password" type="password" 
-                            autocorrect="off" autocapitalize="none"
+                            autoCorrect="off" autoCapitalize="none"
                             className="Input-Control" placeholder="Password" />
                         </div>
                         <div className="Form-Group">

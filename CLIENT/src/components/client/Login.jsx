@@ -55,7 +55,7 @@ class Login extends Component {
     }
     render() {
         const LOGO = {
-            URL: CONFIG.SERVER.domain + "/logo/logo.png",
+            URL: CONFIG.SERVER.domain + "/logo/logo-temp.png",
             ALT: CONFIG.SERVER.title
         }
         if(this.state.login_success){
@@ -73,13 +73,13 @@ class Login extends Component {
                         <div className="Form-Group">
                             <IconEmail />
                             <input name="email" ref="email" type="text" 
-                            autocorrect="off" autocapitalize="none"
+                            autoCorrect="off" autoCapitalize="none"
                             className="Input-Control" placeholder="Email Address" />
                         </div>
                         <div className="Form-Group">
                             <IconPassword />
                             <input name="password" ref="password" type="password" 
-                            autocorrect="off" autocapitalize="none"
+                            autoCorrect="off" autoCapitalize="none"
                             className="Input-Control" placeholder="Password" />
                         </div>
                         <div className="Forgot-Password">
