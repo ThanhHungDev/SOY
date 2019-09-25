@@ -49,7 +49,6 @@
 }
 .BaseInformation{
     display: table;
-    margin: 0 auto;
 }
 .BaseInformation .WrapperItemInfor p{
     display: table-cell;
@@ -101,9 +100,6 @@
         letter-spacing: 5px;
         font-size: 2rem;
     }
-    .BaseInformation>tbody>tr>td.title{
-        display: block
-    }
     .AvatarDeveloper{
         text-align: center;
         margin-top: -80px
@@ -114,6 +110,9 @@
     }
     .title-section{
         text-align: center
+    }
+    .BaseInformation{
+        margin: 0 auto;
     }
 }
 /* Small devices (landscape phones, 576px and up) col-xs-*/
