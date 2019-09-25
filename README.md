@@ -6,3 +6,4 @@ ta dùng lệnh
     npm test
     rm -r src
 ```
+còn trên windows

@@ -24,6 +24,7 @@ Author URI: https://www.facebook.com/HungSmurf
     display: none;
 }
 .LinkHomePage{
+    display: block;
     float: left;
     width: 180px;
 }

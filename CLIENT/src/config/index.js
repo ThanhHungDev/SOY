@@ -1,4 +1,4 @@
-const DOMAIN = 'localhost';
+const DOMAIN = 'ma-soi.online';
 const CONFIG = {
     ASSET : '/',
     SITE : {

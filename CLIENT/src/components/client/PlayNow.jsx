@@ -14,7 +14,7 @@ import Send from "../../icon/svg/send.jsx";
 class PlayNow extends Component {
     messagesEndRef = React.createRef()
     scrollToBottom = () => {
-        if(this.state.list_message){
+        if(this.props.authentication.access && this.props.authentication.id ){
             const messagesContainer = ReactDOM.findDOMNode(this.messagesContainer);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }

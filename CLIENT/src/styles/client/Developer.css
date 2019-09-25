@@ -34,7 +34,6 @@
     position: absolute;
     top: 50%;
     left: 5%;
-    z-index: 3;
     -webkit-transform: translateY(-50%); /* WebKit */
     -moz-transform: translateY(-50%); /* Mozilla */
     -o-transform: translateY(-50%); /* Opera */
@@ -46,3 +45,44 @@
     font-family: "Times New Roman", Times, serif;
     font-size: 1.5rem;
 }
+/* Medium devices (desktops, 992px to 1199px and down) 
+= @media (min-width: 992px) col-xl-*/
+@media screen and (max-width: 1320px) {
+	
+}
+/* Medium devices (desktops, 992px to 1199px and down) 
+= @media (min-width: 992px) col-lg-*/
+@media screen and (max-width: 1199.98px) {
+	.BlackImage h1{
+        font-size: 3em;
+    }
+    .BlackImage h1 span{
+        font-size: 1.5rem;
+    }
+}
+/*Tablet devices (768px to 992px and down) col-md-*/
+@media screen and (max-width: 991.98px) {
+	.BlackImage h1{
+        font-size: 2em;
+    }
+}
+/*Medium devices (Small devices, 576px to 768px) col-sm-*/
+@media screen and (max-width: 767.98px) {
+    .BlackImage h1{
+        letter-spacing: 5px;
+        font-size: 1.5em;
+    }
+    .BlackImage h1 span{
+        font-size: 14px;
+    }
+}
+/* Small devices (landscape phones, 576px and up) col-xs-*/
+@media screen and (max-width: 575.98px) {
+    .BlackImage h1{
+        font-size: 1rem;
+    }
+    .BlackImage h1 span{
+        font-size: 8px;
+    }
+}
+
