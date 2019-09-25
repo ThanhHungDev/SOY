@@ -11,7 +11,7 @@ import LiMenu from "../genneral/LiMenu.jsx";
 import Facebook from "../../icon/svg/facebook.jsx";
 import Youtube from "../../icon/svg/youtube.jsx";
 import Instagram from "../../icon/svg/instagram.jsx";
-import "../../styles/client/Developer.css"
+
 /**
  * import css
  */

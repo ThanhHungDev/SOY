@@ -9,6 +9,7 @@ import Footer from "./Footer.jsx";
 import MessageMySelf from "../genneral/MessageMySelf.jsx"
 import MessageChannel from "../genneral/MessageChannel.jsx";
 import Send from "../../icon/svg/send.jsx";
+import "../../styles/client/Developer.css"
 
 class Developer extends Component {
     render() {
@@ -21,21 +22,24 @@ class Developer extends Component {
             <div className="DeveloperComponent">
                 <Header />
                 <div className="BlackImage">
-                    <img className="mobile" src={background.URL_MOBILE} alt={background.ALT} />
-                    <img className="pc" src={background.URL_PC} alt={background.ALT} />
                     <svg className="hero-triangles" viewBox="0 0 263.07 394.61" preserveAspectRatio="xMinYMax meet">
                         <polygon className="primary-triangle" points="0 394.61 0 0 263.07 263.07 131.53 394.61 0 394.61"></polygon>
                         <polygon className="gray-triangle" points="0 394.61 0 263.07 131.53 394.61 0 394.61"></polygon>
                         <polygon className="gray-triangle" points="131.53 394.61 197.3 328.84 263.07 394.61 131.53 394.61"></polygon>
                     </svg>
                     <h1>Trương Thanh Hùng <span>Web developer</span></h1>
+                    <img className="mobile" src={background.URL_MOBILE} alt={background.ALT} />
+                    <img className="pc" src={background.URL_PC} alt={background.ALT} />
                 </div>
-                <div className="container">
+                <div className="container bg-light">
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-12 bg-white">
                             <h1 className="DeveloperTitle">
                                 đây là trang developer
                             </h1>
+                            <div className="progress">
+                                <div className="progress-bar w-25"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
