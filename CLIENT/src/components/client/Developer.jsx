@@ -32,11 +32,11 @@ class Developer extends Component {
                     <img className="mobile" src={background.URL_MOBILE} alt={background.ALT} />
                     <img className="pc" src={background.URL_PC} alt={background.ALT} />
                 </div>
-                <div className="bg-grey-x">
-                    <div className="container bg-white">
+                <div className="bg-grey-x pb-3">
+                    <div className="container">
                         <div className="row">
                             <div className="col-12">
-                                <div className="row bg-grey-x py-3">
+                                <div className="row py-3">
                                     <div className="col-4 col-lg-5 col-sm-12 AvatarDeveloper">
                                         <img src={background.URL_AVATAR} alt={background.ALT} />
                                     </div>
@@ -58,6 +58,43 @@ class Developer extends Component {
                                             <div className="WrapperItemInfor">
                                                 <p className="title">email</p>
                                                 <p>thanhhung.tud@gmail.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="py-5 py-sm-0">
+                            <div className="row bg-white shadows-1 shadows-0-mobile">
+                                <h2 className="TitleTopic">Skill</h2>
+                                <div className="col-12 py-3">
+                                    <div className="row">
+                                        <div className="col-6 col-sm-12">
+                                            <h4>HTML, CSS</h4>
+                                            <div className="progress">
+                                                <div className="progress-bar w-75"></div>
+                                            </div>
+                                            <h4>PHP</h4>
+                                            <div className="progress">
+                                                <div className="progress-bar w-50"></div>
+                                            </div>
+                                            <h4>JAVASCRIPT</h4>
+                                            <div className="progress">
+                                                <div className="progress-bar w-75"></div>
+                                            </div>
+                                        </div>
+                                        <div className="col-6 col-sm-12">
+                                            <h4>SQL</h4>
+                                            <div className="progress">
+                                                <div className="progress-bar w-75"></div>
+                                            </div>
+                                            <h4>SERVER</h4>
+                                            <div className="progress">
+                                                <div className="progress-bar w-50"></div>
+                                            </div>
+                                            <h4>JAVA, C#</h4>
+                                            <div className="progress">
+                                                <div className="progress-bar w-25"></div>
                                             </div>
                                         </div>
                                     </div>

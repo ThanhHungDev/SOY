@@ -21,7 +21,11 @@ module.exports = {
             {
                 test: /\.(css|scss)$/,
                 use: ["style-loader", "css-loader"]
-            }
+            },
+            { 
+				test: /\.(jpg|png)$/, 
+				loader: "file-loader" 
+			}
         ]
     },
     devServer: {

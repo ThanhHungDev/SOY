@@ -25,7 +25,7 @@
     opacity: .5;
 }
 .BlackImage h1{
-    font-family: "Times New Roman", Times, serif;
+    font-family: RCB;
     font-size: 4.5em;
     text-transform: capitalize;
     letter-spacing: 6px;
@@ -72,6 +72,17 @@
     text-align: right;
     padding-right: 30px;
     line-height: 0;
+}
+.TitleTopic{
+    background: rgba(0, 0, 0, 0) url( "../../icon/background/bg_title.png" ) no-repeat scroll center bottom;
+    color: #142149;
+    display: block;
+    font-family: RCB;
+    font-size: 25px;
+    margin: 20px 0 10px;
+    padding-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
 }
 /* Medium devices (desktops, 992px to 1199px and down) 
 = @media (min-width: 992px) col-xl-*/

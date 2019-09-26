@@ -1,4 +1,4 @@
-const DOMAIN = 'localhost';
+const DOMAIN = 'ma-soi.online';
 const CONFIG = {
     ASSET : '/',
     SITE : {
@@ -10,7 +10,7 @@ const CONFIG = {
         contact : 'thanhhung.tud@gmail.com'
     },
     SERVER : {
-        domain : "http://"+DOMAIN+":8081",
+        domain : "http://"+DOMAIN,
         title : 'werewolf online'
     },
     PHP : {
