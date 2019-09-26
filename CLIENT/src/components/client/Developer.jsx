@@ -13,6 +13,8 @@ import "../../styles/client/Developer.css"
 import Js from "../../icon/svg/js.jsx";
 import Php from "../../icon/svg/php.jsx"
 import Java from "../../icon/svg/java.jsx"
+import avatar_dh_saigon from "../../icon/background/avatar-dh-saigon.jpg";
+
 
 class Developer extends Component {
     render() {
@@ -67,19 +69,19 @@ class Developer extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="py-5 py-sm-0">
+                        <div className="py-5 py-sm-0 px-5 px-sm-0">
                             <div className="row bg-white shadows-1 shadows-0-mobile">
-                                <h2 className="TitleTopic">Skill</h2>
+                                <h2 className="TitleTopic">Kỹ Năng</h2>
                                 <div className="col-12 py-3">
                                     <div className="row">
                                         <div className="col-6 col-sm-12">
                                             <h4>HTML, CSS</h4>
                                             <div className="progress">
-                                                <div className="progress-bar w-75"></div>
+                                                <div className="progress-bar w-80"></div>
                                             </div>
                                             <h4>PHP</h4>
                                             <div className="progress">
-                                                <div className="progress-bar w-50"></div>
+                                                <div className="progress-bar w-85"></div>
                                             </div>
                                             <h4>JAVASCRIPT</h4>
                                             <div className="progress">
@@ -97,7 +99,7 @@ class Developer extends Component {
                                             </div>
                                             <h4>JAVA, C#</h4>
                                             <div className="progress">
-                                                <div className="progress-bar w-25"></div>
+                                                <div className="progress-bar w-50"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -105,50 +107,58 @@ class Developer extends Component {
                             </div>
                         </div>
                         <div className="pb-5 py-sm-0 row">
-                            <h2 className="TitleTopic">Ngôn Ngữ</h2>
-                            <div className="py-3">
-                                <div className="WrapperLanguageDevelopper clear">
-                                    <div className="BlockLanguage">
-                                        <div className="IconTitleBlock">
-                                            <Js />
-                                        </div>
-                                        <h6 className="text-center">Express.js, Reactjs, Jquery</h6>
-                                        <h4 className="TitleBlockLang">JAVASCRIPT</h4>
-                                        <p className="ContentLang">
-                                            Ứng dụng đang dùng được viết trên nền nodejs trên công nghệ reactjs và nodejs express socket
-                                        </p>
+                            <h2 className="TitleTopic py-3">Ngôn Ngữ</h2>
+                            <div className="WrapperLanguageDevelopper clear">
+                                <div className="BlockLanguage">
+                                    <div className="IconTitleBlock">
+                                        <Js />
                                     </div>
-                                    <div className="BlockLanguage Middle">
-                                        <div className="IconTitleBlock">
-                                            <Php />
-                                        </div>
-                                        <h6 className="text-center">PHP Core, Laravel,...</h6>
-                                        <h4 className="TitleBlockLang">PHP</h4>
-                                        <p className="ContentLang">
-                                            Xây dựng các ứng dụng web động viết trên nền LAMP, LEMP. Có khả năng làm việc ở tất cả các giai đoạn của quy trình phát triển phần mềm
-                                            từ phân tích hệ thống đến xây dựng website font-end lẫn back-end
-                                        </p>
+                                    <h6 className="text-center">Express.js, Reactjs, Jquery</h6>
+                                    <h4 className="TitleBlockLang">JAVASCRIPT</h4>
+                                    <p className="ContentLang">
+                                        Ứng dụng đang dùng được viết trên nền nodejs trên công nghệ reactjs và nodejs express socket
+                                    </p>
+                                </div>
+                                <div className="BlockLanguage Middle">
+                                    <div className="IconTitleBlock">
+                                        <Php />
                                     </div>
-                                    <div className="BlockLanguage">
-                                        <div className="IconTitleBlock">
-                                            <Java />
-                                        </div>
-                                        <h6 className="text-center">Servlet, Java core, C#, Redit</h6>
-                                        <h4 className="TitleBlockLang">JAVA & C#</h4>
-                                        <p className="ContentLang">
-                                            Sử dụng Java, C#,... để built các web chuyên biệt hơn hoặc có yêu cầu phù hợp với project cụ thể
-                                        </p>
+                                    <h6 className="text-center">PHP Core, Laravel,...</h6>
+                                    <h4 className="TitleBlockLang">PHP</h4>
+                                    <p className="ContentLang">
+                                        Xây dựng các ứng dụng web động viết trên nền LAMP, LEMP. Có khả năng làm việc ở tất cả các giai đoạn của quy trình phát triển phần mềm
+                                        từ phân tích hệ thống đến xây dựng website font-end lẫn back-end
+                                    </p>
+                                </div>
+                                <div className="BlockLanguage">
+                                    <div className="IconTitleBlock">
+                                        <Java />
                                     </div>
+                                    <h6 className="text-center">Servlet, Java core, C#, Redit</h6>
+                                    <h4 className="TitleBlockLang">JAVA & C#</h4>
+                                    <p className="ContentLang">
+                                        Sử dụng Java, C#,... để built các web chuyên biệt hơn hoặc có yêu cầu phù hợp với project cụ thể
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="py-5 py-sm-0">
+                <div className="py-5 py-sm-0 line-height-0">
                     <h2 className="TitleTopic">Học Vấn</h2>
-                    <div className="BackgroundDeveloper">
-                        <h3>Đại Học Sài Gòn</h3>
-                        <h6>Trường Đại học Sài Gòn là một trường đại học đa ngành của Ủy ban Nhân dân Thành phố Hồ Chí Minh. </h6>
+                    <div className="EducationDeveloper position_relative">
+                        <div className="WrapperContentEducation">
+                            <img className="avatar_dh_saigon vertical-align-middle" src={avatar_dh_saigon} alt="" />
+                            <div className="DescriptionContentEdu vertical-align-middle">
+                                <h3 className="title">Đại Học Sài Gòn</h3>
+                                <q className="description">
+                                    Đại Học Sài Gòn là 1 chuỗi hành trình học tập và rèn luyện kĩ năng.
+                                    Được trải qua đoạn đường sinh viên trong Đh Sài Gòn, 
+                                    nơi không chỉ vun đắp ước mơ mà còn 
+                                    là nơi giúp bạn có những kỉ niệm không thể quên!
+                                </q>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <Footer />
