@@ -84,6 +84,49 @@
     text-align: center;
     text-transform: uppercase;
 }
+.BlockLanguage{
+    width: 30%;
+    margin: 1px auto;
+    background-color: #f1f1f1;
+    padding: 15px;
+    float: left;
+}
+.BlockLanguage.Middle{
+    width: 40%;
+    background-color: rgb(201, 169, 253);
+    margin-top: -15px;
+}
+.IconTitleBlock {
+    text-align: center
+}
+.IconTitleBlock .JsComponent, .IconTitleBlock .PhpComponent, .IconTitleBlock .JavaComponent{
+    width: 50px;
+}
+.IconTitleBlock .svg-inline--fa{
+    width: 100%;
+    max-width: initial;
+    max-height: initial;
+}
+
+.TitleBlockLang {
+    text-align: center;
+    font-size: 24px;
+    color: #253811;
+    text-transform: uppercase;
+    font-weight: bold
+}
+.ContentLang{
+    text-align: center;
+    color: #142149;
+}
+.BackgroundDeveloper{
+    background-color: #f9f9f9;
+    position: relative;
+    text-align: center;
+    background-image: url("../../icon/background/bg-dh-sai-gon.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 /* Medium devices (desktops, 992px to 1199px and down) 
 = @media (min-width: 992px) col-xl-*/
 @media screen and (max-width: 1320px) {
@@ -125,6 +168,15 @@
     .BaseInformation{
         margin: 0 auto;
     }
+    .BlockLanguage{
+        display: block;
+        float: none;
+        width: 80%;
+    }
+    .BlockLanguage.Middle{
+        width: 80%;
+        margin-top: 0px;
+    }
 }
 /* Small devices (landscape phones, 576px and up) col-xs-*/
 @media screen and (max-width: 575.98px) {
@@ -138,6 +190,16 @@
     }
     .AvatarDeveloper img{
         width: 120px;
+    }
+    .BlockLanguage{
+        width: 100%;
+        margin: 1px auto;
+        background-color: #f1f1f1;
+        padding: 15px
+    }
+    .BlockLanguage.Middle{
+        width: 100%;
+        margin-top: 0px;
     }
 }
 

@@ -10,6 +10,9 @@ import MessageMySelf from "../genneral/MessageMySelf.jsx"
 import MessageChannel from "../genneral/MessageChannel.jsx";
 import Send from "../../icon/svg/send.jsx";
 import "../../styles/client/Developer.css"
+import Js from "../../icon/svg/js.jsx";
+import Php from "../../icon/svg/php.jsx"
+import Java from "../../icon/svg/java.jsx"
 
 class Developer extends Component {
     render() {
@@ -32,7 +35,7 @@ class Developer extends Component {
                     <img className="mobile" src={background.URL_MOBILE} alt={background.ALT} />
                     <img className="pc" src={background.URL_PC} alt={background.ALT} />
                 </div>
-                <div className="bg-grey-x pb-3">
+                <div className="bg-grey-x">
                     <div className="container">
                         <div className="row">
                             <div className="col-12">
@@ -101,6 +104,51 @@ class Developer extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="pb-5 py-sm-0 row">
+                            <h2 className="TitleTopic">Ngôn Ngữ</h2>
+                            <div className="py-3">
+                                <div className="WrapperLanguageDevelopper clear">
+                                    <div className="BlockLanguage">
+                                        <div className="IconTitleBlock">
+                                            <Js />
+                                        </div>
+                                        <h6 className="text-center">Express.js, Reactjs, Jquery</h6>
+                                        <h4 className="TitleBlockLang">JAVASCRIPT</h4>
+                                        <p className="ContentLang">
+                                            Ứng dụng đang dùng được viết trên nền nodejs trên công nghệ reactjs và nodejs express socket
+                                        </p>
+                                    </div>
+                                    <div className="BlockLanguage Middle">
+                                        <div className="IconTitleBlock">
+                                            <Php />
+                                        </div>
+                                        <h6 className="text-center">PHP Core, Laravel,...</h6>
+                                        <h4 className="TitleBlockLang">PHP</h4>
+                                        <p className="ContentLang">
+                                            Xây dựng các ứng dụng web động viết trên nền LAMP, LEMP. Có khả năng làm việc ở tất cả các giai đoạn của quy trình phát triển phần mềm
+                                            từ phân tích hệ thống đến xây dựng website font-end lẫn back-end
+                                        </p>
+                                    </div>
+                                    <div className="BlockLanguage">
+                                        <div className="IconTitleBlock">
+                                            <Java />
+                                        </div>
+                                        <h6 className="text-center">Servlet, Java core, C#, Redit</h6>
+                                        <h4 className="TitleBlockLang">JAVA & C#</h4>
+                                        <p className="ContentLang">
+                                            Sử dụng Java, C#,... để built các web chuyên biệt hơn hoặc có yêu cầu phù hợp với project cụ thể
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="py-5 py-sm-0">
+                    <h2 className="TitleTopic">Học Vấn</h2>
+                    <div className="BackgroundDeveloper">
+                        <h3>Đại Học Sài Gòn</h3>
+                        <h6>Trường Đại học Sài Gòn là một trường đại học đa ngành của Ủy ban Nhân dân Thành phố Hồ Chí Minh. </h6>
                     </div>
                 </div>
                 <Footer />
