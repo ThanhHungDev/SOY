@@ -476,6 +476,32 @@ app.post('/api/register', async (req, res )=>{
         return res.end(JSON.stringify(error));
     }
 });
+app.get("/api/menu-blog", async (req , res ) => {
+    const MENU_BLOG = "menu-blog";
+    REDIS.get( MENU_BLOG , async (err , value ) => {
+        if(err){
+            error = { 
+                user_message : "get menu blog fail", 
+                internal_message : "redis get menu fail",
+                code : 500 
+            };
+        }
+        if( !value ){
+            value = JSON.stringify([
+                { url: '/blog/category1', title: 'category1 server'},
+                { url: '/blog/category2', title: 'category2'},
+                { url: '/blog/category3', title: 'category3'}
+            ]);
+            REDIS.set( MENU_BLOG , value , (err , status ) => {
+                console.log("new menu blog to redis");
+                if(err){
+                    console.log(err);
+                }
+            });
+        }
+        return res.end(value);
+    });
+});
 app.get('*', (req, res)=>{ res.sendFile(path.join(__dirname, 'View/index.html')); });
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////

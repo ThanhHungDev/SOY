@@ -23,8 +23,8 @@ class Login extends Component {
             this.refs.email.value = "";
             this.refs.password.value = "";
             var { client } = this.props;
-            fetch(CONFIG.SERVER.domain + "/api/login", {
-                method: "POST",
+            fetch(CONFIG.API.Login.url, {
+                method: CONFIG.API.Login.method,
                 dataType: "JSON",
                 headers: {
                     'Accept': 'application/json',
@@ -55,7 +55,7 @@ class Login extends Component {
     }
     render() {
         const LOGO = {
-            URL: CONFIG.SERVER.domain + "/logo/logo-temp.png",
+            URL: CONFIG.SERVER.domain + "logo/logo-temp.png",
             ALT: CONFIG.SERVER.title
         }
         if(this.state.login_success){

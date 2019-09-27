@@ -12,7 +12,7 @@ export default class ForgotPassword extends Component {
     }
     render() {
         const LOGO = {
-            URL: CONFIG.SERVER.domain + "/logo/logo-temp.png",
+            URL: CONFIG.SERVER.domain + "logo/logo-temp.png",
             ALT: CONFIG.SERVER.title
         }
         return (

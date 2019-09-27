@@ -11,6 +11,7 @@ import ClientAboutPage from "./client/AboutPage.jsx"
 import PlayNow from "./client/PlayNow.jsx"
 import ClientRegisterPage from './client/Register.jsx';
 import Developer from "./client/Developer.jsx"
+import Blog from "./client/Blog.jsx";
 import { actionInitialUser, actionInitialSocketListen } from "../actions"
 ///
 import CONFIG from "../config";
@@ -46,6 +47,7 @@ class App extends Component {
                     <Route path="/setting/logout" render={()=> <ForgotPassword /> } />
                     <Route path="/setting/accounts" render={()=> <ForgotPassword /> } />
                     <Route path="/developer" render={()=> <Developer /> } />
+                    <Route path="/blog" render={()=> <Blog /> } />
                 </BrowserRouter>
             </div>
         );

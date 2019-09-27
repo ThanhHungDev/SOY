@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect  } from 'react-redux';
 
 import CONFIG from "../../config";
-import Header from './Header.jsx';
+import BlogHeader from './BlogHeader.jsx';
 import Footer from "./Footer.jsx";
 import MessageMySelf from "../genneral/MessageMySelf.jsx"
 import MessageChannel from "../genneral/MessageChannel.jsx";
@@ -16,7 +16,7 @@ import Java from "../../icon/svg/java.jsx"
 import avatar_dh_saigon from "../../icon/background/avatar-dh-saigon.jpg";
 
 
-class Developer extends Component {
+class Blog extends Component {
     render() {
         const background = {
             URL_AVATAR: CONFIG.SERVER.domain + "background/avatar-developer.jpg",
@@ -26,7 +26,7 @@ class Developer extends Component {
         }
         return (
             <div className="DeveloperComponent">
-                <Header />
+                <BlogHeader />
                 <div className="BlackImage line-height-0">
                     <svg className="hero-triangles" viewBox="0 0 263.07 394.61" preserveAspectRatio="xMinYMax meet">
                         <polygon className="primary-triangle" points="0 394.61 0 0 263.07 263.07 131.53 394.61 0 394.61"></polygon>
@@ -167,4 +167,4 @@ class Developer extends Component {
     }
 }
 
-export default Developer;
+export default Blog;

@@ -26,10 +26,12 @@ class Header extends Component {
     }
     render() {
         const LOGO = {
-            URL: CONFIG.SERVER.domain + "/logo/logo.png",
+            URL: CONFIG.SERVER.domain + "logo/logo.png",
             ALT: CONFIG.SERVER.title
         }
-        const data_menu = this.props.header
+        let data_menu = this.props.header;
+        if(this.props.blog_data_menu_header)
+            data_menu = this.props.blog_data_menu_header;
         return (
             <div className="HeaderComponent bg-unique-color-dark" >
                 <div className="container">

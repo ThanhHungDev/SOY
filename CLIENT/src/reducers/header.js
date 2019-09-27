@@ -16,6 +16,9 @@ const initialStateHeader = [
         ]
     },
     {
+        url: '/blog', title: 'blog'
+    },
+    {
         title: 'cài đặt', 
         submenu: [
             { url: '/setting/accounts', title: 'tài khoản' },

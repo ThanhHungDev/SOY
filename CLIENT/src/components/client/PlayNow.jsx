@@ -58,8 +58,8 @@ class PlayNow extends Component {
     }
     refeshToken(){
         var { client } = this.props, { id, refesh } = this.props.authentication;
-        fetch(CONFIG.SERVER.domain + "/api/refesh", {
-            method: "POST",
+        fetch(CONFIG.API.Refesh.url, {
+            method: CONFIG.API.Refesh.method,
             dataType: "JSON",
             headers: {
                 'Accept': 'application/json',

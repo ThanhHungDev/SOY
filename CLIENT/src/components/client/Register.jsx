@@ -24,8 +24,8 @@ class Register extends Component {
             this.refs.password.value = "";
             var name = this.refs.name.value;
             this.refs.name.value = "";
-            fetch(CONFIG.SERVER.domain + "/api/register", {
-                method: "POST",
+            fetch(CONFIG.API.Register.url, {
+                method: CONFIG.API.Register.method,
                 dataType: "JSON",
                 headers: {
                     'Accept': 'application/json',
@@ -48,7 +48,7 @@ class Register extends Component {
     }
     render() {
         const LOGO = {
-            URL: CONFIG.SERVER.domain + "/logo/logo-temp.png",
+            URL: CONFIG.SERVER.domain + "logo/logo-temp.png",
             ALT: CONFIG.SERVER.title
         }
         return (

@@ -11,7 +11,7 @@ import CONFIG from "../../config";
 class Footer extends Component {
     render() {
         const LOGO = {
-            URL: CONFIG.SERVER.domain + "/logo/footer-logo.png",
+            URL: CONFIG.SERVER.domain + "logo/footer-logo.png",
             ALT: CONFIG.SERVER.title
         }
         return (
