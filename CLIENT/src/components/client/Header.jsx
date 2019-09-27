@@ -22,7 +22,7 @@ class Header extends Component {
         this.state = { activeMenuToggle: false };
     }
     activeSidebar = () => {
-        this.setState({ activeMenuToggle: !this.state.activeMenuToggle });
+        this.setState({ activeMenuToggle: !this.state.activeMenuToggle } , () => {window.scrollTo(0, 0)});
     }
     render() {
         const LOGO = {

@@ -144,7 +144,7 @@ class Developer extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="py-5 py-sm-0 line-height-0">
+                <div className="line-height-0">
                     <h2 className="TitleTopic">Học Vấn</h2>
                     <div className="EducationDeveloper position_relative">
                         <div className="WrapperContentEducation">

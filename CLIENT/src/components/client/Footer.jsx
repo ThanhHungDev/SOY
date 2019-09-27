@@ -15,7 +15,7 @@ class Footer extends Component {
             ALT: CONFIG.SERVER.title
         }
         return (
-            <div className="FooterComponent bg-unique-color-dark text-white px-5 px-xs-2">
+            <div className="FooterComponent bg-unique-color-dark text-white px-5 px-xs-2 pt-5">
                 <div className="container">
                     <div className="border-top border-brown pb-5"></div>
                     <div className="row">

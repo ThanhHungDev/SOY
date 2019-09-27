@@ -18,6 +18,7 @@ const initialStateHeader = [
     {
         url: '/blog', title: 'blog'
     },
+    { url: '/developer', title: 'developer'},
     {
         title: 'cài đặt', 
         submenu: [
@@ -25,7 +26,6 @@ const initialStateHeader = [
             { url: '/setting/logout', title: 'đăng xuất' }
         ]
     },
-    { url: '/developer', title: 'developer'},
     { url: '/login', title: 'login'  },
 ];
 export default function HeaderReducer(state = initialStateHeader , action) {
