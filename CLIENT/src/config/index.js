@@ -1,5 +1,7 @@
-const DOMAIN = 'localhost';
-const DOMAIN_SERVER = "http://"+DOMAIN+":8081/";
+const DOMAIN = 'ma-soi.online';
+const PORT = "";
+const DOMAIN_PORT = PORT ? ":"+PORT+"/" : '/';
+const DOMAIN_SERVER = "http://"+DOMAIN+DOMAIN_PORT;
 const CONFIG = {
     ASSET : '/',
     SITE : {

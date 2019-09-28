@@ -56,8 +56,8 @@ class Footer extends Component {
                         <div className="col-5 col-lg-6 col-sm-12 text-center-mobile">
                             <h2 className="text-default font-bold text-xl capitalize">werewolf online</h2>
                             <div className="pt-3 text-light">
-                                Chúng tối muốn cộng đồng gamer ma sói sẽ được phát triển mạnh hơn, 
-                                cũng như sử dụng công nghệ để chia sẽ những cảm súc khi chơi game ma sói cùng bạn bè!!!
+                                Chúng tôi muốn cộng đồng gamer ma sói sẽ được phát triển mạnh hơn, 
+                                cũng như sử dụng công nghệ để chia sẽ những cảm xúc khi chơi game ma sói cùng bạn bè!!!
                             </div>
                             <div className="pt-4">
                                 <a style={socialIcon} href="https://www.facebook.com/HungSmurf">

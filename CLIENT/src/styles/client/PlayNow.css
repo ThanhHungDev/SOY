@@ -19,6 +19,18 @@
     width: 100%;
     padding: 15px
 }
+.player img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px
+}
+.player .infor{
+    min-height: 60px;
+    vertical-align: middle;
+    padding: 15px 0 0 60px
+}
 .ListMessage{
     width: 60%;
     float: right;
@@ -71,6 +83,14 @@
     padding-right: 15px;
     height: 420px;
     overflow-y: scroll;
+}
+.Chat.mini_chat{
+    height: 120px;
+}
+.SmallChatScroll{
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
 }
 .ChannelMessage{
     position: relative;

@@ -10,6 +10,7 @@ import MessageMySelf from "../genneral/MessageMySelf.jsx"
 import MessageChannel from "../genneral/MessageChannel.jsx";
 import "../../styles/client/PlayNow.css";
 import Send from "../../icon/svg/send.jsx";
+import EllipsisAlt from "../../icon/svg/ellipsis-alt.jsx";
 
 class PlayNow extends Component {
     messagesEndRef = React.createRef()
@@ -28,8 +29,12 @@ class PlayNow extends Component {
             list_player: null,
             list_message : [],
             channel : null,
-            handleEnterPressUp : false
+            handleEnterPressUp : false,
+            mini_chat : false
         };
+    }
+    active_mini_chat = () => {
+        this.setState({ mini_chat : !this.state.mini_chat });
     }
     listenEnterPress = e => {
         if(e.keyCode == 13 && !e.shiftKey) {
@@ -138,7 +143,7 @@ class PlayNow extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                        <h1 className="TitleChat">
+                            <h1 className="TitleChat">
                                 Sẵn sàng để cùng chơi nào!!!
                             </h1>
                             <div className="clear">
@@ -175,16 +180,16 @@ class PlayNow extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <h1 className="TitleChat">
-                                Sẵn sàng để cùng chơi nào!!!
-                            </h1>
-                            <div className="clear">
+                            <div className="py-2 clear">
                                 <div className="ListPlayer">
                                     <div className="wrapperPlayer">
                                         { this.state.list_player && this.state.list_player.map(
                                             (player , index ) => {
                                                 return (
-                                                    <div key={index} className="player">{player.email}</div>
+                                                    <div key={index} className="player position_relative">
+                                                        <img src={player.avatar} alt={player.email} />
+                                                        <p className="infor">{player.name}</p>
+                                                    </div>
                                                 );
                                             }
                                         )}
@@ -192,7 +197,9 @@ class PlayNow extends Component {
                                 </div>
                                 <div className="ListMessage">
                                     <div className="wrapperMessage">
-                                        <div className="MySelf clear">
+                                        <div className="MySelf clear position_relative">
+                                            <p onClick={this.active_mini_chat}
+                                            className="SmallChatScroll" ><EllipsisAlt /></p>
                                             <img className="avatar rounded-circle float-left" 
                                                 src={this.props.authentication.user_infor.avatar}
                                                 alt={this.props.authentication.user_infor.name} />
@@ -201,7 +208,8 @@ class PlayNow extends Component {
                                                 <i className="mobile">{this.props.authentication.user_infor.mobile}</i>
                                             </span>    
                                         </div>
-                                        <div className="Chat scrollbar-light-defaul" ref={(el) => { this.messagesContainer = el; }}>
+                                        <div className={`Chat scrollbar-light-defaul ` + (this.state.mini_chat ? 'mini_chat' : '')}
+                                        ref={(el) => { this.messagesContainer = el; }}>
                                             {this.state.list_message && this.state.list_message.map(
                                                 ( message , index ) => {
                                                     if( message.id == this.props.authentication.id ){
