@@ -16,6 +16,6 @@ const CONFIG = {
         dialect: 'postgres',
         logging : false
     },
-    TimeExpireAccessToken : 30,
+    TimeExpireAccessToken : 2,
 };
 module.exports.CONFIG = CONFIG;

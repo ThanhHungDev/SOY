@@ -29,6 +29,7 @@ class PlayNow extends Component {
             list_player: null,
             list_message : [],
             channel : null,
+            handleEnterPressUp : false,
             mini_chat : false
         };
     }
@@ -36,15 +37,19 @@ class PlayNow extends Component {
         this.setState({ mini_chat : !this.state.mini_chat });
     }
     listenEnterPress = e => {
-        if(e.keyCode == 13 && e.shiftKey == false) {
-          e.preventDefault();
-          this.sendMessage();
+        if(e.keyCode == 13 && !e.shiftKey) {
+            this.sendMessage();
+        }
+    }
+    listenEnterPressInputValueNull = e => {
+        if(this.state.handleEnterPressUp){
+            this.refs.message.value = "";
+            this.setState({ handleEnterPressUp : false });
         }
     }
     sendMessage = () => {
         var message = this.refs.message.value;
         if(message.trim()){
-            this.refs.message.value = "";
             var data_message = { 
                 id: this.props.authentication.id, 
                 message, 
@@ -53,6 +58,7 @@ class PlayNow extends Component {
                 user_infor : this.props.authentication.user_infor
             };
             this.props.socket.emit("channel_message", data_message);
+            this.setState({ handleEnterPressUp : true });
         }
     }
     refeshToken(){
@@ -66,8 +72,6 @@ class PlayNow extends Component {
             },
             body: JSON.stringify({ id , refesh , client })
         }).then(resp => {
-            console.log("refesh token trả ra : ");
-            console.log(resp);
             return resp.json();
         }).then( response => {
             console.log("response in refesh" + JSON.stringify(response));
@@ -83,15 +87,9 @@ class PlayNow extends Component {
                 } else {
                     alert('ứng dụng không chạy tốt trên trình duyệt này, vui lòng nâng cấp trình duyệt');
                 }
-            }else{
-                if (typeof(Storage) !== 'undefined') {
-                    localStorage.setItem('user', null);
-                    console.log("refesh không thành công localStorage.setItem user = null");
-                }
             }
         }).catch(error => {
-            console.log("refesh catch client");
-            console.log(error);
+            console.log("refesh catch");
         });
     }
     componentDidMount() {
@@ -238,6 +236,7 @@ class PlayNow extends Component {
                                         <div className="WriteMessage">
                                             <textarea className="Write" ref="message"
                                             onKeyDown={this.listenEnterPress}
+                                            onKeyUp={this.listenEnterPressInputValueNull}
                                             rows="2" placeholder="Type your message...">
                                             </textarea>
                                             <button className="btnSendMessage" onClick={this.sendMessage}>

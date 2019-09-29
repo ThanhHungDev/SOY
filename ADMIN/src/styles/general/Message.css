@@ -1,0 +1,25 @@
+.MessageComponent{
+  background-color: aquamarine;
+}
+.RoundedCircle {
+  border-radius: 50%!important;
+}
+.WrapperAvatar {
+  height: 40px;
+  width: 40px;
+}
+.Avatar{
+  height: 40px;
+  width: 40px;
+  border: 1.5px solid #f5f6fa;
+}
+.MessageInformationUser{
+  padding-left: 10px;
+}
+.MessageInformationUser .name{
+  color: #f5f6fa;
+  font-weight: 700;
+}
+.MessageBody{
+  color: #0b1024
+}
