@@ -30,7 +30,8 @@ class PlayNow extends Component {
             list_player: null,
             list_message : [],
             channel : null,
-            mini_chat : false
+            mini_chat : false,
+            loading_send_message : false
         };
     }
     active_mini_chat = () => {
@@ -45,16 +46,20 @@ class PlayNow extends Component {
     sendMessage = () => {
         var message = this.refs.message.value;
         if(message.trim()){
-            this.refs.message.value = "";
-            var data_message = { 
-                id: this.props.authentication.id, 
-                message, 
-                channel : this.state.channel, 
-                access : this.props.authentication.access,
-                user_infor : this.props.authentication.user_infor
-            };
-            alert(JSON.stringify(data_message));
-            this.props.socket.emit("channel_message", data_message);
+            this.setState({
+                loading_send_message : true
+            }, () => {
+                var data_message = { 
+                    id: this.props.authentication.id, 
+                    message, 
+                    channel : this.state.channel, 
+                    access : this.props.authentication.access,
+                    user_infor : this.props.authentication.user_infor
+                };
+                console.log("send message : "+ JSON.stringify(data_message));
+                alert(JSON.stringify(data_message));
+                this.props.socket.emit("channel_message", data_message);
+            });
         }
     }
     refeshToken(){
@@ -81,8 +86,15 @@ class PlayNow extends Component {
                     localStorage.setItem('user', JSON.stringify(refesh_user));
                     /// nguy hiểm chưa test
                     this.props.dispatch( actionInitialUser(refesh_user) );
-                    this.props.socket.emit("authentication", { authentication : refesh_user , client :this.props.client});
+                    // this.props.socket.emit("authentication", { authentication : refesh_user , client :this.props.client});
+                    if(this.state.loading_send_message){
+                        console.log("resend message vì access token fail 2p");
+                        alert("resend message vì access token fail 2p");
+                        this.sendMessage();
+                    }
                 } else {
+                    this.setState({ loading_send_message : false });
+                    console.log('ứng dụng không chạy tốt trên trình duyệt này, vui lòng nâng cấp trình duyệt');
                     alert('ứng dụng không chạy tốt trên trình duyệt này, vui lòng nâng cấp trình duyệt');
                 }
             }else{
@@ -90,6 +102,7 @@ class PlayNow extends Component {
                     localStorage.setItem('user', null);
                     console.log("refesh không thành công localStorage.setItem user = null");
                 }
+                this.setState({ loading_send_message : false });
             }
         }).catch(error => {
             console.log("refesh catch client");
@@ -102,18 +115,20 @@ class PlayNow extends Component {
         // console.log(this.props.authentication);
         if(this.props.authentication.access && this.props.authentication.id ){
             this.props.socket.emit("authentication", { authentication : this.props.authentication , client :this.props.client});
-            this.props.socket.on("authentication_response" , response => {
-                console.log("data trả ra là : ");
-                console.log(response);
-                if( response.status == 200 ){
-                    /// success 
-                    this.setState({ list_player : response.data[0].online , channel : response.data[0].channel });
-                }else if( response.status == 403 ){
-                    /// refesh token
-                    this.refeshToken();
-                }
-            });
         }
+        this.props.socket.on("authentication_response" , response => {
+            console.log("data trả ra là : ");
+            console.log(response);
+            if( response.status == 200 ){
+                /// success 
+                this.setState({ list_player : response.data[0].online , channel : response.data[0].channel });
+            }else if( response.status == 403 ){
+                /// refesh token
+                this.refeshToken();
+            }else{
+                this.setState({ loading_send_message : false });
+            }
+        });
         this.props.socket.on("server_fail" , response => {
             console.log("server_fail: ");
             console.log(response);
@@ -127,18 +142,17 @@ class PlayNow extends Component {
             console.log(response);
         });
         this.props.socket.on("channel_message_response" , response => {
+            this.refs.message.value = "";
+            this.setState({ loading_send_message : false });
             console.log("channel_message_response: ");
-            console.log(response);
-            alert (response);
+            console.log(response.data);
+            alert (response.data);
             var new_message = response.data;
             if( response.status == 200 ){
                 this.setState({ list_message : [...this.state.list_message, new_message] });
             }
         });
-    }
-    sendChat = () => {
-        alert("ahihi");
-    }  
+    } 
     render() {
         console.log(this.state.list_message);
         if(!this.props.authentication.access || !this.props.authentication.id ){
