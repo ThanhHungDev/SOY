@@ -1,5 +1,7 @@
 const DOMAIN = 'ma-soi.online';
 const PORT = "";
+const IP_VPS = "139.180.209.195";
+const PORT_VPS = "8081";
 const DOMAIN_PORT = PORT ? ":"+PORT+"/" : '/';
 const DOMAIN_SERVER = "http://"+DOMAIN+DOMAIN_PORT;
 const CONFIG = {
@@ -14,7 +16,9 @@ const CONFIG = {
     },
     SERVER : {
         domain : DOMAIN_SERVER,
-        title : 'Hospital'
+        title : 'Hospital',
+        ip : IP_VPS,
+        port : PORT_VPS
     },
     PHP : {},
     LANGUAGE : {},

@@ -11,6 +11,7 @@ import MessageChannel from "../genneral/MessageChannel.jsx";
 import "../../styles/client/PlayNow.css";
 import Send from "../../icon/svg/send.jsx";
 import EllipsisAlt from "../../icon/svg/ellipsis-alt.jsx";
+import { actionInitialUser } from "../../actions";
 
 class PlayNow extends Component {
     messagesEndRef = React.createRef()
@@ -52,6 +53,7 @@ class PlayNow extends Component {
                 access : this.props.authentication.access,
                 user_infor : this.props.authentication.user_infor
             };
+            alert(JSON.stringify(data_message));
             this.props.socket.emit("channel_message", data_message);
         }
     }
@@ -127,6 +129,7 @@ class PlayNow extends Component {
         this.props.socket.on("channel_message_response" , response => {
             console.log("channel_message_response: ");
             console.log(response);
+            alert (response);
             var new_message = response.data;
             if( response.status == 200 ){
                 this.setState({ list_message : [...this.state.list_message, new_message] });

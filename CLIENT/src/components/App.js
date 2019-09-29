@@ -19,7 +19,7 @@ import CONFIG from "../config";
 class App extends Component {
     constructor(props){
         super(props);
-        const socket = socketIOClient(CONFIG.SERVER.domain);
+        const socket = socketIOClient("http://"+CONFIG.SERVER.ip+":"+CONFIG.SERVER.port+"/");
         this.props.dispatch(actionInitialSocketListen(socket));
         ////
         // console.log("constructor app");
