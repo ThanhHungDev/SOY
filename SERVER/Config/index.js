@@ -1,6 +1,6 @@
 const CONFIG = {
     SERVER : {
-        PORT : 8081,
+        PORT : 8888,
         DOMAIN : "localhost",
         PROTOCOL: "http://",
         REDIS : {
