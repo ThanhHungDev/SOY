@@ -502,6 +502,7 @@ app.get("/api/menu-blog", async (req , res ) => {
         return res.end(value);
     });
 });
+app.get('/admin*', (req, res)=>{ res.sendFile(path.join(__dirname, 'View/admin.html')); });
 app.get('*', (req, res)=>{ res.sendFile(path.join(__dirname, 'View/index.html')); });
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////

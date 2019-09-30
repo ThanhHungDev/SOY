@@ -12,31 +12,26 @@ import Facebook from "../../icon/svg/facebook.jsx";
 import Youtube from "../../icon/svg/youtube.jsx";
 import Instagram from "../../icon/svg/instagram.jsx";
 
-import Header from './Header.jsx';
-import Footer from "./Footer.jsx";
 /**
  * import css
  */
 import "../../styles/client/Header.css";
-class BlogHeader extends Component {
+class Header extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            data_menu : []
-        };
-    }
-    componentDidMount(){
-        fetch(CONFIG.API.MenuBlog.url)
-        .then(response => response.json())
-        .then(data => this.setState({
-            data_menu : data
-        }))
-        .catch(err => true);
     }
     render() {
         return (
-            <Header blog_data_menu_header={this.state.data_menu} />
+            <div className="HeaderComponent bg-unique-color-dark" >
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 ">
+                            ghfgh
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
-export default BlogHeader;
+export default Header;

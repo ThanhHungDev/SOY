@@ -1,3 +1,5 @@
 SERVER/node_modules
 CLIENT/node_modules
 CLIENT/RENDERJS/node_modules
+ADMIN/node_modules
+ADMIN/RENDERJS/node_modules

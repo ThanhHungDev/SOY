@@ -4,7 +4,7 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, "/../../SERVER/Public/Js/React"),
-        filename: "bundle.js",
+        filename: "admin.js",
         publicPath: '/',
     }, 
     module: {

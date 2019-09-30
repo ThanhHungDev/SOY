@@ -1,0 +1,251 @@
+/*
+Author: TRƯƠNG THANH HÙNG
+Author URI: https://www.facebook.com/HungSmurf
+*/
+@charset "UTF-8";
+/**
+* css begin 
+* col-number
+*/
+.svg-inline--fa .fa-primary {
+	fill: #4285f4;
+	opacity: 1;
+}
+
+.svg-inline--fa .fa-secondary {
+	fill: #aaa;
+	opacity: 1;
+}
+.MenuHeaderComponent{
+    position: initial;
+    padding: 5px 15px;
+}
+.btn-toggle-menu{
+    display: none;
+}
+.LinkHomePage{
+    display: block;
+    float: left;
+    width: 180px;
+}
+.WrapperMenu{
+    float: right;
+}
+.Menu {
+    width : 100%;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+ul.Menu>li{
+    float: left;
+}
+ul.Menu>li>a {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 10px;
+    text-transform: uppercase;
+    font-size: 15px;
+    text-decoration: none;
+    font-size: 13px;
+    color: #f1f1f1;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+}
+ul.Menu>li>a.active{
+    color: #00bcd4;
+    fill: #00bcd4;
+    opacity: 1;
+}
+ul.submenu {
+    text-align: left;
+    -webkit-box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.05);
+    border-left: 1px solid #edf0f5;
+    border-right: 1px solid #edf0f5;
+    border-bottom: 1px solid #edf0f5;
+    padding: 4px 0 8px 0;
+    margin-left: 0px;
+    background: #fff;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    margin-top: 30px;
+    -webkit-transition: 0.2s 0s;
+    -o-transition: 0.2s 0s;
+    transition: 0.2s 0s;
+}
+ul.submenu.active {
+    z-index: 1;
+    opacity: 1;
+    margin-top: 0;
+}
+ul.submenu>li {
+    min-width: 175px;
+}
+ul.submenu>li:hover{
+    background-color: #f7f7f7;
+}
+ul.submenu>li>a {
+    color: #222;
+    font-size: 14px;
+    padding: 8px 20px 6px 35px;
+    display: block;
+    text-transform: none;
+    letter-spacing: normal;
+    text-transform: capitalize;
+}
+.SocialWrapper{
+    display: none;
+}
+.btn-toggle-menu path:nth-child(1){
+    fill: #ccc;
+    opacity: 0.4;
+}
+.btn-toggle-menu path:nth-child(2){
+    fill: #fff;
+    opacity: 1;
+}
+/* Medium devices (desktops, 992px to 1199px and down) 
+= @media (min-width: 992px) col-xl-*/
+@media screen and (max-width: 1320px) {
+	
+}
+/* Medium devices (desktops, 992px to 1199px and down) 
+= @media (min-width: 992px) col-lg-*/
+@media screen and (max-width: 1199.98px) {
+	
+}
+/*Tablet devices (768px to 992px and down) col-md-*/
+@media screen and (max-width: 991.98px) {
+	
+/* }
+/*Medium devices (Small devices, 576px to 768px) col-sm-*
+@media screen and (max-width: 767.98px) { */
+    .MenuHeaderComponent{
+        position: relative;
+    }
+	.btn-toggle-menu{
+        display: block;
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%); /* WebKit */
+        -moz-transform: translateY(-50%); /* Mozilla */
+        -o-transform: translateY(-50%); /* Opera */
+        -ms-transform: translateY(-50%); /* Internet Explorer */
+        transform: translateY(-50%); /* CSS3 */
+    }
+    .LinkHomePage{
+        float: none;
+    }
+    .WrapperMenu{
+        float: none;
+        position: fixed;
+        background: #333145;
+        background: -moz-linear-gradient(top, #333145 0%, #b8333e 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, #333145), color-stop(100%, #b8333e));
+        background: -webkit-linear-gradient(top, #333145 0%, #b8333e 100%);
+        background: -o-linear-gradient(top, #333145 0%, #b8333e 100%);
+        background: -ms-linear-gradient(top, #333145 0%, #b8333e 100%);
+        background: linear-gradient(to bottom, #333145 0%, #b8333e 100%);
+        z-index: 2;
+        top: 0;
+        left: -992px;
+        right: 992px;
+        bottom: -200px;
+        overflow-y: scroll;
+        padding: 15px;
+        -webkit-transition: 0.2s 0s;
+        -o-transition: 0.2s 0s;
+        transition: 0.2s 0s;
+    }
+    .MenuHeaderComponent.active .WrapperMenu{
+        z-index: 2;
+        left: 0;
+        right: 0;
+    }
+    .Menu {
+        width : 100%;
+        padding: 30px 0 0 0;
+    }
+    ul.Menu>li{
+        float: none;
+    }
+    ul.Menu>li>a {
+        display: block;
+        line-height: 21px;
+        font-size: 21px;
+        color: #fff;
+        margin-left: 0;
+        padding: 12px 30px 12px 12px;
+        font-weight: bold;
+        text-align: left
+    }
+    ul.Menu>li>a.active{
+        color: #a6c1ee;
+        fill: #a6c1ee;
+        opacity: 1;
+    }
+    ul.submenu {
+        text-align: left;
+        border-top: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+        padding: 0 0 0 20px;
+        margin-left: 0px;
+        background: transparent;
+        position: initial;
+        opacity: 0;
+        z-index: 1;
+        height: 0;
+        margin-top: 0;
+        -webkit-transition: 0.2s 0s;
+        -o-transition: 0.2s 0s;
+        transition: 0.2s 0s;
+    }
+    ul.submenu.active {
+        opacity: 1;
+        height: auto;
+    }
+    ul.submenu>li>a {
+        color: #f1f1f1;
+        line-height: 19px;
+        font-size: 16px;
+    }
+    /**
+    * child
+    */
+    .SocialWrapper{
+        display: block;
+        padding: 10px 0;
+        border-bottom: 1px solid #f2f2f2;
+    }
+    .SocialWrapper a{
+        color : white;
+        padding-left : 20px
+    }
+    .btn-toggle-close{
+        float: right;
+    }
+    .IconWindowsClose svg{
+        display: block;
+        width: 36px;
+        max-width: 36px;
+        max-height: 36px;
+    }
+    .IconWindowsClose path{
+        fill : #fff!important;
+        color : #fff!important;
+        background-color: #fff!important;
+    }
+}
+/* Small devices (landscape phones, 576px and up) col-xs-*/
+@media screen and (max-width: 575.98px) {
+    
+}
+
