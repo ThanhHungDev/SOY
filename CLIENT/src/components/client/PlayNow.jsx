@@ -11,7 +11,7 @@ import MessageChannel from "../genneral/MessageChannel.jsx";
 import "../../styles/client/PlayNow.css";
 import Send from "../../icon/svg/send.jsx";
 import EllipsisAlt from "../../icon/svg/ellipsis-alt.jsx";
-import { actionInitialUser } from "../../actions";
+import { actionInitialUser , actionResetUserNull } from "../../actions";
 
 class PlayNow extends Component {
     messagesEndRef = React.createRef()
@@ -79,28 +79,39 @@ class PlayNow extends Component {
         }).then( response => {
             console.log("response in refesh" + JSON.stringify(response));
             if(response.code == 200){
+                console.log("response in refesh 1");
                 if (typeof(Storage) !== 'undefined') {
+                    console.log("response in refesh 2");
                     var user = JSON.parse(localStorage.getItem('user'));
+                    console.log("response in refesh 3");
                     var { id , access , refesh } = response.code;
                     var refesh_user = { ... user , id , access , refesh };
+                    console.log("response in refesh 4");
                     localStorage.setItem('user', JSON.stringify(refesh_user));
                     /// nguy hiểm chưa test
+                    console.log("response in refesh 5");
                     this.props.dispatch( actionInitialUser(refesh_user) );
                     // this.props.socket.emit("authentication", { authentication : refesh_user , client :this.props.client});
+                    console.log("response in refesh 6");
                     if(this.state.loading_send_message){
+                        console.log("response in refesh 7");
                         console.log("resend message vì access token fail 2p");
                         alert("resend message vì access token fail 2p");
                         this.sendMessage();
                     }
                 } else {
+                    console.log("response in refesh 8");
                     this.setState({ loading_send_message : false });
                     console.log('ứng dụng không chạy tốt trên trình duyệt này, vui lòng nâng cấp trình duyệt');
                     alert('ứng dụng không chạy tốt trên trình duyệt này, vui lòng nâng cấp trình duyệt');
                 }
             }else{
+                console.log("response in refesh response.code" );
+                console.log(response.code);
                 if (typeof(Storage) !== 'undefined') {
                     localStorage.setItem('user', null);
                     console.log("refesh không thành công localStorage.setItem user = null");
+                    this.props.dispatch( actionResetUserNull() );
                 }
                 this.setState({ loading_send_message : false });
             }

@@ -33,3 +33,8 @@ export function actionInitialSocketListen(socket){
         payload : socket
     }
 }
+export function actionResetUserNull(){
+    return {
+        type : TYPE.RESET_USER_NULL
+    }
+}
